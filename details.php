@@ -18,8 +18,19 @@
         echo "Identifiant non fourni";
         exit;
     }
-    ?>
+?>
     
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Détails du disque</title>
+    <!-- Inclusion de Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <!-- Inclusion du fichier CSS personnalisé -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
     <h1><?php echo $row['disc_title']; ?></h1>
     <img src="src/img/jaquettes/<?php echo $row['disc_picture']; ?>" alt="<?php echo $row['disc_title']; ?>"><br>
     <strong>Artiste :</strong> <?php echo $row['artist_name']; ?><br>
@@ -28,4 +39,11 @@
     <strong>Genre :</strong> <?php echo $row['disc_genre']; ?><br>
     <strong>Prix :</strong> <?php echo $row['disc_price']; ?> €<br>
     <a href="edit_disc.php?id=<?php echo $row['disc_id']; ?>" class="btn btn-warning">Modifier</a>
-    <a href="delete_disc.php?id=<?php echo $row['disc_id']; ?>" class="btn btn-danger">Supprimer</a>
+    <a href="delete_disc.php?id=<?php echo $row['disc_id']; ?>" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce disque ?')">Supprimer</a>
+
+    <!-- Inclusion des scripts Bootstrap et des scripts JS supplémentaires -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Inclusion du fichier JS personnalisé -->
+    <script src="script.js"></script>
+</body>
+</html>
