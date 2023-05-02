@@ -333,3 +333,294 @@ des mesures appropriées pour la suppression des données, telles que la vérifi
 </html>
 
 
+<!-- -------------------------------------------------------------------
+Formulaire ajouter !!!!
+Pour permettre l'upload d'une image et l'associer au disque que vous souhaitez ajouter sur la page add_disc.php, 
+vous pouvez utiliser le formulaire avec un champ de type "file" pour sélectionner le fichier image. Voici comment vous pouvez le faire : -->
+
+<?php
+include('db.php');
+
+// Vérifier si le formulaire a été soumis
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Récupérer les données du formulaire
+    $title = $_POST['title'];
+    $artist = $_POST['artist'];
+    $newArtist = $_POST['new_artist'];
+    $year = $_POST['year'];
+    $genre = $_POST['genre'];
+    $label = $_POST['label'];
+    $price = $_POST['price'];
+
+    // Vérifier si un nouvel artiste a été saisi
+    if (!empty($newArtist)) {
+        // Ajouter le nouvel artiste à la base de données
+        $insertArtist = "INSERT INTO artist (artist_name) VALUES (:newArtist)";
+        $stmt = $pdo->prepare($insertArtist);
+        $stmt->execute(['newArtist' => $newArtist]);
+
+        // Récupérer l'ID de l'artiste nouvellement inséré
+        $artistId = $pdo->lastInsertId();
+    } else {
+        $artistId = $artist;
+    }
+
+    // Vérifier si un fichier image a été téléchargé
+    if (isset($_FILES['picture']) && $_FILES['picture']['error'] === UPLOAD_ERR_OK) {
+        // Récupérer les informations du fichier
+        $fileTmpPath = $_FILES['picture']['tmp_name'];
+        $fileName = $_FILES['picture']['name'];
+
+        // Déplacer le fichier vers le répertoire de destination
+        $uploadDirectory = 'src/img/jaquettes/';
+        $uploadedFilePath = $uploadDirectory . $fileName;
+        move_uploaded_file($fileTmpPath, $uploadedFilePath);
+    } else {
+        $uploadedFilePath = null;
+    }
+
+    // Insérer le disque dans la base de données
+    $insertDisc = "INSERT INTO disc (disc_title, artist_id, disc_year, disc_genre, disc_label, disc_price, disc_picture) 
+                   VALUES (:title, :artistId, :year, :genre, :label, :price, :picture)";
+    $stmt = $pdo->prepare($insertDisc);
+    $stmt->execute([
+        'title' => $title,
+        'artistId' => $artistId,
+        'year' => $year,
+        'genre' => $genre,
+        'label' => $label,
+        'price' => $price,
+        'picture' => $uploadedFilePath
+    ]);
+
+    // Rediriger vers la page index.php après l'ajout du disque
+    header('Location: index.php');
+    exit;
+}
+
+// Récupération de la liste des artistes pour le select
+$artist_sql = "SELECT * FROM artist";
+$artist_stmt = $pdo->query($artist_sql);
+$artists = $artist_stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter un vinyle</title>
+    <!-- Inclusion de Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <!-- Inclusion du fichier CSS personnalisé -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+        <h1>Ajouter un vinyle</h1>
+        <form method="POST" action="add_disc.php" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="title" class="form-label">Titre</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" required>
+            </div>
+            <div class="mb-3">
+                <label for="artist" class="form-label">Artiste</label>
+                <select class="form-select" id="artist" name="artist" required>
+                    <option value="">Sélectionner un artiste</option>
+                    <?php foreach ($artists as $artist) : ?>
+                        <option value="<?= $artist['artist_id']; ?>"><?= $artist['artist_name']; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="new_artist" class="form-label">Nouvel artiste</label>
+                <input type="text" class="form-control" id="new_artist" name="new_artist" placeholder="Enter artist">
+            </div>
+            <div class="mb-3">
+                <label for="year" class="form-label">Année</label>
+                <input type="number" class="form-control" id="year" name="year" placeholder="Enter year" required>
+            </div>
+            <div class="mb-3">
+                <label for="genre" class="form-label">Genre</label>
+                <input type="text" class="form-control" id="genre" name="genre" placeholder="Enter genre" required>
+            </div>
+            <div class="mb-3">
+                <label for="label" class="form-label">Label</label>
+                <input type="text" class="form-control" id="label" name="label" placeholder="Enter label" required>
+            </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">Price</label>
+                <input type="number" class="form-control" id="price" name="price" step="0.01" required>
+            </div>
+            <div class="mb-3">
+                <label for="picture" class="form-label">Jaquette</label>
+                <div class="input-group">
+                    <input type="file" class="form-control" id="picture" name="picture" accept="image/*">
+                    <label class="input-group-text" for="picture">Choisir un fichier</label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+            <a href="index.php" class="btn btn-secondary">Retour</a>
+        </form>
+    </div>
+    <!-- Inclusion des scripts Bootstrap et des scripts JS supplémentaires -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Inclusion du fichier JS personnalisé -->
+    <script src="script.js"></script>
+</body>
+</html>
+-----------------------------------------------------------------------------------------------------------------
+Ajout formulaire modifier page details.php
+
+Pour permettre de modifier la jaquette du disque sur la page details.php, vous pouvez ajouter un formulaire à la place du bouton "Modifier" et inclure un champ de téléchargement de fichier (input de type "file") pour sélectionner une nouvelle jaquette. Voici comment vous pouvez modifier votre code :
+
+php
+Copy code
+<?php
+    include('db.php');
+
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+    
+        $sql = "SELECT * FROM disc JOIN artist ON disc.artist_id = artist.artist_id WHERE disc_id = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(['id' => $id]);
+    
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if (!$row) {
+            echo "Disque non trouvé";
+            exit;
+        }
+    } else {
+        echo "Identifiant non fourni";
+        exit;
+    }
+?>
+    
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Détails du disque</title>
+    <!-- Inclusion de Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <!-- Inclusion du fichier CSS personnalisé -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1><?php echo $row['disc_title']; ?></h1>
+    <img src="src/img/jaquettes/<?php echo $row['disc_picture']; ?>" alt="<?php echo $row['disc_title']; ?>"><br>
+    <strong>Artiste :</strong> <?php echo $row['artist_name']; ?><br>
+    <strong>Label :</strong> <?php echo $row['disc_label']; ?><br>
+    <strong>Année :</strong> <?php echo $row['disc_year']; ?><br>
+    <strong>Genre :</strong> <?php echo $row['disc_genre']; ?><br>
+    <strong>Prix :</strong> <?php echo $row['disc_price']; ?> €<br>
+    
+    <form method="POST" action="process_update_disc.php" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="<?php echo $row['disc_id']; ?>">
+        <div class="mb-3">
+            <label for="picture" class="form-label">Nouvelle jaquette</label>
+            <input type="file" class="form-control" id="picture" name="picture">
+        </div>
+        <button type="submit" class="btn btn-primary">Modifier</button>
+    </form>
+
+    <a href="delete_disc.php?id=<?php echo $row['disc_id']; ?>" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce disque ?')">Supprimer</a>
+
+    <!-- Inclusion des scripts Bootstrap et des scripts JS supplémentaires -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Inclusion du fichier JS personnalisé -->
+    <script src="script.js"></script>
+</body>
+</html>
+
+-------------------------------------------------
+Le code de mise à jour de la jaquette directement dans la page details.php :
+
+<?php
+    include('db.php');
+
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+    
+        $sql = "SELECT * FROM disc JOIN artist ON disc.artist_id = artist.artist_id WHERE disc_id = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(['id' => $id]);
+    
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        if (!$row) {
+            echo "Disque non trouvé";
+            exit;
+        }
+    } else {
+        echo "Identifiant non fourni";
+        exit;
+    }
+    
+    // Gérer la mise à jour de la jaquette
+    if (isset($_POST['updatePicture'])) {
+        $id = $_POST['id'];
+        
+        // Vérifier si un fichier a été sélectionné
+        if ($_FILES['picture']['name'] !== '') {
+            $picture = $_FILES['picture'];
+
+            // Vérifier si le fichier est une image
+            if (getimagesize($picture['tmp_name'])) {
+                // Déplacer le fichier vers le dossier des jaquettes
+                $destination = 'src/img/jaquettes/' . $picture['name'];
+                move_uploaded_file($picture['tmp_name'], $destination);
+
+                // Mettre à jour la jaquette du disque dans la base de données
+                $updateSql = "UPDATE disc SET disc_picture = :picture WHERE disc_id = :id";
+                $updateStmt = $pdo->prepare($updateSql);
+                $updateStmt->execute(['picture' => $picture['name'], 'id' => $id]);
+
+                // Rediriger vers la page de détails mise à jour
+                header("Location: details.php?id=$id");
+                exit;
+            } else {
+                echo "Le fichier sélectionné n'est pas une image valide.";
+                exit;
+            }
+        }
+    }
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Détails du disque</title>
+    <!-- Inclusion de Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <!-- Inclusion du fichier CSS personnalisé -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1><?php echo $row['disc_title']; ?></h1>
+    <img src="src/img/jaquettes/<?php echo $row['disc_picture']; ?>" alt="<?php echo $row['disc_title']; ?>"><br>
+    <strong>Artiste :</strong> <?php echo $row['artist_name']; ?><br>
+    <strong>Label :</strong> <?php echo $row['disc_label']; ?><br>
+    <strong>Année :</strong> <?php echo $row['disc_year']; ?><br>
+    <strong>Genre :</strong> <?php echo $row['disc_genre']; ?><br>
+    <strong>Prix :</strong> <?php echo $row['disc_price']; ?> €<br>
+
+    <form method="POST" action="details.php?id=<?php echo $row['disc_id']; ?>" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="<?php echo $row['disc_id']; ?>">
+        <div class="mb-3">
+            <label for="picture" class="form-label">Nouvelle jaquette</label>
+            <input type="file" class="form-control" id="picture" name="picture">
+        </div>
+        <button type="submit" name="updatePicture" class="btn btn-primary">Modifier la jaquette</button>
+    </form>
+
+    <a href="delete_disc.php?id=<?php echo $row['disc_id']; ?>" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce disque ?')">Supprimer</a>
+
+    <!-- Inclusion des scripts Bootstrap et des scripts JS supplémentaires -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Inclusion du fichier JS personnalisé -->
+    <script src="script.js"></script>
+</body>
+</html>
