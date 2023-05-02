@@ -1,13 +1,14 @@
 <?php
-    include('db.php');
-    // Récupération de la liste des artistes pour le select
-    $artist_sql = "SELECT * FROM artist";
-    $artist_stmt = $pdo->query($artist_sql);
-    $artists = $artist_stmt->fetchAll(PDO::FETCH_ASSOC);
+include('db.php');
+// Récupération de la liste des artistes pour le select
+$artist_sql = "SELECT * FROM artist";
+$artist_stmt = $pdo->query($artist_sql);
+$artists = $artist_stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Ajouter un vinyle</title>
@@ -16,9 +17,10 @@
     <!-- Inclusion du fichier CSS personnalisé -->
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div class="container">
-        <h1>Ajouter un vinyle</h1>
+        <h1 class="text-center">Ajouter un vinyle</h1>
         <form method="POST" action="process_add_disc.php">
             <div class="mb-3">
                 <label for="title" class="form-label">Titre</label>
@@ -55,14 +57,21 @@
             </div>
             <div class="mb-3">
                 <label for="picture" class="form-label">Jaquette</label>
-                <input type="text" class="form-control" id="picture" name="picture" placeholder="URL de l'image">
+                <div class="input-group">
+                    <input type="file" class="form-control" id="inputGroupFile" name="file" accept="image/*">
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary">Ajouter</button>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+                <a href="javascript:history.back()" class="btn btn-primary">Retour</a>
+            </div>
         </form>
     </div>
     <!-- Inclusion des scripts Bootstrap et des scripts JS supplémentaires -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Inclusion du fichier JS personnalisé -->
     <script src="script.js"></script>
+
 </body>
+
 </html>

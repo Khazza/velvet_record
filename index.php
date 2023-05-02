@@ -53,9 +53,9 @@ $count = $count_row['count'];
                                         <div class="d-flex flex-column">
                                             <h5 class="card-title fw-bold"><?php echo $row['disc_title']; ?></h5>
                                             <span class="card-text"><span class="fw-bold">Artiste: </span><?php echo $row['artist_name']; ?></span>
-                                            <span class="card-text"><span class="fw-bold">Artiste: </span>Label: <?php echo $row['disc_label']; ?></span>
-                                            <span class="card-text"><span class="fw-bold">Artiste: </span>Année: <?php echo $row['disc_year']; ?></span>
-                                            <span class="card-text"><span class="fw-bold">Artiste: </span>Genre: <?php echo $row['disc_genre']; ?></span>
+                                            <span class="card-text"><span class="fw-bold">Label: </span> <?php echo $row['disc_label']; ?></span>
+                                            <span class="card-text"><span class="fw-bold">Année: </span><?php echo $row['disc_year']; ?></span>
+                                            <span class="card-text"><span class="fw-bold">Genre: </span><?php echo $row['disc_genre']; ?></span>
                                         </div>
                                         <div>
                                             <a href="details.php?id=<?php echo $row['disc_id']; ?>" class="btn btn-primary">Détails</a>
