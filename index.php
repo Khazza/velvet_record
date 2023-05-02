@@ -1,19 +1,31 @@
 <?php
-                include('db.php');
-                ?>
+    include('db.php');
+    // Requête SQL pour compter le nombre de disques
+    $count_sql = "SELECT COUNT(*) as count FROM disc";
+    $count_stmt = $pdo->query($count_sql);
+    $count_row = $count_stmt->fetch(PDO::FETCH_ASSOC);
+    $count = $count_row['count'];
+?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Liste des disques</title>
+    <title>Liste des disques (<?php echo $count; ?>)</title>
     <!-- Inclusion de Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
     <!-- Inclusion du fichier CSS personnalisé -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Liste des disques</h1>
-    <a href="add_disc.php" class="btn btn-primary">Ajouter</a>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">Liste des disques</a>
+            <div class="ml-auto">
+                <a href="add_disc.php" class="btn btn-primary">Ajouter</a>
+            </div>
+        </div>
+    </nav>
 
     <div class="container">
         <div class="row">
@@ -29,14 +41,20 @@
                 ?>
                 <div class="col-md-6">
                     <div class="card mb-3">
-                        <img src="src/img/jaquettes/<?= $row['disc_picture']; ?>" class="card-img-top" alt="Jaquette">
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo $row['disc_title']; ?></h5>
-                            <p class="card-text">Artiste: <?php echo $row['artist_name']; ?></p>
-                            <p class="card-text">Label: <?php echo $row['disc_label']; ?></p>
-                            <p class="card-text">Année: <?php echo $row['disc_year']; ?></p>
-                            <p class="card-text">Genre: <?php echo $row['disc_genre']; ?></p>
-                            <a href="details.php?id=<?php echo $row['disc_id']; ?>" class="btn btn-primary">Détails</a>
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="src/img/jaquettes/<?= $row['disc_picture']; ?>" class="card-img-top" alt="Jaquette">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title"><?php echo $row['disc_title']; ?></h5>
+                                    <p class="card-text">Artiste: <?php echo $row['artist_name']; ?></p>
+                                    <p class="card-text">Label: <?php echo $row['disc_label']; ?></p>
+                                    <p class="card-text">Année: <?php echo $row['disc_year']; ?></p>
+                                    <p class="card-text">Genre: <?php echo $row['disc_genre']; ?></p>
+                                    <a href="details.php?id=<?php echo $row['disc_id']; ?>" class="btn btn-primary">Détails</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -47,9 +65,7 @@
     </div>
 
     <!-- Inclusion des scripts Bootstrap et des scripts JS supplémentaires -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Inclusion du fichier JS personnalisé -->
     <script src="script.js"></script>
 </body>
