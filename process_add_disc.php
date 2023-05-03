@@ -1,63 +1,80 @@
 <?php
 include('db.php');
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Récupérer les autres informations du formulaire
-    $artist = $_POST['artist'];
-    $label = $_POST['label'];
-    $year = $_POST['year'];
-    $genre = $_POST['genre'];
-    $price = $_POST['price'];
+// Récupération des données du formulaire
+$title = $_POST['title'];
+$artist = $_POST['artist'];
+$newArtist = $_POST['new_artist'];
+$year = $_POST['year'];
+$genre = $_POST['genre'];
+$label = $_POST['label'];
+$price = $_POST['price'];
 
-    // Vérifier si un fichier a été téléchargé
-    if (!empty($_FILES['file']['name'])) {
-        // Chemin du répertoire de stockage des jaquettes
-        $uploadDirectory = 'src/img/jaquettes/';
+// Vérification si un nouvel artiste est ajouté
+if (!empty($newArtist)) {
+    // Insertion du nouvel artiste dans la table artist
+    $insertArtistSql = "INSERT INTO artist (artist_name) VALUES (:artist_name)";
+    $insertArtistStmt = $pdo->prepare($insertArtistSql);
+    $insertArtistStmt->execute(['artist_name' => $newArtist]);
 
-        // Nom du fichier téléchargé
-        $filename = basename($_FILES['file']['name']);
+    // Récupération de l'ID du nouvel artiste ajouté
+    $artistId = $pdo->lastInsertId();
+} else {
+    $artistId = $artist;
+}
 
-        // Chemin complet du fichier sur le serveur
-        $uploadFilePath = $uploadDirectory . $filename;
+// Gestion de l'upload de la jaquette
+if ($_FILES['file']['name']) {
+    $uploadDir = 'src/img/jaquettes/';
+    $filename = $_FILES['file']['name'];
+    $tmpFilePath = $_FILES['file']['tmp_name'];
+    $newFilePath = $uploadDir . $filename;
 
-        // Déplacer le fichier téléchargé vers le répertoire de stockage
-        if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadFilePath)) {
-            // Mettre à jour le chemin de la nouvelle jaquette dans la base de données
-            $updateSql = "UPDATE disc SET artist_id = :artist, disc_label = :label, disc_year = :year, disc_genre = :genre, disc_price = :price, disc_jacket = :jacket WHERE disc_id = :id";
-            $updateStmt = $pdo->prepare($updateSql);
-            $updateStmt->execute([
-                'artist' => $artist,
-                'label' => $label,
-                'year' => $year,
-                'genre' => $genre,
-                'price' => $price,
-                'jacket' => $uploadFilePath,
-                'id' => $id
-            ]);
+    // Redimensionnement de l'image si nécessaire
+    list($width, $height) = getimagesize($tmpFilePath);
+    $maxSize = 600;
 
-            // Redirection vers la page des détails du disque
-            header('Location: details.php?id=' . $id);
-            exit;
+    if ($width > $maxSize || $height > $maxSize) {
+        // Calcul des nouvelles dimensions
+        if ($width > $height) {
+            $newWidth = $maxSize;
+            $newHeight = intval($height * ($maxSize / $width));
         } else {
-            echo "Une erreur s'est produite lors du téléchargement de la jaquette.";
-            exit;
+            $newHeight = $maxSize;
+            $newWidth = intval($width * ($maxSize / $height));
         }
-    } else {
-        // Si aucun fichier n'a été téléchargé, mettre à jour les autres informations sans changer la jaquette
-        $updateSql = "UPDATE disc SET artist_id = :artist, disc_label = :label, disc_year = :year, disc_genre = :genre, disc_price = :price WHERE disc_id = :id";
-        $updateStmt = $pdo->prepare($updateSql);
-        $updateStmt->execute([
-            'artist' => $artist,
-            'label' => $label,
-            'year' => $year,
-            'genre' => $genre,
-            'price' => $price,
-            'id' => $id
-        ]);
 
-        // Redirection vers la page des détails du disque
-        header('Location: details.php?id=' . $id);
-        exit;
+        // Création de la nouvelle image redimensionnée
+        $imageResized = imagecreatetruecolor($newWidth, $newHeight);
+        $imageSource = imagecreatefromjpeg($tmpFilePath);
+
+        // Redimensionnement de l'image source à la nouvelle taille
+        imagecopyresampled($imageResized, $imageSource, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+
+        // Sauvegarde de l'image redimensionnée
+        imagejpeg($imageResized, $newFilePath);
+        // Libération de la mémoire
+        imagedestroy($imageResized);
+        imagedestroy($imageSource);
+    } else {
+        move_uploaded_file($tmpFilePath, $newFilePath);
     }
+
+    // Insertion des données dans la table disc
+    $insertDiscSql = "INSERT INTO disc (disc_title, artist_id, disc_year, disc_genre, disc_label, disc_price, disc_picture) VALUES (:title, :artist_id, :year, :genre, :label, :price, :picture)";
+    $insertDiscStmt = $pdo->prepare($insertDiscSql);
+    $insertDiscStmt->execute([
+        'title' => $title,
+        'artist_id' => $artistId,
+        'year' => $year,
+        'genre' => $genre,
+        'label' => $label,
+        'price' => $price,
+        'picture' => $filename
+    ]);
+
+    // Redirection vers la page d'accueil ou une autre page de confirmation
+    header('Location: index.php');
+    exit();
 }
 ?>

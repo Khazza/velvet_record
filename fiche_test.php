@@ -9,6 +9,7 @@ $artists = $artist_stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Ajouter un vinyle</title>
@@ -17,6 +18,7 @@ $artists = $artist_stmt->fetchAll(PDO::FETCH_ASSOC);
     <!-- Inclusion du fichier CSS personnalisé -->
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div class="container">
         <h1>Ajouter un vinyle</h1>
@@ -62,16 +64,17 @@ $artists = $artist_stmt->fetchAll(PDO::FETCH_ASSOC);
         </form>
     </div>
     <!-- Inclusion des scripts Bootstrap et des scripts JS supplémentaires -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Inclusion du fichier JS personnalisé -->
-<script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Inclusion du fichier JS personnalisé -->
+    <script src="script.js"></script>
 
 </body>
+
 </html>
 
 -------------------------------------------------------------------------------
 Page process modifier:
-    <?php
+<?php
 include('db.php');
 
 // Récupération des données du formulaire
@@ -126,29 +129,36 @@ if ($_FILES['file']['name']) {
 
         // Sauvegarde de l'image redimensionnée
         imagejpeg($imageResized, $newFilePath);
-            // Libération de la mémoire
-    imagedestroy($imageResized);
-    imagedestroy($imageSource);
-} else {
-    move_uploaded_file($tmpFilePath, $newFilePath);
-}
+        // Libération de la mémoire
+        imagedestroy($imageResized);
+        imagedestroy($imageSource);
+    } else {
+        move_uploaded_file($tmpFilePath, $newFilePath);
+    }
 
-// Insertion des données dans la table disc
-$insertDiscSql = "INSERT INTO disc (title, artist_id, year, genre, label, price, picture) VALUES (:title, :artist_id, :year, :genre, :label, :price, :picture)";
-$insertDiscStmt = $pdo->prepare($insertDiscSql);
-$insertDiscStmt->execute([
-    'title' => $title,
-    'artist_id' => $artistId,
-    'year' => $year,
-    'genre' => $genre,
-    'label' => $label,
-    'price' => $price,
-    'picture' => $newFilePath
-]);
+    // Insertion des données dans la table disc
+    $insertDiscSql = "INSERT INTO disc (title, artist_id, year, genre, label, price, picture) VALUES (:title, :artist_id, :year, :genre, :label, :price, :picture)";
+    $insertDiscStmt = $pdo->prepare($insertDiscSql);
+    $insertDiscStmt->execute([
+        'title' => $title,
+        'artist_id' => $artistId,
+        'year' => $year,
+        'genre' => $genre,
+        'label' => $label,
+        'price' => $price,
+        'picture' => $newFilePath
+    ]);
 
-// Redirection vers la page d'accueil ou une autre page de confirmation
-header('Location: index.php');
-exit();
+    // Redirection vers la page d'accueil ou une autre page de confirmation
+    header('Location: index.php');
+    exit();
 }
 ?>
 
+---------------------------------------------------
+Fatal error: Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'title' in 'field list' in /home/mahe/Bureau/velvet_record/process_add_disc.php on line 73
+( ! ) PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'title' in 'field list' in /home/mahe/Bureau/velvet_record/process_add_disc.php on line 73
+Call Stack
+#	Time	Memory	Function	Location
+1	0.0003	364584	{main}( )	.../process_add_disc.php:0
+2	0.1294	409136	execute( $params = ['title' => 'aaa', 'artist_id' => '11', 'year' => '1500', 'genre' => 'rrrr', 'label' => 'tttt', 'price' => '15', 'picture' => 'src/img/jaquettes/testvinyl.jpeg'] )	.../process_add_disc.php:73

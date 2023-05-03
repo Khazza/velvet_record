@@ -1,13 +1,15 @@
 <?php
-    include('db.php');
-    // Récupération de la liste des artistes pour le select
-    $artist_sql = "SELECT * FROM artist";
-    $artist_stmt = $pdo->query($artist_sql);
-    $artists = $artist_stmt->fetchAll(PDO::FETCH_ASSOC);
+include('db.php');
+
+// Récupération de la liste des artistes pour le select
+$artist_sql = "SELECT * FROM artist";
+$artist_stmt = $pdo->query($artist_sql);
+$artists = $artist_stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Ajouter un vinyle</title>
@@ -16,17 +18,18 @@
     <!-- Inclusion du fichier CSS personnalisé -->
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div class="container">
         <h1>Ajouter un vinyle</h1>
-        <form method="POST" action="process_add_disc.php">
+        <form method="POST" action="process_add_disc.php" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="title" class="form-label">Titre</label>
                 <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" required>
             </div>
             <div class="mb-3">
                 <label for="artist" class="form-label">Artiste</label>
-                <select class="form-select" id="artist" name="artist" required>
+                <select class="form-select" id="artist" name="artist">
                     <option value="">Sélectionner un artiste</option>
                     <?php foreach ($artists as $artist) : ?>
                         <option value="<?= $artist['artist_id']; ?>"><?= $artist['artist_name']; ?></option>
@@ -55,7 +58,7 @@
             </div>
             <div class="mb-3">
                 <label for="picture" class="form-label">Jaquette</label>
-                <input type="text" class="form-control" id="picture" name="picture" placeholder="URL de l'image">
+                <input type="file" class="form-control" id="picture" name="file" accept="image/*">
             </div>
             <button type="submit" class="btn btn-primary">Ajouter</button>
         </form>
@@ -64,5 +67,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Inclusion du fichier JS personnalisé -->
     <script src="script.js"></script>
+
 </body>
+
 </html>
