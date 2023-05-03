@@ -1,6 +1,12 @@
 <?php
 include('db.php');
 
+// Inclusion de la bibliothèque GD
+if (!extension_loaded('gd') || !function_exists('gd_info')) {
+    echo 'L\'extension GD n\'est pas activée. Veuillez activer GD pour utiliser la manipulation d\'images.';
+    exit;
+}
+
 // Récupération de la liste des artistes pour le select
 $artist_sql = "SELECT * FROM artist";
 $artist_stmt = $pdo->query($artist_sql);
@@ -31,7 +37,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $genre = $_POST['genre'];
     $price = $_POST['price'];
 
-
     // Gestion du changement de jaquette
     if ($_FILES['file']['name']) {
         $uploadDir = 'src/img/jaquettes/';
@@ -39,12 +44,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $tmpFilePath = $_FILES['file']['tmp_name'];
         $newFilePath = $uploadDir . $filename;
 
-        if (move_uploaded_file($tmpFilePath, $newFilePath)) {
-            // Mise à jour du chemin de la nouvelle jaquette dans la base de données
-            $updateSql = "UPDATE disc SET artist_id = :artist, disc_label = :label, disc_year = :year, disc_genre = :genre, disc_price = :price, disc_picture = :picture WHERE disc_id = :id";
-            $updateStmt = $pdo->prepare($updateSql);
-            $updateStmt->execute(['artist' => $artist, 'label' => $label, 'year' => $year, 'genre' => $genre, 'price' => $price, 'picture' => $filename, 'id' => $id]);
+        // Vérification de la taille de l'image
+        $imageSize = getimagesize($tmpFilePath);
+        $imageWidth = $imageSize[0];
+        $imageHeight = $imageSize[1];
+
+        if ($imageWidth > 600 || $imageHeight > 600) {
+            // Redimensionnement de l'image si elle dépasse la taille maximale de 600x600 pixels
+            $maxWidth = 600;
+            $maxHeight = 600;
+
+            // Calcul des nouvelles dimensions de l'image en conservant le ratio
+            $ratio = min($maxWidth / $imageWidth, $maxHeight / $imageHeight);
+            $newWidth = intval($imageWidth * $ratio);
+            $newHeight = intval($imageHeight * $ratio);
+
+            // Création d'une nouvelle image redimensionnée
+            $newImage = imagecreatetruecolor($newWidth, $newHeight);
+            $sourceImage = imagecreatefromstring(file_get_contents($tmpFilePath));
+
+            // Redimensionnement de l'image source vers la nouvelle image
+            imagecopyresampled($newImage, $sourceImage, 0, 0, 0, 0, $newWidth, $newHeight, $imageWidth, $imageHeight);
+
+            // Enregistrement de l'image redimensionnée
+            imagejpeg($newImage, $newFilePath, 90);
+
+            // Libération de la mémoire utilisée par les images
+            imagedestroy($newImage);
+            imagedestroy($sourceImage);
+        } else {
+            // Pas de redimensionnement nécessaire, copie directe de l'image
+            move_uploaded_file($tmpFilePath, $newFilePath);
         }
+
+        // Mise à jour du chemin de la nouvelle jaquette dans la base de données
+        $updateSql = "UPDATE disc SET artist_id = :artist, disc_label = :label, disc_year = :year, disc_genre = :genre, disc_price = :price, disc_picture = :picture WHERE disc_id = :id";
+        $updateStmt = $pdo->prepare($updateSql);
+        $updateStmt->execute(['artist' => $artist, 'label' => $label, 'year' => $year, 'genre' => $genre, 'price' => $price, 'picture' => $filename, 'id' => $id]);
     } else {
         // Mise à jour des autres informations sans changer la jaquette
         $updateSql = "UPDATE disc SET artist_id = :artist, disc_label = :label, disc_year = :year, disc_genre = :genre, disc_price = :price WHERE disc_id = :id";
@@ -75,12 +111,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form action="" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <select class="form-select" id="artist" name="artist" required>
-                    <option value="">Sélectionner un artiste</option>
-                    <?php foreach ($artists as $artist) : ?>
-                        <option value="<?= $artist['artist_id']; ?>" <?php if ($artist['artist_id'] == $row['artist_id']) echo 'selected'; ?>>
-                            <?= $artist['artist_name']; ?>
-                        </option>
-                    <?php endforeach; ?>
+                    <option value="">Sélectionner un artiste</index.php/option>
+                        <?php foreach ($artists as $artist) : ?>
+                    <option value="<?= $artist['artist_id']; ?>" <?php if ($artist['artist_id'] == $row['artist_id']) echo 'selected'; ?>>
+                        <?= $artist['artist_name']; ?>
+                    </option>
+                <?php endforeach; ?>
                 </select>
             </div>
             <div class="mb-3">
@@ -116,6 +152,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Inclusion du fichier JS personnalisé -->
     <script src="script.js"></script>
+
 </body>
 
 </html>
