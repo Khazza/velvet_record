@@ -20,6 +20,7 @@ $artists = $artist_stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 
 <body>
+    <!-- Formulaire d'ajout de disque -->
     <div class="container">
         <h1>Ajouter un vinyle</h1>
         <form method="POST" action="process_add_disc.php" enctype="multipart/form-data">
@@ -61,6 +62,7 @@ $artists = $artist_stmt->fetchAll(PDO::FETCH_ASSOC);
                 <input type="file" class="form-control" id="picture" name="file" accept="image/*">
             </div>
             <button type="submit" class="btn btn-primary">Ajouter</button>
+            <a href="javascript:history.back()" class="btn btn-primary">Retour</a>
         </form>
     </div>
     <!-- Inclusion des scripts Bootstrap et des scripts JS supplémentaires -->
