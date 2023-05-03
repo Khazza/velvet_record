@@ -1,6 +1,11 @@
 <?php
 include('db.php');
 
+// Récupération de la liste des artistes pour le select
+$artist_sql = "SELECT * FROM artist";
+$artist_stmt = $pdo->query($artist_sql);
+$artists = $artist_stmt->fetchAll(PDO::FETCH_ASSOC);
+
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
@@ -25,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $year = $_POST['year'];
     $genre = $_POST['genre'];
     $price = $_POST['price'];
+
 
     // Gestion du changement de jaquette
     if ($_FILES['file']['name']) {
@@ -68,15 +74,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h1 class="text-center">Modifier le disque : <?php echo $row['disc_title']; ?></h1>
         <form action="" method="post" enctype="multipart/form-data">
             <div class="mb-3">
-            <select class="form-select" id="artist" name="artist" required>
-    <option value="">Sélectionner un artiste</option>
-    <?php foreach ($artists as $artist) : ?>
-        <option value="<?= $artist['artist_id']; ?>" <?php if ($artist['artist_id'] == $row['artist_id']) echo 'selected'; ?>>
-            <?= $artist['artist_name']; ?>
-        </option>
-    <?php endforeach; ?>
-</select>
-</div>
+                <select class="form-select" id="artist" name="artist" required>
+                    <option value="">Sélectionner un artiste</option>
+                    <?php foreach ($artists as $artist) : ?>
+                        <option value="<?= $artist['artist_id']; ?>" <?php if ($artist['artist_id'] == $row['artist_id']) echo 'selected'; ?>>
+                            <?= $artist['artist_name']; ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
             <div class="mb-3">
                 <label for="label" class="form-label">Label :</label>
                 <input type="text" class="form-control" id="label" name="label" value="<?php echo $row['disc_label']; ?>">
