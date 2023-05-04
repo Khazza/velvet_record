@@ -1,21 +1,34 @@
 <?php
 include 'db.php';
 
-    if (isset($_GET['id'])) {
-        $id = $_GET['id'];
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
 
-        // Requête SQL pour supprimer le disque avec l'identifiant spécifié
-        $sql = "DELETE FROM disc WHERE disc_id = :id";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute(['id' => $id]);
+    // Vérification si l'artiste n'a pas d'autre disque
+    $sql = "SELECT COUNT(*) FROM disc WHERE artist_id = :id";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(['id' => $id]);
+    $count = $stmt->fetchColumn();
 
-        // Redirection vers la page de liste des disques après suppression
-        header("Location: index.php");
-        exit;
-    } else {
-        echo "Identifiant non fourni";
-        exit;
+    if ($count == 0) {
+        // Suppression de l'artiste de la table artist
+        $artist_sql = "DELETE FROM artist WHERE artist_id = :id";
+        $artist_stmt = $pdo->prepare($artist_sql);
+        $artist_stmt->execute(['id' => $id]);
     }
+
+    // Suppression du disque avec l'identifiant spécifié
+    $disc_sql = "DELETE FROM disc WHERE disc_id = :id";
+    $disc_stmt = $pdo->prepare($disc_sql);
+    $disc_stmt->execute(['id' => $id]);
+
+    // Redirection vers la page de liste des disques après suppression
+    header("Location: index.php");
+    exit;
+} else {
+    echo "Identifiant non fourni";
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -23,7 +36,7 @@ include 'db.php';
     <meta charset="UTF-8">
     <title>Confirmation de suppression</title>
     <!-- Inclusion de Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
 </head>
 <body>
     <h1>Confirmation de suppression</h1>
@@ -38,4 +51,3 @@ include 'db.php';
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
