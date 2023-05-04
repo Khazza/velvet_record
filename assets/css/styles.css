@@ -1,0 +1,13 @@
+.counter {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background-color: #f8f9fa;
+    color: #6c757d;
+    font-weight: bold;
+  }
+  
+  .navbar-brand {
+    font-size: 24px;
+  }
+  
