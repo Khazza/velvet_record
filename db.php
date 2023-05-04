@@ -14,17 +14,4 @@ try {
     echo "Erreur de connexion à la base de données : " . $e->getMessage();
     exit;
 }
-
-// Fonction pour exécuter une requête SQL
-function executeQuery($sql, $params = []) {
-    global $pdo;
-    try {
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute($params);
-        return $stmt;
-    } catch (PDOException $e) {
-        echo "Erreur lors de l'exécution de la requête : " . $e->getMessage();
-        exit;
-    }
-}
 ?>
