@@ -107,52 +107,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
     <div class="container">
-        <h1 class="text-center">Modifier le disque : <?php echo $row['disc_title']; ?></h1>
-        <form action="" method="post" enctype="multipart/form-data">
+        <h1 class="text-center">Modifier le disque</h1>
+        <form method="POST" action="process_edit_disc.php?id=<?php echo $row['disc_id']; ?>">
             <div class="mb-3">
+                <label for="title" class="form-label">Titre</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Entrez le titre" value="<?php echo $row['disc_title']; ?>" required>
+            </div>
+            <div class="mb-3">
+                <label for="artist" class="form-label">Artiste</label>
                 <select class="form-select" id="artist" name="artist" required>
-                    <option value="">Sélectionner un artiste</index.php/option>
-                        <?php foreach ($artists as $artist) : ?>
-                    <option value="<?= $artist['artist_id']; ?>" <?php if ($artist['artist_id'] == $row['artist_id']) echo 'selected'; ?>>
-                        <?= $artist['artist_name']; ?>
-                    </option>
-                <?php endforeach; ?>
+                    <option value="">Sélectionner un artiste</option>
+                    <?php foreach ($artists as $artist) : ?>
+                        <option value="<?php echo $artist['artist_id']; ?>" <?php if ($artist['artist_id'] == $row['artist_id']) echo 'selected'; ?>><?php echo $artist['artist_name']; ?></option>
+                    <?php endforeach; ?>
                 </select>
             </div>
             <div class="mb-3">
-                <label for="label" class="form-label">Label :</label>
-                <input type="text" class="form-control" id="label" name="label" value="<?php echo $row['disc_label']; ?>">
+                <label for="label" class="form-label">Label</label>
+                <input type="text" class="form-control" id="label" name="label" placeholder="Entrez le label" value="<?php echo $row['disc_label']; ?>" required>
             </div>
             <div class="mb-3">
-                <label for="year" class="form-label">Année :</label>
-                <input type="text" class="form-control" id="year" name="year" value="<?php echo $row['disc_year']; ?>">
+                <label for="year" class="form-label">Année</label>
+                <input type="number" class="form-control" id="year" name="year" placeholder="Entrez l'année" value="<?php echo $row['disc_year']; ?>" required>
             </div>
             <div class="mb-3">
-                <label for="genre" class="form-label">Genre :</label>
-                <input type="text" class="form-control" id="genre" name="genre" value="<?php echo $row['disc_genre']; ?>">
+                <label for="genre" class="form-label">Genre</label>
+                <input type="text" class="form-control" id="genre" name="genre" placeholder="Entrez le genre" value="<?php echo $row['disc_genre']; ?>" required>
             </div>
             <div class="mb-3">
-                <label for="price" class="form-label">Prix :</label>
-                <input type="text" class="form-control" id="price" name="price" value="<?php echo $row['disc_price']; ?>">
+                <label for="price" class="form-label">Prix</label>
+                <input type="number" class="form-control" id="price" name="price" step="0.01" placeholder="Entrez le prix" value="<?php echo $row['disc_price']; ?>" required>
             </div>
             <div class="mb-3">
-                <label for="picture" class="form-label">Jaquette :</label>
-                <div class="input-group">
-                    <input type="file" class="form-control" id="picture" name="file" accept="image/*">
-                </div>
+                <label for="picture" class="form-label">Jaquette</label>
+                <input type="file" class="form-control" id="picture" name="picture" accept="image/*">
             </div>
-            <input type="hidden" name="id" value="<?php echo $row['disc_id']; ?>">
-            <div class="text-center mt-3">
-                <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
-                <a href="details.php?id=<?php echo $row['disc_id']; ?>" class="btn btn-secondary">Annuler</a>
+            <div class="mb-3">
+                <?php if ($row['disc_picture']) : ?>
+                    <img src="src/img/jaquettes/<?php echo $row['disc_picture']; ?>" alt="<?php echo $row['disc_title']; ?>" width="200">
+                <?php else : ?>
+                    <span>Aucune jaquette disponible</span>
+                <?php endif; ?>
             </div>
+            <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
         </form>
     </div>
+
     <!-- Inclusion des scripts Bootstrap et des scripts JS supplémentaires -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Inclusion du fichier JS personnalisé -->
     <script src="script.js"></script>
-
 </body>
 
 </html>
