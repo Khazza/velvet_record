@@ -5,18 +5,10 @@ $count_sql = "SELECT COUNT(*) as count FROM disc";
 $count_stmt = $pdo->query($count_sql);
 $count_row = $count_stmt->fetch(PDO::FETCH_ASSOC);
 $count = $count_row['count'];
-
-// Requête SQL pour récupérer les 5 derniers disques ajoutés
-$recent_sql = "SELECT * 
-               FROM disc
-               JOIN artist ON disc.artist_id = artist.artist_id
-               ORDER BY disc_id DESC
-               LIMIT 5";
-$recent_stmt = $pdo->query($recent_sql);
 ?>
-
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Liste des disques</title>
@@ -25,6 +17,7 @@ $recent_stmt = $pdo->query($recent_sql);
     <!-- Inclusion du fichier CSS personnalisé -->
     <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
+
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -37,24 +30,38 @@ $recent_stmt = $pdo->query($recent_sql);
             </div>
         </div>
     </nav>
-    
-    <!-- Section ajoutée pour l'historique des disques récemment ajoutés -->
-    <div class="container mt-3">
-        <h4>Ajouté récemment:</h4>
-        <div class="d-flex flex-wrap">
-            <?php while ($recent_row = $recent_stmt->fetch(PDO::FETCH_ASSOC)) { ?>
-                <div class="recent-disc">
-                    <img src="src/img/jaquettes/<?php echo $recent_row['disc_picture']; ?>" alt="Jaquette" width="50">
-                    <div class="recent-disc-info">
-                        <span class="fw-bold"><?php echo $recent_row['disc_title']; ?></span>
-                        <span class="text-muted"><?php echo $recent_row['artist_name']; ?></span>
+
+    <!-- Historique des 5 derniers disques ajoutés -->
+    <div class="container mt-4">
+        <h5>Ajouté récemment:</h5>
+        <div class="row">
+            <?php
+            // Requête SQL pour sélectionner les 5 derniers enregistrements de la table disc
+            $recent_sql = "SELECT * 
+                           FROM disc
+                           JOIN artist ON disc.artist_id = artist.artist_id
+                           ORDER BY disc_id DESC
+                           LIMIT 5";
+            $recent_stmt = $pdo->query($recent_sql);
+
+            // Boucle pour afficher les enregistrements
+            while ($recent_row = $recent_stmt->fetch(PDO::FETCH_ASSOC)) {
+            ?>
+                <div class="col-md-2">
+                    <div class="d-flex flex-column align-items-center">
+                        <img src="src/img/jaquettes/<?= $recent_row['disc_picture']; ?>" class="recent-disc-img" alt="Jaquette">
+                        <p class="recent-disc-title"><?php echo $recent_row['disc_title']; ?></p>
+                        <p class="recent-disc-artist"><?php echo $recent_row['artist_name']; ?></p>
                     </div>
                 </div>
-            <?php } ?>
+            <?php
+            }
+            ?>
         </div>
     </div>
 
-    <div class="container">
+    <!-- Liste de tous les disques -->
+    <div class="container mt-4">
         <div class="row">
             <?php
             // Requête SQL pour sélectionner tous les enregistrements de la table disc
@@ -70,7 +77,7 @@ $recent_stmt = $pdo->query($recent_sql);
                     <div class="card mb-3 border border-0">
                         <div class="row g-0">
                             <div class="col-md-4">
-                                <img src="src/img/jaquettes/<?= $row['disc_picture']; ?>" class="card-img-top" alt="Jaquette">
+                            <img src="src/img/jaquettes/<?= $row['disc_picture']; ?>" class="card-img-top" alt="Jaquette">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body py-0 h-100">
@@ -78,7 +85,7 @@ $recent_stmt = $pdo->query($recent_sql);
                                         <div class="d-flex flex-column">
                                             <h5 class="card-title fw-bold"><?php echo $row['disc_title']; ?></h5>
                                             <span class="card-text"><span class="fw-bold">Artiste: </span><?php echo $row['artist_name']; ?></span>
-                                            <span class="card-text"><span class="fw-bold">Label: </span> <?php echo $row['disc_label']; ?></span>
+                                            <span class="card-text"><span class="fw-bold">Label: </span><?php echo $row['disc_label']; ?></span>
                                             <span class="card-text"><span class="fw-bold">Année: </span><?php echo $row['disc_year']; ?></span>
                                             <span class="card-text"><span class="fw-bold">Genre: </span><?php echo $row['disc_genre']; ?></span>
                                         </div>
@@ -102,4 +109,5 @@ $recent_stmt = $pdo->query($recent_sql);
     <!-- Inclusion du fichier JS personnalisé -->
     <script src="script.js"></script>
 </body>
+
 </html>
