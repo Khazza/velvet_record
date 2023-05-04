@@ -7,39 +7,3 @@
     border-radius: 90%;
   }
    */
-
-   .recently-added {
-    margin-top: 30px;
-    padding: 20px;
-    background-color: #f8f9fa;
-}
-
-.recently-added h2 {
-    margin-bottom: 20px;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.recently-added .card {
-    border: none;
-}
-
-.recently-added .card-img-top {
-    width: 100%;
-    height: auto;
-    max-height: 200px;
-    object-fit: contain;
-}
-
-.recently-added .card-body {
-    padding: 10px;
-}
-
-.recently-added .artist-name {
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.recently-added .disc-title {
-    font-size: 12px;
-}
