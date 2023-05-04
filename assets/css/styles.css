@@ -22,11 +22,24 @@
 
 .recently-added .card {
     border: none;
-    text-align: center;
 }
 
 .recently-added .card-img-top {
     width: 100%;
     height: auto;
-    max-height: 150px;
+    max-height: 200px;
+    object-fit: contain;
+}
+
+.recently-added .card-body {
+    padding: 10px;
+}
+
+.recently-added .artist-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.recently-added .disc-title {
+    font-size: 12px;
 }
