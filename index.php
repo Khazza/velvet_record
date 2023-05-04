@@ -23,7 +23,7 @@ $count = $count_row['count'];
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand fs-1 fw-bold">
-                Liste des disques (<span class="counter"><?php echo $count; ?></span>)
+                Liste des disques (<span class="counter-style"><?php echo $count; ?></span>)
             </a>
             <div class="ml-auto">
                 <a href="add_disc.php" class="btn btn-primary">Ajouter</a>

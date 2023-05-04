@@ -1,13 +1,9 @@
-.counter {
+.counter-style {
     display: inline-block;
-    padding: 4px 8px;
-    border-radius: 4px;
-    background-color: #f8f9fa;
-    color: #6c757d;
+    padding: 8px;
+    background-color: #f44336;
+    color: #fff;
     font-weight: bold;
-  }
-  
-  .navbar-brand {
-    font-size: 24px;
+    border-radius: 50%;
   }
   
