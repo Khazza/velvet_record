@@ -31,6 +31,32 @@ $count = $count_row['count'];
         </div>
     </nav>
 
+    <div class="recently-added">
+    <h2 class="text-center">Ajoutés récemment :</h2>
+    <div class="row">
+        <?php
+        // Requête SQL pour sélectionner les 5 derniers enregistrements de la table disc
+        $recent_sql = "SELECT * 
+        FROM disc
+        JOIN artist ON disc.artist_id = artist.artist_id
+        ORDER BY disc_id DESC
+        LIMIT 5";
+        $recent_stmt = $pdo->query($recent_sql);
+
+        // Boucle pour afficher les disques récemment ajoutés
+        while ($recent_row = $recent_stmt->fetch(PDO::FETCH_ASSOC)) {
+        ?>
+            <div class="col-md-2">
+                <div class="card border-0">
+                    <img src="src/img/jaquettes/<?= $recent_row['disc_picture']; ?>" class="card-img-top" alt="Jaquette">
+                </div>
+            </div>
+        <?php
+        }
+        ?>
+    </div>
+</div>
+
     <div class="container">
         <div class="row">
             <?php

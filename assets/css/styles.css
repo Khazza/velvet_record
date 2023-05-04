@@ -7,3 +7,26 @@
     border-radius: 90%;
   }
    */
+
+   .recently-added {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+.recently-added h2 {
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.recently-added .card {
+    border: none;
+    text-align: center;
+}
+
+.recently-added .card-img-top {
+    width: 100%;
+    height: auto;
+    max-height: 150px;
+}
