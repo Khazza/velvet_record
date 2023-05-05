@@ -30,7 +30,7 @@ $count = $count_row['count'];
             </div>
         </div>
     </nav>
-    <div class="container">
+<div class="container">
         <div class="row">
             <?php
             // Requête SQL pour sélectionner tous les enregistrements de la table disc
