@@ -38,3 +38,34 @@
     </div>
 </div>
 <!-- Fin de l'encadré "Ajouté récemment" -->
+
+
+
+------------------------------------------------------------------
+
+<!-- ... code précédent ... -->
+
+<?php
+$recent_rows = array(); // Tableau pour stocker les résultats
+
+// Récupérer les résultats dans le tableau
+while ($recent_row = $recent_stmt->fetch(PDO::FETCH_ASSOC)) {
+    $recent_rows[] = $recent_row;
+}
+?>
+
+<!-- ... code précédent ... -->
+
+<div class="carousel-inner d-flex justify-content-center">
+    <?php foreach ($recent_rows as $index => $recent_row) { ?>
+        <div class="carousel-item <?php if ($index === 0) echo 'active'; ?>">
+            <img src="src/img/jaquettes/<?= $recent_row['disc_picture']; ?>" alt="Jaquette" class="d-block mx-auto" style="width: 50px; height: 50px; object-fit: cover;">
+            <div class="text-center mt-2">
+                <div><?= $recent_row['disc_title']; ?></div>
+                <div><?= $recent_row['artist_name']; ?></div>
+            </div>
+        </div>
+    <?php } ?>
+</div>
+
+<!-- ... code suivant ... -->

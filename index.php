@@ -49,7 +49,7 @@ $recent_count = $recent_stmt->rowCount();
 <div class="container">
     <div class="row mt-4">
         <div class="col">
-            <h4>Ajouté récemment :</h4>
+            <h4 class="text-center">Ajouté récemment :</h4>
             <div id="recent-carousel" class="carousel slide" data-bs-ride="carousel">
                 <!-- Indicateurs -->
                 <ol class="carousel-indicators">
@@ -59,17 +59,15 @@ $recent_count = $recent_stmt->rowCount();
                 </ol>
 
                 <!-- Slides -->
-                <div class="carousel-inner">
-                    <?php $first = true; ?>
+                <div class="carousel-inner d-flex justify-content-center">
                     <?php while ($recent_row = $recent_stmt->fetch(PDO::FETCH_ASSOC)) { ?>
-                        <div class="carousel-item <?php if ($first) echo 'active'; ?>">
-                            <img src="src/img/jaquettes/<?= $recent_row['disc_picture']; ?>" alt="Jaquette" class="d-block mx-auto" style="width: 200px; height: 200px; object-fit: cover;">
+                        <div class="carousel-item">
+                            <img src="src/img/jaquettes/<?= $recent_row['disc_picture']; ?>" alt="Jaquette" class="d-block mx-auto" style="width: 50px; height: 50px; object-fit: cover;">
                             <div class="text-center mt-2">
                                 <div><?= $recent_row['disc_title']; ?></div>
                                 <div><?= $recent_row['artist_name']; ?></div>
                             </div>
                         </div>
-                        <?php $first = false; ?>
                     <?php } ?>
                 </div>
 
@@ -87,6 +85,7 @@ $recent_count = $recent_stmt->rowCount();
     </div>
 </div>
 <!-- Fin de l'encadré "Ajouté récemment" -->
+
 
     <div class="container">
         <div class="row">
