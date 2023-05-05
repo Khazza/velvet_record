@@ -5,20 +5,6 @@ $count_sql = "SELECT COUNT(*) as count FROM disc";
 $count_stmt = $pdo->query($count_sql);
 $count_row = $count_stmt->fetch(PDO::FETCH_ASSOC);
 $count = $count_row['count'];
-
-// initialisation du compteur
-$recent_count = 0; 
-
-// Requête SQL pour sélectionner les 5 derniers disques ajoutés récemment
-$recent_sql = "SELECT * 
-               FROM disc
-               JOIN artist ON disc.artist_id = artist.artist_id
-               ORDER BY disc_id DESC
-               LIMIT 5";
-$recent_stmt = $pdo->query($recent_sql);
-
-//comptage du nombre de résultats
-$recent_count = $recent_stmt->rowCount();
 ?>
 <!DOCTYPE html>
 <html>
@@ -44,50 +30,7 @@ $recent_count = $recent_stmt->rowCount();
             </div>
         </div>
     </nav>
-
-    <!-- Encadré "Ajouté récemment" -->
 <div class="container">
-    <div class="row mt-4">
-        <div class="col">
-            <h4 class="text-center">Ajouté récemment :</h4>
-            <div id="recent-carousel" class="carousel slide" data-bs-ride="carousel">
-                <!-- Indicateurs -->
-                <ol class="carousel-indicators">
-                    <?php for ($i = 0; $i < $recent_count; $i++) { ?>
-                        <li data-bs-target="#recent-carousel" data-bs-slide-to="<?= $i ?>" <?php if ($i == 0) echo 'class="active"'; ?>></li>
-                    <?php } ?>
-                </ol>
-
-                <!-- Slides -->
-                <div class="carousel-inner d-flex justify-content-center">
-                    <?php while ($recent_row = $recent_stmt->fetch(PDO::FETCH_ASSOC)) { ?>
-                        <div class="carousel-item">
-                            <img src="src/img/jaquettes/<?= $recent_row['disc_picture']; ?>" alt="Jaquette" class="d-block mx-auto" style="width: 50px; height: 50px; object-fit: cover;">
-                            <div class="text-center mt-2">
-                                <div><?= $recent_row['disc_title']; ?></div>
-                                <div><?= $recent_row['artist_name']; ?></div>
-                            </div>
-                        </div>
-                    <?php } ?>
-                </div>
-
-                <!-- Contrôles -->
-                <a class="carousel-control-prev" href="#recent-carousel" role="button" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Précédent</span>
-                </a>
-                <a class="carousel-control-next" href="#recent-carousel" role="button" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Suivant</span>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Fin de l'encadré "Ajouté récemment" -->
-
-
-    <div class="container">
         <div class="row">
             <?php
             // Requête SQL pour sélectionner tous les enregistrements de la table disc
@@ -133,7 +76,7 @@ $recent_count = $recent_stmt->rowCount();
     <!-- Inclusion des scripts Bootstrap et des scripts JS supplémentaires -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Inclusion du fichier JS personnalisé -->
-    <script src="./js/script.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
