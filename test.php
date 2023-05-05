@@ -9,23 +9,25 @@ $recent_stmt = $pdo->query($recent_sql);
 
 
 
- <!-- Encadré "Ajouté récemment" -->
- <div class="container">
-        <div class="row mt-4">
-            <div class="col">
-                <h4>Ajouté récemment :</h4>
-                <div class="d-flex">
-                    <?php while ($recent_row = $recent_stmt->fetch(PDO::FETCH_ASSOC)) { ?>
-                        <div class="me-3">
-                            <img src="src/img/jaquettes/<?= $recent_row['disc_picture']; ?>" alt="Jaquette" style="width: 50px;">
-                            <div class="text-center" style="font-size: 12px;">
-                                <div><?= $recent_row['disc_title']; ?></div>
-                                <div><?= $recent_row['artist_name']; ?></div>
-                            </div>
+<!-- Encadré "Ajouté récemment" -->
+<div class="container">
+    <div class="row mt-4">
+        <div class="col">
+            <h4>Ajouté récemment :</h4>
+            <div class="d-flex flex-wrap">
+                <?php while ($recent_row = $recent_stmt->fetch(PDO::FETCH_ASSOC)) { ?>
+                    <div class="me-3 mb-3">
+                        <img src="src/img/jaquettes/<?= $recent_row['disc_picture']; ?>" alt="Jaquette" style="width: 50px; height: 50px; object-fit: cover;">
+                        <div class="text-center" style="font-size: 12px; white-space: nowrap; width: 50px; overflow: hidden; text-overflow: ellipsis;">
+                            <?= $recent_row['disc_title']; ?>
                         </div>
-                    <?php } ?>
-                </div>
+                        <div class="text-center" style="font-size: 12px; white-space: nowrap; width: 50px; overflow: hidden; text-overflow: ellipsis;">
+                            <?= $recent_row['artist_name']; ?>
+                        </div>
+                    </div>
+                <?php } ?>
             </div>
         </div>
     </div>
-    <!-- Fin de l'encadré "Ajouté récemment" -->
+</div>
+<!-- Fin de l'encadré "Ajouté récemment" -->
