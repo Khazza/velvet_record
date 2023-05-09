@@ -1,29 +1,24 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="UTF-8">
     <title>Login</title>
-    <!-- Inclusion de Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
-    <!-- Inclusion du fichier CSS personnalisé -->
-    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-dYYNR0gKu2qV3qB6HmrEucCmLy6uPX7VUswbIauY7V+eSx5+eK7rh5o5Pwv5n4JD" crossorigin="anonymous">
 </head>
-
 <body>
-    <h2>Login</h2>
-    <form method="POST" action="login_handler.php">
-        <label for="username">Username:</label>
-        <input type="text" name="username" required><br>
-        <label for="password">Password:</label>
-        <input type="password" name="password" required><br>
-        <input type="submit" value="Login">
-    </form>
-
-    <!-- Inclusion des scripts Bootstrap et des scripts JS supplémentaires -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Inclusion du fichier JS personnalisé -->
-    <script src="script.js"></script>
+    <div class="container">
+        <h2>Login</h2>
+        <form method="POST" action="login_handler.php">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username:</label>
+                <input type="text" class="form-control" name="username" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password:</label>
+                <input type="password" class="form-control" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js" integrity="sha384-6KMjU6RznU6Hovd9XOgV7S0NcUBNUT7LnWE8bNwJ0DN4G0DBke93BdYQ9fZ1/6yo" crossorigin="anonymous"></script>
 </body>
-
 </html>
