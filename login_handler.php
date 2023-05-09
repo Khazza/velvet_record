@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Récupère l'utilisateur correspondant à l'identifiant fourni
     $query = "SELECT * FROM users WHERE username = ?";
-    $stmt = $conn->prepare($query);
+    $stmt = $pdo->prepare($query);
     $stmt->execute([$username]);
     $user = $stmt->fetch();
 
