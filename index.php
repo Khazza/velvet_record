@@ -2,6 +2,12 @@
 session_start();
 include('db.php');
 
+// Vérifiez si l'utilisateur est connecté
+if (isset($_SESSION['user'])) {
+    // Récupérez le nom d'utilisateur
+    $username = $_SESSION['user']['name'];
+}
+
 // Requête SQL pour compter le nombre de disques
 $count_sql = "SELECT COUNT(*) as count FROM disc";
 $count_stmt = $pdo->query($count_sql);
@@ -23,22 +29,22 @@ $count = $count_row['count'];
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-        <a class="navbar-brand fs-1 fw-bold">
-            Liste des disques (<span class="counter-style"><?php echo $count; ?></span>)
-        </a>
-        <div class="ml-auto">
-            <?php if (isset($_SESSION['user'])) { ?>
-                <span class="navbar-text me-2">Bonjour, <?php echo $_SESSION['user']['name']; ?></span>
-                <a href="logout.php" class="btn btn-outline-primary me-2">Logout</a>
-                <a href="add_disc.php" class="btn btn-primary">Ajouter un Disque</a>
-            <?php } else { ?>
-                <a href="login.php" class="btn btn-outline-primary me-2">Log in</a>
-                <a href="signup.php" class="btn btn-primary">Sign up</a>
-            <?php } ?>
+        <div class="container">
+            <a class="navbar-brand fs-1 fw-bold">
+                Liste des disques (<span class="counter-style"><?php echo $count; ?></span>)
+            </a>
+            <div class="ml-auto">
+                <?php if (isset($_SESSION['user'])) { ?>
+                    <span class="navbar-text me-2">Bonjour, <?php echo $username; ?></span>
+                    <a href="logout.php" class="btn btn-outline-primary me-2">Logout</a>
+                    <a href="add_disc.php" class="btn btn-primary">Ajouter un Disque</a>
+                <?php } else { ?>
+                    <a href="login.php" class="btn btn-outline-primary me-2">Log in</a>
+                    <a href="signup.php" class="btn btn-primary">Sign up</a>
+                <?php } ?>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
     <div class="container">
         <div class="row justify-content-center">
