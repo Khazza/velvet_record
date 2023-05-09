@@ -1,6 +1,22 @@
 <?php
 include('db.php');
 
+session_start();
+
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['user_id'])) {
+    // Rediriger vers la page de connexion s'il n'est pas connecté
+    header('Location: login.php');
+    exit;
+}
+
+// Vérifier si l'utilisateur a le rôle approprié
+if ($_SESSION['user_role'] !== 'admin') {
+    // Rediriger vers la page d'accueil s'il n'a pas le rôle approprié
+    header('Location: index.php');
+    exit;
+}
+
 // Inclusion de la bibliothèque GD
 if (!extension_loaded('gd') || !function_exists('gd_info')) {
     echo 'L\'extension GD n\'est pas activée. Veuillez activer GD pour utiliser la manipulation d\'images.';

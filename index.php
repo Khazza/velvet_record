@@ -1,5 +1,22 @@
 <?php
 include('db.php');
+
+session_start();
+
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['user_id'])) {
+    // Rediriger vers la page de connexion s'il n'est pas connecté
+    header('Location: login.php');
+    exit;
+}
+
+// Vérifier si l'utilisateur a le rôle approprié
+if ($_SESSION['user_role'] !== 'admin') {
+    // Rediriger vers la page d'accueil s'il n'a pas le rôle approprié
+    header('Location: index.php');
+    exit;
+}
+
 // Requête SQL pour compter le nombre de disques
 $count_sql = "SELECT COUNT(*) as count FROM disc";
 $count_stmt = $pdo->query($count_sql);
@@ -21,15 +38,17 @@ $count = $count_row['count'];
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand fs-1 fw-bold">
-                Liste des disques (<span class="counter-style"><?php echo $count; ?></span>)
-            </a>
-            <div class="ml-auto">
-                <a href="add_disc.php" class="btn btn-primary">Ajouter</a>
-            </div>
+    <div class="container">
+        <a class="navbar-brand fs-1 fw-bold">
+            Liste des disques (<span class="counter-style"><?php echo $count; ?></span>)
+        </a>
+        <div class="ml-auto">
+            <a href="login.php" class="btn btn-outline-primary me-2">Log in</a>
+            <a href="signup.php" class="btn btn-primary">Sign up</a>
+            <a href="add_disc.php" class="btn btn-primary">Ajouter un Disque</a>
         </div>
-    </nav>
+    </div>
+</nav>
 
     <div class="container">
         <div class="row justify-content-center">
