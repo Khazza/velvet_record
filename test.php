@@ -1,4 +1,1 @@
-<?php
-session_start();
-include('header.php');
-?>
+( ! ) Warning: Undefined array key "csrf_token" in /home/mahe/Bureau/velvet_record/signup.php on line 27 Call Stack #TimeMemoryFunctionLocation 10.0001359448{main}( ).../signup.php:0 ">
