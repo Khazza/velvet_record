@@ -1,3 +1,15 @@
+<?php
+session_start();
+include('db.php');
+
+// Générer un nouveau jeton CSRF et l'enregistrer dans la variable de session
+if (!isset($_SESSION["csrf_token"])) {
+    $_SESSION["csrf_token"] = bin2hex(random_bytes(32));
+}
+
+$csrf_token = isset($_SESSION["csrf_token"]) ? $_SESSION["csrf_token"] : '';
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +28,7 @@
                 <label for="password" class="form-label">Password:</label>
                 <input type="password" class="form-control" name="password" required>
             </div>
-            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION["csrf_token"]; ?>">
+            <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
             <button type="submit" class="btn btn-primary">Login</button>
         </form>
     </div>
