@@ -1,22 +1,6 @@
 <?php
 include('db.php');
 
-session_start();
-
-// Vérifier si l'utilisateur est connecté
-if (!isset($_SESSION['user_id'])) {
-    // Rediriger vers la page de connexion s'il n'est pas connecté
-    header('Location: login.php');
-    exit;
-}
-
-// Vérifier si l'utilisateur a le rôle approprié
-if ($_SESSION['user_role'] !== 'admin') {
-    // Rediriger vers la page d'accueil s'il n'a pas le rôle approprié
-    header('Location: index.php');
-    exit;
-}
-
 // Requête SQL pour compter le nombre de disques
 $count_sql = "SELECT COUNT(*) as count FROM disc";
 $count_stmt = $pdo->query($count_sql);

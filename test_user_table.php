@@ -1,15 +1,3 @@
-<!-- requête SQL pour créer une table users dans votre base de données : -->
-CREATE TABLE users (
-    id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    role ENUM('admin', 'user') NOT NULL DEFAULT 'user'
-);
-<!-- Cette table contiendra les informations de connexion des utilisateurs avec leur nom d'utilisateur (username), 
-leur mot de passe hashé (password) et leur rôle (role), qui peut être soit "admin" pour un utilisateur ayant tous les droits, 
-soit "user" pour un utilisateur lambda qui ne peut que consulter les pages.-->
-
-
 <!-- -------------------------------------------------------------------------------------------------------------- -->
 <!--code pour la page de connexion (login.php) : -->
 
@@ -119,17 +107,3 @@ Placer ce code à la suite de la section qui récupère les données du formulai
 Initialiser la variable $pdo avec une connexion à la base de données. -->
 
 <!-- ---------------------------------------------------------------------------------------------------------------------------------------- -->
-<!-- Bouton page index navbar: -->
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-        <a class="navbar-brand fs-1 fw-bold">
-            Liste des disques (<span class="counter-style"><?php echo $count; ?></span>)
-        </a>
-        <div class="ml-auto">
-            <a href="login.php" class="btn btn-outline-primary me-2">Log in</a>
-            <a href="signup.php" class="btn btn-primary">Sign up</a>
-            <a href="add_disc.php" class="btn btn-primary">Ajouter</a>
-        </div>
-    </div>
-</nav>

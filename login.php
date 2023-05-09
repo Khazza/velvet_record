@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Login</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-dYYNR0gKu2qV3qB6HmrEucCmLy6uPX7VUswbIauY7V+eSx5+eK7rh5o5Pwv5n4JD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 </head>
 <body>
     <div class="container">
@@ -19,6 +19,6 @@
             <button type="submit" class="btn btn-primary">Login</button>
         </form>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js" integrity="sha384-6KMjU6RznU6Hovd9XOgV7S0NcUBNUT7LnWE8bNwJ0DN4G0DBke93BdYQ9fZ1/6yo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
