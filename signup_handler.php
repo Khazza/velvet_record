@@ -1,6 +1,8 @@
 <?php
-// Inclure le fichier de connexion à la base de données
-include "db.php";
+// Démarrage de la session
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Vérifie si la méthode de requête est POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -28,6 +30,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Échapper les données utilisateur pour éviter les attaques par injection SQL
     $username = htmlspecialchars($_POST["username"]);
     $password = htmlspecialchars($_POST["password"]);
+
+    // Inclure le fichier de connexion à la base de données
+    include "db.php";
 
     // Hacher le mot de passe avec la fonction password_hash avant de l'insérer dans la base de données
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
