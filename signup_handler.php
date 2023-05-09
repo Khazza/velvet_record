@@ -1,45 +1,42 @@
 <?php
 session_start();
-include('db.php');
-
-// Vérification si les champs de formulaire sont renseignés
-if (!isset($_POST["username"]) || !isset($_POST["email"]) || !isset($_POST["password"]) || !isset($_POST["confirm_password"])) {
-    header("Location: signup.php");
-    exit;
-}
+include ('db.php');
 
 // Vérification du jeton CSRF
-if (!isset($_POST["csrf_token"]) || !isset($_SESSION["csrf_token"]) || $_POST["csrf_token"] !== $_SESSION["csrf_token"]) {
-    header("Location: index.php");
-    exit;
+if($_POST["csrf_token"] !== $_SESSION["csrf_token"]) {
+    die("Erreur : jeton CSRF invalide.");
 }
 
-// Vérification si l'utilisateur existe déjà
-$stmt = $pdo->prepare("SELECT * FROM users WHERE username = ? OR email = ?");
-$stmt->execute([$_POST["username"], $_POST["email"]]);
-$user = $stmt->fetch();
+// Récupération des données du formulaire
+$username = $_POST["username"];
+$password = $_POST["password"];
+$confirm_password = $_POST["confirm_password"];
 
-if ($user) {
-    $_SESSION["signup_error"] = "Nom d'utilisateur ou adresse email déjà utilisé.";
-    header("Location: signup.php");
-    exit;
+// Vérification que les mots de passe correspondent
+if($password !== $confirm_password) {
+    die("Erreur : les mots de passe ne correspondent pas.");
 }
 
-// Vérification si les mots de passe correspondent
-if ($_POST["password"] !== $_POST["confirm_password"]) {
-    $_SESSION["signup_error"] = "Les mots de passe ne correspondent pas.";
-    header("Location: signup.php");
-    exit;
+// Vérification que le nom d'utilisateur n'est pas déjà utilisé
+$stmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE username = ?");
+$stmt->execute([$username]);
+if($stmt->fetchColumn() > 0) {
+    die("Erreur : ce nom d'utilisateur est déjà utilisé.");
 }
 
 // Hashage du mot de passe
-$password_hash = password_hash($_POST["password"], PASSWORD_DEFAULT);
+$hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
 // Insertion du nouvel utilisateur dans la base de données
-$stmt = $pdo->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-$stmt->execute([$_POST["username"], $_POST["email"], $password_hash]);
+$stmt = $pdo->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
+$stmt->execute([$username, $hashed_password]);
 
-// Redirection vers la page de connexion
-header("Location: login.php");
-exit;
+// // Redirection vers la page de succès
+// header("Location: signup_success.php");
+// exit;
+
+// Redirection vers la page d'index après création de compte
+header("Location: index.php");
+exit();
+
 ?>
