@@ -65,6 +65,20 @@ INSERT INTO users (username, password, role) VALUES ('Kaza', 'CV05', 'admin');
 INSERT INTO users (username, password, role) VALUES ('Kaza', PASSWORD('CV05'), 'admin');
 
 
+
+ALTER TABLE users
+MODIFY COLUMN password VARCHAR(255)
+    CHARACTER SET utf8mb4
+    COLLATE utf8mb4_unicode_ci
+    NOT NULL
+    CHECK (password REGEXP '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$');
+
+    
+    Cette requête modifie la colonne "password" pour ajouter une contrainte "CHECK" qui vérifie que le mot de passe respecte l'expression 
+    régulière "^(?=.[a-z])(?=.[A-Z])(?=.*[0-9]).{8,}$", 
+    qui correspond à la présence d'au moins une minuscule, une majuscule et un chiffre, ainsi qu'à une longueur minimale de 8 caractères.
+
+
 <!-- -------------------------------------------------------------------------------------------------------------- -->
 <!-- requete avec mdp sécurisé ! -->
 <?php
