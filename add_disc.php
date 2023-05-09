@@ -14,7 +14,7 @@ $artists = $artist_stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <title>Ajouter un vinyle</title>
     <!-- Inclusion de Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <!-- Inclusion du fichier CSS personnalisé -->
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -66,7 +66,7 @@ $artists = $artist_stmt->fetchAll(PDO::FETCH_ASSOC);
         </form>
     </div>
     <!-- Inclusion des scripts Bootstrap et des scripts JS supplémentaires -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
     <!-- Inclusion du fichier JS personnalisé -->
     <script src="script.js"></script>
 

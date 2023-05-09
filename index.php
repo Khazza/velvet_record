@@ -2,30 +2,6 @@
 session_start();
 include('db.php');
 
-// Vérifier si l'utilisateur est connecté
-if (isset($_SESSION['user_id'])) {
-    // Récupérer le nom d'utilisateur
-    $user_id = $_SESSION['user_id'];
-    $user_sql = "SELECT * FROM user WHERE user_id = ?";
-    $user_stmt = $pdo->prepare($user_sql);
-    $user_stmt->execute([$user_id]);
-    $user_row = $user_stmt->fetch(PDO::FETCH_ASSOC);
-    $username = $user_row['username'];
-
-    // Afficher le nom d'utilisateur et un bouton de déconnexion
-    echo '<div class="ml-auto">';
-    echo '<span class="me-2">Bonjour, ' . $username . '!</span>';
-    echo '<a href="logout.php" class="btn btn-primary">Déconnexion</a>';
-    echo '<a href="add_disc.php" class="btn btn-primary">Ajouter un Disque</a>';
-    echo '</div>';
-} else {
-    // Afficher les boutons de connexion et d'inscription
-    echo '<div class="ml-auto">';
-    echo '<a href="login.php" class="btn btn-outline-primary me-2">Log in</a>';
-    echo '<a href="signup.php" class="btn btn-primary">Sign up</a>';
-    echo '</div>';
-}
-
 // Requête SQL pour compter le nombre de disques
 $count_sql = "SELECT COUNT(*) as count FROM disc";
 $count_stmt = $pdo->query($count_sql);
@@ -39,7 +15,7 @@ $count = $count_row['count'];
     <meta charset="UTF-8">
     <title>Liste des disques</title>
     <!-- Inclusion de Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <!-- Inclusion du fichier CSS personnalisé -->
     <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
@@ -47,17 +23,21 @@ $count = $count_row['count'];
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-        <a class="navbar-brand fs-1 fw-bold">
-            Liste des disques (<span class="counter-style"><?php echo $count; ?></span>)
-        </a>
-        <div class="ml-auto">
-            <a href="login.php" class="btn btn-outline-primary me-2">Log in</a>
-            <a href="signup.php" class="btn btn-primary">Sign up</a>
-            <a href="add_disc.php" class="btn btn-primary">Ajouter un Disque</a>
+        <div class="container">
+            <a class="navbar-brand fs-1 fw-bold">
+                Liste des disques (<span class="counter-style"><?php echo $count; ?></span>)
+            </a>
+            <div class="ml-auto">
+                <?php if (isset($_SESSION['user'])) { ?>
+                    <a href="logout.php" class="btn btn-outline-primary me-2">Logout</a>
+                    <a href="add_disc.php" class="btn btn-primary">Ajouter un Disque</a>
+                <?php } else { ?>
+                    <a href="login.php" class="btn btn-outline-primary me-2">Log in</a>
+                    <a href="signup.php" class="btn btn-primary">Sign up</a>
+                <?php } ?>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
     <div class="container">
         <div class="row justify-content-center">
@@ -145,7 +125,7 @@ $count = $count_row['count'];
     </div>
 
     <!-- Inclusion des scripts Bootstrap et des scripts JS supplémentaires -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
     <!-- Inclusion du fichier JS personnalisé -->
     <script src="script.js"></script>
 </body>
