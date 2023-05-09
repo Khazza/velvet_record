@@ -23,21 +23,22 @@ $count = $count_row['count'];
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand fs-1 fw-bold">
-                Liste des disques (<span class="counter-style"><?php echo $count; ?></span>)
-            </a>
-            <div class="ml-auto">
-                <?php if (isset($_SESSION['user'])) { ?>
-                    <a href="logout.php" class="btn btn-outline-primary me-2">Logout</a>
-                    <a href="add_disc.php" class="btn btn-primary">Ajouter un Disque</a>
-                <?php } else { ?>
-                    <a href="login.php" class="btn btn-outline-primary me-2">Log in</a>
-                    <a href="signup.php" class="btn btn-primary">Sign up</a>
-                <?php } ?>
-            </div>
+    <div class="container">
+        <a class="navbar-brand fs-1 fw-bold">
+            Liste des disques (<span class="counter-style"><?php echo $count; ?></span>)
+        </a>
+        <div class="ml-auto">
+            <?php if (isset($_SESSION['user'])) { ?>
+                <span class="navbar-text me-2">Bonjour, <?php echo $_SESSION['user']['name']; ?></span>
+                <a href="logout.php" class="btn btn-outline-primary me-2">Logout</a>
+                <a href="add_disc.php" class="btn btn-primary">Ajouter un Disque</a>
+            <?php } else { ?>
+                <a href="login.php" class="btn btn-outline-primary me-2">Log in</a>
+                <a href="signup.php" class="btn btn-primary">Sign up</a>
+            <?php } ?>
         </div>
-    </nav>
+    </div>
+</nav>
 
     <div class="container">
         <div class="row justify-content-center">
