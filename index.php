@@ -1,5 +1,30 @@
 <?php
+session_start();
 include('db.php');
+
+// Vérifier si l'utilisateur est connecté
+if (isset($_SESSION['user_id'])) {
+    // Récupérer le nom d'utilisateur
+    $user_id = $_SESSION['user_id'];
+    $user_sql = "SELECT * FROM user WHERE user_id = ?";
+    $user_stmt = $pdo->prepare($user_sql);
+    $user_stmt->execute([$user_id]);
+    $user_row = $user_stmt->fetch(PDO::FETCH_ASSOC);
+    $username = $user_row['username'];
+
+    // Afficher le nom d'utilisateur et un bouton de déconnexion
+    echo '<div class="ml-auto">';
+    echo '<span class="me-2">Bonjour, ' . $username . '!</span>';
+    echo '<a href="logout.php" class="btn btn-primary">Déconnexion</a>';
+    echo '<a href="add_disc.php" class="btn btn-primary">Ajouter un Disque</a>';
+    echo '</div>';
+} else {
+    // Afficher les boutons de connexion et d'inscription
+    echo '<div class="ml-auto">';
+    echo '<a href="login.php" class="btn btn-outline-primary me-2">Log in</a>';
+    echo '<a href="signup.php" class="btn btn-primary">Sign up</a>';
+    echo '</div>';
+}
 
 // Requête SQL pour compter le nombre de disques
 $count_sql = "SELECT COUNT(*) as count FROM disc";
