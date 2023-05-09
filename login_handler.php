@@ -1,58 +1,36 @@
 <?php
-// Démarrage de la session
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+session_start();
+include ('db.php');
+
+// Vérification du jeton CSRF
+if (!isset($_POST["csrf_token"]) || $_POST["csrf_token"] !== $_SESSION["csrf_token"]) {
+    header("Location: index.php");
+    exit;
 }
 
-// Inclure le fichier de connexion à la base de données
-include "db.php";
+// Vérification si les champs de connexion sont renseignés
+if (!isset($_POST["username"]) || !isset($_POST["password"])) {
+    header("Location: index.php");
+    exit;
+}
 
-// Vérifie si la méthode de requête est POST
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+// Récupération de l'utilisateur dans la base de données
+$stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
+$stmt->execute([$_POST["username"]]);
+$user = $stmt->fetch();
 
-    // Vérifie si le token CSRF est valide
-    if (!isset($_POST["csrf_token"]) || $_POST["csrf_token"] !== $_SESSION["csrf_token"]) {
-        die("Token CSRF invalide");
-    }
-
-    // Vérifie si les champs requis ont été remplis
-    if (empty($_POST["username"]) || empty($_POST["password"])) {
-        die("Veuillez remplir tous les champs");
-    }
-
-    // Échapper les données utilisateur pour éviter les attaques par injection SQL
-    $username = htmlspecialchars($_POST["username"]);
-    $password = htmlspecialchars($_POST["password"]);
-
-    // Rechercher l'utilisateur dans la base de données
-    $query = $pdo->prepare("SELECT * FROM users WHERE username = ?");
-    $query->execute([$username]);
-
-    // Vérifie si l'utilisateur existe dans la base de données
-    if ($query->rowCount() > 0) {
-
-        // Récupère le mot de passe haché de l'utilisateur
-        $user = $query->fetch();
-        $password_hash = $user["password"];
-
-        // Vérifie si le mot de passe est correct
-        if (password_verify($password, $password_hash)) {
-
-            // Authentification réussie, stocke l'ID de l'utilisateur en session
-            $_SESSION["user_id"] = $user["id"];
-
-            // Redirige l'utilisateur vers la page d'accueil
-            header("Location: index.php");
-            exit();
-
-        } else {
-            die("Mot de passe incorrect");
-        }
-
-    } else {
-        die("Nom d'utilisateur incorrect");
-    }
-
+// Vérification du mot de passe
+if ($user && password_verify($_POST["password"], $user["password"])) {
+    // Authentification réussie, on stocke l'utilisateur en session
+    $_SESSION["user"] = $user;
+    // Redirection vers la page d'accueil
+    header("Location: index.php");
+    exit;
 } else {
-    die("Méthode de requête invalide");
+    // Mauvaise combinaison nom d'utilisateur / mot de passe
+    $_SESSION["login_error"] = "Mauvaise combinaison nom d'utilisateur / mot de passe.";
+    header("Location: login.php");
+    exit;
 }
+
+?>
