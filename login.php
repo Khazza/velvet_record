@@ -8,6 +8,19 @@ if (!isset($_SESSION["csrf_token"])) {
 }
 
 $csrf_token = isset($_SESSION["csrf_token"]) ? $_SESSION["csrf_token"] : '';
+
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // récupération des données de formulaire
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    // code de vérification du nom d'utilisateur et du mot de passe
+    // ...
+    // si l'authentification est réussie, stock le nom d'utilisateur dans session
+    $_SESSION['user'] = $username;
+    // rediriger l'utilisateur vers la page d'accueil
+    header('Location: index.php');
+    exit;
+}
 ?>
 
 <!DOCTYPE html>

@@ -26,9 +26,12 @@
 <!-- -------------------------------------------------------------- -->
 <!-- -------------------------------------------------------------- -->
 
-Pour stocker le nom de l'utilisateur connecté dans la variable de session $_SESSION['user'], vous pouvez ajouter le nom d'utilisateur à la session après une connexion réussie. Voici comment vous pouvez le faire:
+Pour stocker le nom de l'utilisateur connecté dans la variable de session $_SESSION['user'], 
+vous pouvez ajouter le nom d'utilisateur à la session après une connexion réussie. Voici comment vous pouvez le faire:
 
-Tout d'abord, vous devez récupérer le nom d'utilisateur lorsqu'un utilisateur se connecte. Supposons que vous avez un formulaire de connexion avec deux champs: nom d'utilisateur et mot de passe. Vous pouvez récupérer le nom d'utilisateur à partir de ce formulaire de connexion en utilisant la superglobale $_POST.
+Tout d'abord, vous devez récupérer le nom d'utilisateur lorsqu'un utilisateur se connecte. 
+Supposons que vous avez un formulaire de connexion avec deux champs: nom d'utilisateur et mot de passe. 
+Vous pouvez récupérer le nom d'utilisateur à partir de ce formulaire de connexion en utilisant la superglobale $_POST.
 Voici un exemple de code pour récupérer le nom d'utilisateur dans votre fichier de connexion (login.php):
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -43,7 +46,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     header('Location: index.php');
     exit;
 }
-Maintenant, vous pouvez vérifier si un utilisateur est connecté en vérifiant si $_SESSION['user'] est défini. Par exemple, dans votre fichier index.php, vous pouvez vérifier si l'utilisateur est connecté comme suit:
+Maintenant, vous pouvez vérifier si un utilisateur est connecté en vérifiant si $_SESSION['user'] est défini. Par exemple, 
+dans votre fichier index.php, vous pouvez vérifier si l'utilisateur est connecté comme suit:
 <?php
 session_start();
 if(isset($_SESSION['user'])) {
@@ -55,3 +59,8 @@ if(isset($_SESSION['user'])) {
 }
 ?>
 Notez que vous devez appeler session_start() avant d'utiliser la variable de session $_SESSION.
+
+
+
+
+Warning: Array to string conversion in /home/mahe/Bureau/velvet_record/index.php on line 5
