@@ -1,11 +1,5 @@
 <?php
 session_start();
-if (isset($_SESSION['user']) && is_string($_SESSION['user'])) {
-    echo "Bonjour " . $_SESSION['user'] . " !";
-} else {
-    echo "Bienvenue, veuillez vous connecter.";
-}
-
 
 // Recuperation base de données
 include('db.php');
