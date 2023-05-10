@@ -24,6 +24,11 @@ if($stmt->fetchColumn() > 0) {
     die("Erreur : ce nom d'utilisateur est déjà utilisé.");
 }
 
+// Vérification de la complexité du mot de passe
+if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{5,}$/', $password)) {
+    die("Erreur : le mot de passe doit comporter au moins 5 caractères avec une majuscule, une minuscule et un chiffre.");
+}
+
 // Hashage du mot de passe
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
@@ -38,5 +43,4 @@ $stmt->execute([$username, $hashed_password]);
 // Redirection vers la page d'index après création de compte
 header("Location: index.php");
 exit();
-
 ?>
