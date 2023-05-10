@@ -1,12 +1,11 @@
 <?php
 session_start();
-if(isset($_SESSION['user'])) {
-    // l'utilisateur est connecté, afficher le nom d'utilisateur
+if(isset($_SESSION['user']) && is_string($_SESSION['user'])) {
     echo "Bonjour " . $_SESSION['user'] . " !";
 } else {
-    // l'utilisateur n'est pas connecté, afficher un message de bienvenue
     echo "Bienvenue, veuillez vous connecter.";
 }
+
 
 // Recuperation base de données
 include('db.php');
