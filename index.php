@@ -1,7 +1,5 @@
 <?php
 session_start();
-
-// Recuperation base de données
 include('db.php');
 
 // Requête SQL pour compter le nombre de disques
@@ -31,10 +29,7 @@ $count = $count_row['count'];
             </a>
             <div class="ml-auto">
                 <?php if (isset($_SESSION['user'])) { ?>
-                    <div class="d-flex align-items-center">
-                        <span>Bonjour <?php echo $_SESSION['user']; ?> !</span>
-                        <a href="logout.php" class="btn btn-outline-primary ms-2">Logout</a>
-                    </div>
+                    <a href="logout.php" class="btn btn-outline-primary me-2">Logout</a>
                     <a href="add_disc.php" class="btn btn-primary">Ajouter un Disque</a>
                 <?php } else { ?>
                     <a href="login.php" class="btn btn-outline-primary me-2">Log in</a>
