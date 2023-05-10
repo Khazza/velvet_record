@@ -1,6 +1,10 @@
 <?php
-session_start();
 include('db.php');
+
+session_start();
+if (isset($_POST['user'])) { // Vérifie si un nom d'utilisateur a été soumis via un formulaire
+    $_SESSION['username'] = $_POST['user']; // Stocke le nom d'utilisateur dans une variable de session
+}
 
 // Requête SQL pour compter le nombre de disques
 $count_sql = "SELECT COUNT(*) as count FROM disc";
@@ -24,11 +28,17 @@ $count = $count_row['count'];
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand fs-1 fw-bold">
-                Liste des disques (<span class="counter-style"><?php echo $count; ?></span>)
-            </a>
+            <?php if (isset($_SESSION['username'])) { ?>
+                <a class="navbar-brand fs-1 fw-bold">
+                    Welcome, <?php echo $_SESSION['username']; ?>!
+                </a>
+            <?php } else { ?>
+                <a class="navbar-brand fs-1 fw-bold">
+                    Liste des disques
+                </a>
+            <?php } ?>
             <div class="ml-auto">
-                <?php if (isset($_SESSION['user'])) { ?>
+                <?php if (isset($_SESSION['username'])) { ?>
                     <a href="logout.php" class="btn btn-outline-primary me-2">Logout</a>
                     <a href="add_disc.php" class="btn btn-primary">Ajouter un Disque</a>
                 <?php } else { ?>
