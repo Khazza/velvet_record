@@ -1,9 +1,11 @@
 <?php
+session_start();
 include('db.php');
 
-session_start();
-if (isset($_POST['user'])) { // Vérifie si un nom d'utilisateur a été soumis via un formulaire
-    $_SESSION['username'] = $_POST['user']; // Stocke le nom d'utilisateur dans une variable de session
+// Vérifiez si l'utilisateur est connecté
+if (isset($_SESSION['user'])) {
+    // Récupérez le nom d'utilisateur
+    $username = $_SESSION['user']['username'];
 }
 
 // Requête SQL pour compter le nombre de disques
@@ -28,17 +30,12 @@ $count = $count_row['count'];
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <?php if (isset($_SESSION['username'])) { ?>
-                <a class="navbar-brand fs-1 fw-bold">
-                    Welcome, <?php echo $_SESSION['username']; ?>!
-                </a>
-            <?php } else { ?>
-                <a class="navbar-brand fs-1 fw-bold">
-                    Liste des disques
-                </a>
-            <?php } ?>
+            <a class="navbar-brand fs-1 fw-bold">
+                Liste des disques (<span class="counter-style"><?php echo $count; ?></span>)
+            </a>
             <div class="ml-auto">
-                <?php if (isset($_SESSION['username'])) { ?>
+                <?php if (isset($_SESSION['user'])) { ?>
+                    <span class="navbar-text me-2">Bonjour, <?php echo $username; ?></span>
                     <a href="logout.php" class="btn btn-outline-primary me-2">Logout</a>
                     <a href="add_disc.php" class="btn btn-primary">Ajouter un Disque</a>
                 <?php } else { ?>

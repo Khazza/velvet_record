@@ -12,13 +12,22 @@ $csrf_token = isset($_SESSION["csrf_token"]) ? $_SESSION["csrf_token"] : '';
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Login</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 </head>
+
 <body>
     <div class="container">
         <h2>Login</h2>
+        <?php
+        if (isset($_GET['error'])) {
+            if ($_GET['error'] == 1) {
+                echo '<h1> error </h1>';
+            }
+        }
+        ?>
         <form method="POST" action="login_handler.php">
             <div class="mb-3">
                 <label for="username" class="form-label">Username:</label>
@@ -34,4 +43,5 @@ $csrf_token = isset($_SESSION["csrf_token"]) ? $_SESSION["csrf_token"] : '';
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

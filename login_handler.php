@@ -1,6 +1,6 @@
 <?php
 session_start();
-include ('db.php');
+include('db.php');
 
 // Vérification du jeton CSRF
 if (!isset($_POST["csrf_token"]) || $_POST["csrf_token"] !== $_SESSION["csrf_token"]) {
@@ -24,18 +24,13 @@ if ($user && password_verify($_POST["password"], $user["password"])) {
     // Authentification réussie, on stocke l'utilisateur en session
     $_SESSION["user"] = $user;
     // Vérification si l'utilisateur est authentifié
-    if ($user_authentifié) {
-    // stocker le nom d'utilisateur dans la variable de session
-    $_SESSION['nom_utilisateur'] = $username;
-    }
-    // Redirection vers la page d'accueil
     header("Location: index.php");
     exit;
-    } else {
+} else {
     // Mauvaise combinaison nom d'utilisateur / mot de passe
     $_SESSION["login_error"] = "Mauvaise combinaison nom d'utilisateur / mot de passe.";
-    header("Location: login.php");
+    header("Location: login.php?error=1");
     exit;
-    }
-
+}
+var_dump($_SESSION);
 ?>
