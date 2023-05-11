@@ -30,7 +30,7 @@ if (!empty($_SESSION['errors'])) {
 }
 
 // Si tout est correct, ajouter l'utilisateur à la base de données
-$stmt = $db->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
+$stmt = $pdo->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
 $stmt->execute([$_POST['username'], password_hash($_POST['password'], PASSWORD_DEFAULT)]);
 
 // Rediriger l'utilisateur vers une page de succès
