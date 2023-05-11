@@ -20,13 +20,15 @@ $errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : [];
 <body>
     <div class="container">
         <h2>Signup</h2>
-        <?php if (!empty($errors)) { ?>
-            <div class="alert alert-danger" role="alert">
-                <?php foreach ($errors as $error) { ?>
-                    <p><?= $error ?></p>
-                <?php } ?>
-            </div>
-        <?php } ?>
+        <?php
+        // Afficher les erreurs s'il y en a
+        if (isset($_SESSION['errors'])) {
+            foreach ($_SESSION['errors'] as $error) {
+                echo "<p>" . $error . "</p>";
+            }
+            unset($_SESSION['errors']);
+        }
+        ?>
         <form method="POST" action="signup_handler.php">
             <div class="mb-3">
                 <label for="username" class="form-label">Username:</label>
