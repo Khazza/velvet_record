@@ -23,6 +23,17 @@ if ($_POST['password'] !== $_POST['confirm_password']) {
     $_SESSION['errors'][] = "Les mots de passe ne correspondent pas.";
 }
 
+// Vérification si le nom d'utilisateur est déjà pris
+$stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
+$stmt->execute([$_POST['username']]);
+$user = $stmt->fetch();
+
+if ($user) {
+    $_SESSION['errors'][] = "Le nom d'utilisateur est déjà pris.";
+    header("Location: signup.php");
+    exit();
+}
+
 // Si des erreurs ont été détectées, retourner sur la page signup.php
 if (!empty($_SESSION['errors'])) {
     header("Location: signup.php");
