@@ -24,7 +24,7 @@ $errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : [];
         // Afficher les erreurs s'il y en a
         if (isset($_SESSION['errors'])) {
             foreach ($_SESSION['errors'] as $error) {
-                echo "<p>" . $error . "</p>";
+                echo "<div class='alert alert-danger' role='alert'>" . $error . "</div>";
             }
             unset($_SESSION['errors']);
         }
