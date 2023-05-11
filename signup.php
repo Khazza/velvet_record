@@ -7,6 +7,9 @@ if (!isset($_SESSION["csrf_token"])) {
     $_SESSION["csrf_token"] = bin2hex(random_bytes(32));
 }
 
+// Gestion erreurs
+$errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : [];
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,6 +20,13 @@ if (!isset($_SESSION["csrf_token"])) {
 <body>
     <div class="container">
         <h2>Signup</h2>
+        <?php if (!empty($errors)) { ?>
+            <div class="alert alert-danger" role="alert">
+                <?php foreach ($errors as $error) { ?>
+                    <p><?= $error ?></p>
+                <?php } ?>
+            </div>
+        <?php } ?>
         <form method="POST" action="signup_handler.php">
             <div class="mb-3">
                 <label for="username" class="form-label">Username:</label>
@@ -30,7 +40,7 @@ if (!isset($_SESSION["csrf_token"])) {
                 <label for="confirm_password" class="form-label">Confirm Password:</label>
                 <input type="password" class="form-control" name="confirm_password" required>
             </div>
-            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION["csrf_token"]; ?>">
+            <input type="hidden" name="csrf_token" value="<?= $_SESSION["csrf_token"] ?>">
             <button type="submit" class="btn btn-primary">Signup</button>
         </form>
     </div>
