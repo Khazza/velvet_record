@@ -1,39 +1,43 @@
 <?php
 session_start();
-include('db.php');
+include ('db.php');
 
-// Génération du jeton CSRF
-if (!isset($_SESSION["csrf_token"])) {
-    $_SESSION["csrf_token"] = bin2hex(random_bytes(32));
+// Génération d'un jeton CSRF
+$csrf_token = bin2hex(random_bytes(32));
+$_SESSION["csrf_token"] = $csrf_token;
+
+session_start();
+if(isset($_SESSION['errors'])) {
+    foreach ($_SESSION['errors'] as $error) {
+        echo "<p>" . $error . "</p>";
+    }
+    unset($_SESSION['errors']);
 }
-
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Signup</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <meta charset="utf-8">
+    <title>Inscription</title>
 </head>
 <body>
-    <div class="container">
-        <h2>Signup</h2>
-        <form method="POST" action="signup_handler.php">
-            <div class="mb-3">
-                <label for="username" class="form-label">Username:</label>
-                <input type="text" class="form-control" name="username" required>
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password:</label>
-                <input type="password" class="form-control" name="password" required>
-            </div>
-            <div class="mb-3">
-                <label for="confirm_password" class="form-label">Confirm Password:</label>
-                <input type="password" class="form-control" name="confirm_password" required>
-            </div>
-            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION["csrf_token"]; ?>">
-            <button type="submit" class="btn btn-primary">Signup</button>
-        </form>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
+    <h1>Inscription</h1>
+    <form action="signup_handler.php" method="post">
+        <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
+
+        <label for="username">Nom d'utilisateur :</label>
+        <input type="text" id="username" name="username" required><br>
+
+        <label for="password">Mot de passe :</label>
+        <input type="password" id="password" name="password" required><br>
+
+        <label for="confirm_password">Confirmer le mot de passe :</label>
+        <input type="password" id="confirm_password" name="confirm_password" required><br>
+
+        <button type="submit">S'inscrire</button>
+    </form>
+
+    <a href="index.php">Retour à la page d'accueil</a>
 </body>
 </html>
