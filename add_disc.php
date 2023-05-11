@@ -32,9 +32,9 @@ $artists = $artist_stmt->fetchAll(PDO::FETCH_ASSOC);
                 <label for="artist" class="form-label">Artiste</label>
                 <select class="form-select" id="artist" name="artist">
                     <option value="">Sélectionner un artiste</option>
-                    <?php foreach ($artists as $artist) : ?>
+                    <?php foreach ($artists as $artist) { ?>
                         <option value="<?= $artist['artist_id']; ?>"><?= $artist['artist_name']; ?></option>
-                    <?php endforeach; ?>
+                    <?php } ?>
                 </select>
             </div>
             <div class="mb-3">
