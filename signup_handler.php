@@ -11,16 +11,16 @@ if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_tok
 
 // Vérification des champs
 if (!preg_match('/^[a-zA-Z0-9]+$/', $_POST['username'])) {
-    $_SESSION['errors'][] = "Username must only contain letters and digits.";
+    $_SESSION['errors'][] = "Le nom d'utilisateur ne doit contenir que des lettres et des chiffres.";
 }
 if (strlen($_POST['password']) < 5) {
-    $_SESSION['errors'][] = "Password must be at least 5 characters long.";
+    $_SESSION['errors'][] = "Le mot de passe doit comporter au moins 5 caractères.";
 }
 if (!preg_match('/[A-Z]/', $_POST['password']) || !preg_match('/[a-z]/', $_POST['password'])) {
-    $_SESSION['errors'][] = "Password must contain at least one uppercase and one lowercase letter.";
+    $_SESSION['errors'][] = "Le mot de passe doit contenir au moins une lettre majuscule et une lettre minuscule.";
 }
 if ($_POST['password'] !== $_POST['confirm_password']) {
-    $_SESSION['errors'][] = "Passwords don't match.";
+    $_SESSION['errors'][] = "Les mots de passe ne correspondent pas.";
 }
 
 // Si des erreurs ont été détectées, retourner sur la page signup.php
