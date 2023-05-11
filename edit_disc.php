@@ -1,14 +1,6 @@
 <?php
 include('db.php');
 
-// Vérification du rôle de l'utilisateur connecté
-session_start();
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-    // Si l'utilisateur n'a pas le rôle admin, on redirige vers la page d'accueil ou on affiche un message d'erreur
-    header('Location: index.php');
-    exit;
-}
-
 // Inclusion de la bibliothèque GD
 if (!extension_loaded('gd') || !function_exists('gd_info')) {
     echo 'L\'extension GD n\'est pas activée. Veuillez activer GD pour utiliser la manipulation d\'images.';
