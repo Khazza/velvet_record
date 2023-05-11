@@ -12,6 +12,10 @@ $username = $_POST["username"];
 $password = $_POST["password"];
 $confirm_password = $_POST["confirm_password"];
 
+// Initialisation des variables d'erreur et de succès
+$error_msg = '';
+$success_msg = '';
+
 // Vérification que les mots de passe correspondent
 if($password !== $confirm_password) {
     $error_msg = "Les mots de passe ne correspondent pas.";
@@ -48,12 +52,26 @@ if($password !== $confirm_password) {
     <title>Inscription</title>
 </head>
 <body>
-    <?php if(isset($error_msg)): ?>
+    <?php if($error_msg !== ''): ?>
         <p><?php echo $error_msg; ?></p>
+        <form method="POST" action="signup_handler.php">
+            <label for="username">Nom d'utilisateur :</label>
+            <input type="text" id="username" name="username" value="<?php echo $username; ?>" required>
+            <br>
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="password" value="" required>
+            <br>
+            <label for="confirm_password">Confirmer le mot de passe :</label>
+            <input type="password" id="confirm_password" name="confirm_password" value="" required>
+            <br>
+            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION["csrf_token"]; ?>">
+            <input type="submit" value="S'inscrire">
+        </form>
     <?php endif; ?>
-    <?php if(isset($success_msg)): ?>
+    <?php if($success_msg !== ''): ?>
         <p><?php echo $success_msg; ?></p>
     <?php endif; ?>
     <a href="index.php">Retour à la page d'accueil</a>
+
 </body>
 </html>
