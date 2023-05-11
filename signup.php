@@ -2,14 +2,6 @@
 session_start();
 include('db.php');
 
-// Gestion erreurs
-if(isset($_SESSION['errors'])) {
-    foreach ($_SESSION['errors'] as $error) {
-        echo "<p>" . $error . "</p>";
-    }
-    unset($_SESSION['errors']);
-}
-
 // Génération du jeton CSRF
 if (!isset($_SESSION["csrf_token"])) {
     $_SESSION["csrf_token"] = bin2hex(random_bytes(32));
