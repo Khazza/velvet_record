@@ -4,8 +4,9 @@ include('db.php');
 
 // Vérifiez si l'utilisateur est connecté
 if (isset($_SESSION['user'])) {
-    // Récupérez le nom d'utilisateur
+    // Récupérez le nom d'utilisateur et le rôle de l'utilisateur
     $username = $_SESSION['user']['username'];
+    $role = $_SESSION['user']['role'];
 }
 
 // Requête SQL pour compter le nombre de disques
@@ -14,6 +15,7 @@ $count_stmt = $pdo->query($count_sql);
 $count_row = $count_stmt->fetch(PDO::FETCH_ASSOC);
 $count = $count_row['count'];
 ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -34,10 +36,12 @@ $count = $count_row['count'];
                 Liste des disques (<span class="counter-style"><?php echo $count; ?></span>)
             </a>
             <div class="ml-auto">
-                <?php if (isset($_SESSION['user'])) { ?>
+            <?php if (isset($_SESSION['user'])) { ?>
                     <span class="navbar-text me-2">Bonjour, <?php echo $username; ?></span>
                     <a href="logout.php" class="btn btn-outline-primary me-2">Logout</a>
-                    <a href="add_disc.php" class="btn btn-primary">Ajouter un Disque</a>
+                    <?php if ($role === 'admin') { ?>
+                        <a href="add_disc.php" class="btn btn-primary">Ajouter un Disque</a>
+                    <?php } ?>
                 <?php } else { ?>
                     <a href="login.php" class="btn btn-outline-primary me-2">Log in</a>
                     <a href="signup.php" class="btn btn-primary">Sign up</a>
