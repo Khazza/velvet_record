@@ -1,5 +1,13 @@
 <?php
+session_start();
 include('db.php');
+
+// Vérifiez si l'utilisateur est connecté
+if (isset($_SESSION['user'])) {
+    // Récupérez le nom d'utilisateur et le rôle de l'utilisateur
+    $username = $_SESSION['user']['username'];
+    $role = $_SESSION['user']['role'];
+}
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
@@ -33,6 +41,24 @@ if (isset($_GET['id'])) {
 </head>
 
 <body>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light py-0">
+        <div class="container">
+            <a class="navbar-brand fs-1 fw-bold">
+                Détails
+            </a>
+            <div class="ml-auto">
+            <?php if (isset($_SESSION['user'])) { ?>
+                    <span class="navbar-text me-2">Bonjour, <?php echo $username; ?></span>
+                    <a href="logout.php" class="btn btn-outline-primary me-2">Logout</a>
+                <?php } else { ?>
+                    <a href="login.php" class="btn btn-outline-primary me-2">Log in</a>
+                    <a href="signup.php" class="btn btn-primary">Sign up</a>
+                <?php } ?>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
         <h1 class="text-center"><?php echo $row['disc_title']; ?></h1>
         <div class="row">
@@ -69,8 +95,10 @@ if (isset($_GET['id'])) {
             <img src="src/img/jaquettes/<?php echo $row['disc_picture']; ?>" alt="<?php echo $row['disc_title']; ?>"><br>
         </div>
         <div class="text-center mt-3">
+            <?php if ($role === 'admin') { ?>
             <a href="edit_disc.php?id=<?php echo $row['disc_id']; ?>" class="btn btn-warning">Modifier</a>
             <a href="delete_disc.php?id=<?php echo $row['disc_id']; ?>" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce disque ?')">Supprimer</a>
+            <?php } ?>
             <a href="javascript:history.back()" class="btn btn-primary">Retour</a>
         </div>
     </div>

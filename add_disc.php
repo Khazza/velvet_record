@@ -1,5 +1,13 @@
 <?php
+session_start();
 include('db.php');
+
+// Vérifiez si l'utilisateur est connecté
+if (isset($_SESSION['user'])) {
+    // Récupérez le nom d'utilisateur et le rôle de l'utilisateur
+    $username = $_SESSION['user']['username'];
+    $role = $_SESSION['user']['role'];
+}
 
 // Récupération de la liste des artistes pour le select
 $artist_sql = "SELECT * FROM artist";
@@ -20,9 +28,26 @@ $artists = $artist_stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 
 <body>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light py-0">
+        <div class="container">
+            <a class="navbar-brand fs-1 fw-bold">
+                Ajouter un vinyle
+            </a>
+            <div class="ml-auto">
+            <?php if (isset($_SESSION['user'])) { ?>
+                    <span class="navbar-text me-2">Bonjour, <?php echo $username; ?></span>
+                    <a href="logout.php" class="btn btn-outline-primary me-2">Logout</a>
+                <?php } else { ?>
+                    <a href="login.php" class="btn btn-outline-primary me-2">Log in</a>
+                    <a href="signup.php" class="btn btn-primary">Sign up</a>
+                <?php } ?>
+            </div>
+        </div>
+    </nav>
+
     <!-- Formulaire d'ajout de disque -->
     <div class="container">
-        <h1>Ajouter un vinyle</h1>
         <form method="POST" action="process_add_disc.php" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="title" class="form-label">Titre</label>

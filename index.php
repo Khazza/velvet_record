@@ -30,7 +30,7 @@ $count = $count_row['count'];
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light py-0">
         <div class="container">
             <a class="navbar-brand fs-1 fw-bold">
                 Liste des disques (<span class="counter-style"><?php echo $count; ?></span>)
@@ -55,7 +55,7 @@ $count = $count_row['count'];
             <div class="col-md-8">
                 <div class="card mb-3 border-0">
                     <div class="card-body">
-                        <h5 class="card-title text-center" style="font-size: 18px;">Ajoutés récemment :</h5>
+                        <h5 class="card-title text-center">Ajoutés récemment :</h5>
                         <div class="row d-flex justify-content-center">
                             <?php
                             // Requête SQL pour sélectionner les 5 derniers enregistrements de la table disc
@@ -72,11 +72,11 @@ $count = $count_row['count'];
                                 <div class="col-md-2 text-center">
                                     <img src="src/img/jaquettes/<?= $history_row['disc_picture']; ?>" class="card-img-top" alt="Jaquette" style="max-width: 50px;">
                                     <div class="mt-2">
-                                        <span class="card-text" style="font-size: 14px;">
+                                        <span class="card-text">
                                             <span class="fw-bold">Titre:</span><br>
                                             <?php echo $history_row['disc_title']; ?>
                                         </span><br>
-                                        <span class="card-text" style="font-size: 14px;">
+                                        <span class="card-text">
                                             <span class="fw-bold">Artiste:</span><br>
                                             <?php echo $history_row['artist_name']; ?>
                                         </span>
