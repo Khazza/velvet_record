@@ -1,6 +1,13 @@
 <?php
 include('db.php');
 
+// Vérifiez si l'utilisateur est connecté
+if (isset($_SESSION['user'])) {
+    // Récupérez le nom d'utilisateur et le rôle de l'utilisateur
+    $username = $_SESSION['user']['username'];
+    $role = $_SESSION['user']['role'];
+}
+
 // Récupération des données du formulaire
 $title = $_POST['title'];
 $artist = $_POST['artist'];
