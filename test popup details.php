@@ -1,7 +1,8 @@
 <?php
 session_start();
 include('db.php');
-$role=false;
+$role = false;
+
 // Vérifiez si l'utilisateur est connecté
 if (isset($_SESSION['user'])) {
     // Récupérez le nom d'utilisateur et le rôle de l'utilisateur
@@ -38,18 +39,17 @@ if (isset($_GET['id'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <!-- Inclusion du fichier CSS personnalisé -->
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light py-0">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light py-0">
         <div class="container">
             <a class="navbar-brand fs-1 fw-bold">
                 Détails
             </a>
             <div class="ml-auto">
-            <?php if (isset($_SESSION['user'])) { ?>
+                <?php if (isset($_SESSION['user'])) { ?>
                     <span class="navbar-text me-2">Bonjour, <?php echo $username; ?></span>
                     <a href="logout.php" class="btn btn-outline-primary me-2">Logout</a>
                 <?php } else { ?>
@@ -78,7 +78,7 @@ if (isset($_GET['id'])) {
                 </div>
             </div>
             <div class="col-md-6">
-            <div class="mb-3">
+                <div class="mb-3">
                     <label for="artist" class="form-label">Titre</label>
                     <input type="text" class="form-control" id="artist" value="<?php echo $row['disc_title']; ?>" disabled>
                 </div>
@@ -97,12 +97,32 @@ if (isset($_GET['id'])) {
         </div>
         <div class="text-center mt-3">
             <?php if ($role === 'admin') { ?>
-            <a href="edit_disc.php?id=<?php echo $row['disc_id']; ?>" class="btn btn-warning">Modifier</a>
-            <button class="btn btn-danger" onclick="confirmDelete(<?php echo $row['disc_id']; ?>)">Supprimer</button>
+                <a href="edit_disc.php?id=<?php echo $row['disc_id']; ?>" class="btn btn-warning">Modifier</a>
+                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Supprimer</button>
             <?php } ?>
             <a href="javascript:history.back()" class="btn btn-primary">Retour</a>
         </div>
     </div>
+
+    <!-- Modal de confirmation de suppression -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirmation de suppression</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Êtes-vous sûr de vouloir supprimer ce disque ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <a href="delete_disc.php?id=<?php echo $row['disc_id']; ?>" class="btn btn-danger">Confirmer</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Inclusion des scripts Bootstrap et des scripts JS supplémentaires -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
     <!-- Inclusion du fichier JS personnalisé -->
