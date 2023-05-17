@@ -14,16 +14,6 @@ $count_sql = "SELECT COUNT(*) as count FROM disc";
 $count_stmt = $pdo->query($count_sql);
 $count_row = $count_stmt->fetch(PDO::FETCH_ASSOC);
 $count = $count_row['count'];
-
-if (isset($_SESSION['success_message'])) {
-    echo '
-    <script>
-        $(document).ready(function() {
-            $("#successModal").modal("show");
-        });
-    </script>';
-    unset($_SESSION['success_message']);
-}
 ?>
 
 <!DOCTYPE html>
@@ -144,26 +134,6 @@ if (isset($_SESSION['success_message'])) {
             ?>
         </div>
     </div>
-
-    <!-- Modal de confirmation de suppression -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalLabel">Confirmation de suppression</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>Êtes-vous sûr de vouloir supprimer ce disque ?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                <button type="button" class="btn btn-danger">Supprimer</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 
     <!-- Inclusion des scripts Bootstrap et des scripts JS supplémentaires -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>

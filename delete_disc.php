@@ -27,11 +27,12 @@ if (isset($_GET['id'])) {
         $artist_stmt = $pdo->prepare($artist_sql);
         $artist_stmt->execute(['artist_id' => $artist_id]);
     }
-    // Après la suppression réussie du disque
-    $_SESSION['success_message'] = "Le disque a été supprimé avec succès.";
+
+    // Redirection vers la page de liste des disques après suppression
     header("Location: index.php");
     exit;
 } else {
     echo "Identifiant non fourni";
     exit;
 }
+?>
