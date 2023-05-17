@@ -123,23 +123,6 @@ if (isset($_GET['id'])) {
         </div>
     </div>
 
-    <!-- Modal d'alerte de suppression réussie -->
-    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="successModalLabel">Disque supprimé</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Le disque a été supprimé avec succès.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- Inclusion des scripts Bootstrap et des scripts JS supplémentaires -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
     <!-- Inclusion du fichier JS personnalisé -->
