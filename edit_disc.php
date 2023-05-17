@@ -108,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="container">
         <h1 class="text-center">Modifier le disque</h1>
-        <form method="POST" action="process_edit_disc.php?id=<?php echo $row['disc_id']; ?>">
+        <form method="POST" action="edit_disc.php?id=<?php echo $row['disc_id']; ?>">
             <div class="mb-3">
                 <label for="title" class="form-label">Titre</label>
                 <input type="text" class="form-control" id="title" name="title" placeholder="Entrez le titre" value="<?php echo $row['disc_title']; ?>" required>

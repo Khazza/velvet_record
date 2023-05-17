@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('db.php');
-
+$role=false;
 // Vérifiez si l'utilisateur est connecté
 if (isset($_SESSION['user'])) {
     // Récupérez le nom d'utilisateur et le rôle de l'utilisateur
