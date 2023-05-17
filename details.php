@@ -97,7 +97,7 @@ if (isset($_GET['id'])) {
         </div>
         <div class="text-center mt-3">
             <?php if ($role === 'admin') { ?>
-                <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal">Modifier</button>
+                <a href="edit_disc.php?id=<?php echo $row['disc_id']; ?>" class="btn btn-warning">Modifier</a>
                 <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Supprimer</button>
             <?php } ?>
             <a href="javascript:history.back()" class="btn btn-primary">Retour</a>
