@@ -5,3 +5,7 @@
 .card-title {
     font-size: 18px;
 }
+
+.modal-dialog {
+    margin-top: 200px;
+}
