@@ -1,10 +1,13 @@
 <?php
 include('db.php');
+session_start();
 
-// Inclusion de la bibliothèque GD
-if (!extension_loaded('gd') || !function_exists('gd_info')) {
-    echo 'L\'extension GD n\'est pas activée. Veuillez activer GD pour utiliser la manipulation d\'images.';
-    exit;
+$role = false;
+// Vérifiez si l'utilisateur est connecté
+if (isset($_SESSION['user'])) {
+    // Récupérez le nom d'utilisateur et le rôle de l'utilisateur
+    $username = $_SESSION['user']['username'];
+    $role = $_SESSION['user']['role'];
 }
 
 // Récupération de la liste des artistes pour le select
@@ -30,18 +33,27 @@ if (isset($_GET['id'])) {
     exit;
 }
 
+// Inclusion de la bibliothèque GD
+if (!extension_loaded('gd') || !function_exists('gd_info')) {
+    echo 'L\'extension GD n\'est pas activée. Veuillez activer GD pour utiliser la manipulation d\'images.';
+    exit;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $artist = $_POST['artist'];
+    $title = $_POST['title'];
     $label = $_POST['label'];
     $year = $_POST['year'];
     $genre = $_POST['genre'];
     $price = $_POST['price'];
 
-    // Gestion du changement de jaquette
-    if ($_FILES['file']['name']) {
+
+    if (isset($_FILES['picture']['name'])) {
+
+        // Gestion du changement de jaquette
         $uploadDir = 'src/img/jaquettes/';
-        $filename = $_FILES['file']['name'];
-        $tmpFilePath = $_FILES['file']['tmp_name'];
+        $filename = $_FILES['picture']['name'];
+        $tmpFilePath = $_FILES['picture']['tmp_name'];
         $newFilePath = $uploadDir . $filename;
 
         // Vérification de la taille de l'image
@@ -78,16 +90,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Mise à jour du chemin de la nouvelle jaquette dans la base de données
-        $updateSql = "UPDATE disc SET artist_id = :artist, disc_label = :label, disc_year = :year, disc_genre = :genre, disc_price = :price, disc_picture = :picture WHERE disc_id = :id";
+        $updateSql = "UPDATE disc SET artist_id = :artist, disc_title = :title, disc_label = :label, disc_year = :year, disc_genre = :genre, disc_price = :price, disc_picture = :picture WHERE disc_id = :id";
         $updateStmt = $pdo->prepare($updateSql);
-        $updateStmt->execute(['artist' => $artist, 'label' => $label, 'year' => $year, 'genre' => $genre, 'price' => $price, 'picture' => $filename, 'id' => $id]);
+        $updateStmt->execute([':artist' => $artist, ':title' => $title, ':label' => $label, ':year' => $year, ':genre' => $genre, ':price' => $price, ':picture' => $filename, ':id' => $id]);
     } else {
         // Mise à jour des autres informations sans changer la jaquette
-        $updateSql = "UPDATE disc SET artist_id = :artist, disc_label = :label, disc_year = :year, disc_genre = :genre, disc_price = :price WHERE disc_id = :id";
+        $updateSql = "UPDATE disc SET artist_id = :artist, disc_title = :title, disc_label = :label, disc_year = :year, disc_genre = :genre, disc_price = :price WHERE disc_id = :id";
         $updateStmt = $pdo->prepare($updateSql);
-        $updateStmt->execute(['artist' => $artist, 'label' => $label, 'year' => $year, 'genre' => $genre, 'price' => $price, 'id' => $id]);
+        $updateStmt->execute([':artist' => $artist, ':title' => $title, ':label' => $label, ':year' => $year, ':genre' => $genre, ':price' => $price, ':id' => $id]);
     }
-
     header('Location: details.php?id=' . $id);
     exit;
 }
@@ -108,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="container">
         <h1 class="text-center">Modifier le disque</h1>
-        <form method="POST" action="edit_disc.php?id=<?php echo $row['disc_id']; ?>">
+        <form method="POST" action="edit_disc.php?id=<?php echo $row['disc_id']; ?>" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="title" class="form-label">Titre</label>
                 <input type="text" class="form-control" id="title" name="title" placeholder="Entrez le titre" value="<?php echo $row['disc_title']; ?>" required>

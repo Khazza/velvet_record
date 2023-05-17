@@ -4,7 +4,8 @@ CREATE DATABASE record;
 
 USE record;
 
-CREATE TABLE artist (
+DROP TABLE IF EXISTS `artist`;
+CREATE TABLE  IF NOT EXISTS `artist` (
 	artist_id		INT PRIMARY KEY AUTO_INCREMENT,
 	artist_name		VARCHAR(255),
 	artist_url		VARCHAR(255)
@@ -22,8 +23,8 @@ INSERT INTO artist (artist_id, artist_name) VALUES
 (9, 'Fleshtones'),
 (10, 'The Clash');
 
-
-CREATE TABLE disc (
+DROP TABLE IF EXISTS `disc`;
+CREATE TABLE IF NOT EXISTS `disc` (
 	disc_id			INT PRIMARY KEY AUTO_INCREMENT,
 	disc_title		VARCHAR(255),
 	disc_year		INT,
@@ -60,3 +61,7 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     role ENUM('admin', 'user') NOT NULL DEFAULT 'user'
 );
+
+INSERT INTO users (id, username, password, role) VALUES
+-- MDP admin: Admin123
+	(1, 'Admin', '$2y$10$hifuCMqIYHhH84S0hNQpzuysd2uURrQFtTszCL7sMxHh/.CEWcRlO', 'admin');
