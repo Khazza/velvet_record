@@ -63,8 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($imageWidth > 600 || $imageHeight > 600) {
             // Redimensionnement de l'image si elle dépasse la taille maximale de 600x600 pixels
-            $maxWidth = 600;
-            $maxHeight = 600;
+            $maxWidth = 500;
+            $maxHeight = 500;
 
             // Calcul des nouvelles dimensions de l'image en conservant le ratio
             $ratio = min($maxWidth / $imageWidth, $maxHeight / $imageHeight);

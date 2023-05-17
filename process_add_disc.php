@@ -39,7 +39,7 @@ if ($_FILES['file']['name']) {
 
     // Redimensionnement de l'image si nécessaire
     list($width, $height) = getimagesize($tmpFilePath);
-    $maxSize = 600;
+    $maxSize = 500;
 
     if ($width > $maxSize || $height > $maxSize) {
         // Calcul des nouvelles dimensions
