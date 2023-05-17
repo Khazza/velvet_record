@@ -29,10 +29,10 @@ if (isset($_GET['id'])) {
     }
 
     // Redirection vers la page de liste des disques après suppression
-    // Après la suppression réussie du disque
-    header("Location: index.php?modal=success");
+    header("Location: index.php");
     exit;
 } else {
     echo "Identifiant non fourni";
     exit;
 }
+?>

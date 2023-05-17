@@ -27,11 +27,6 @@ if (isset($_GET['id'])) {
     echo "Identifiant non fourni";
     exit;
 }
-
-if (isset($_GET['modal']) && $_GET['modal'] === 'success') {
-    echo '<script>$(document).ready(function() { $("#successModal").modal("show"); });</script>';
-}
-
 ?>
 
 <!DOCTYPE html>
