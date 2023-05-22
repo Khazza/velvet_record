@@ -45,7 +45,7 @@ $count = $count_row['count'];
                         <a href="add_disc.php" class="btn btn-primary">Ajouter un Disque</a>
                     <?php } ?>
                 <?php } else { ?>
-                    <a href="login.php" class="btn btn-outline-primary me-2">Log in</a>
+                    <button type="button" class="btn btn-outline-primary me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Log in</button>
                     <a href="signup.php" class="btn btn-primary">Sign up</a>
                 <?php } ?>
             </div>
@@ -136,6 +136,32 @@ $count = $count_row['count'];
             ?>
         </div>
     </div>
+
+    <!-- Modal de connexion -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Connexion</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="login_handler.php" method="post">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Nom d'utilisateur</label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Mot de passe</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Se connecter</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Inclusion des scripts Bootstrap et des scripts JS supplémentaires -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
     <!-- Inclusion des scripts SweetAlert2 -->
