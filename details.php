@@ -1,7 +1,8 @@
 <?php
 session_start();
 include('db.php');
-$role=false;
+$role = false;
+
 // Vérifiez si l'utilisateur est connecté
 if (isset($_SESSION['user'])) {
     // Récupérez le nom d'utilisateur et le rôle de l'utilisateur
@@ -36,19 +37,20 @@ if (isset($_GET['id'])) {
     <title>Détails du disque</title>
     <!-- Inclusion de Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css" rel="stylesheet">
     <!-- Inclusion du fichier CSS personnalisé -->
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light py-0">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light py-0">
         <div class="container">
             <a class="navbar-brand fs-1 fw-bold">
                 Détails
             </a>
             <div class="ml-auto">
-            <?php if (isset($_SESSION['user'])) { ?>
+                <?php if (isset($_SESSION['user'])) { ?>
                     <span class="navbar-text me-2">Bonjour, <?php echo $username; ?></span>
                     <a href="logout.php" class="btn btn-outline-primary me-2">Logout</a>
                 <?php } else { ?>
@@ -65,29 +67,35 @@ if (isset($_GET['id'])) {
             <div class="col-md-6">
                 <div class="mb-3">
                     <label for="artist" class="form-label">Artiste</label>
-                    <input type="text" class="form-control" id="artist" value="<?php echo $row['artist_name']; ?>" disabled>
+                    <input type="text" class="form-control" id="artist" value="<?php echo $row['artist_name']; ?>"
+                        disabled>
                 </div>
                 <div class="mb-3">
                     <label for="label" class="form-label">Label</label>
-                    <input type="text" class="form-control" id="label" value="<?php echo $row['disc_label']; ?>" disabled>
+                    <input type="text" class="form-control" id="label" value="<?php echo $row['disc_label']; ?>"
+                        disabled>
                 </div>
                 <div class="mb-3">
                     <label for="year" class="form-label">Année</label>
-                    <input type="text" class="form-control" id="year" value="<?php echo $row['disc_year']; ?>" disabled>
+                    <input type="text" class="form-control" id="year" value="<?php echo $row['disc_year']; ?>"
+                        disabled>
                 </div>
             </div>
             <div class="col-md-6">
-            <div class="mb-3">
+                <div class="mb-3">
                     <label for="artist" class="form-label">Titre</label>
-                    <input type="text" class="form-control" id="artist" value="<?php echo $row['disc_title']; ?>" disabled>
+                    <input type="text" class="form-control" id="artist" value="<?php echo $row['disc_title']; ?>"
+                        disabled>
                 </div>
                 <div class="mb-3">
                     <label for="genre" class="form-label">Genre</label>
-                    <input type="text" class="form-control" id="genre" value="<?php echo $row['disc_genre']; ?>" disabled>
+                    <input type="text" class="form-control" id="genre" value="<?php echo $row['disc_genre']; ?>"
+                        disabled>
                 </div>
                 <div class="mb-3">
                     <label for="price" class="form-label">Prix</label>
-                    <input type="text" class="form-control" id="price" value="<?php echo $row['disc_price']; ?>" disabled>
+                    <input type="text" class="form-control" id="price" value="<?php echo $row['disc_price']; ?>"
+                        disabled>
                 </div>
             </div>
         </div>
@@ -96,15 +104,15 @@ if (isset($_GET['id'])) {
         </div>
         <div class="text-center mt-3">
             <?php if ($role === 'admin') { ?>
-            <a href="edit_disc.php?id=<?php echo $row['disc_id']; ?>" class="btn btn-warning">Modifier</a>
-            <a href="delete_disc.php?id=<?php echo $row['disc_id']; ?>" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce disque ?')">Supprimer</a>
+                <a href="edit_disc.php?id=<?php echo $row['disc_id']; ?>" class="btn btn-warning">Modifier</a>
+                <button class="btn btn-danger" onclick="deleteDisc(<?php echo $row['disc_id']; ?>)">Supprimer</button>
             <?php } ?>
             <a href="javascript:history.back()" class="btn btn-primary">Retour</a>
         </div>
     </div>
-    <!-- Inclusion des scripts Bootstrap et des scripts JS supplémentaires -->
+    <!-- Inclusion des scripts Bootstrap et du script JS personnalisé -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
-    <!-- Inclusion du fichier JS personnalisé -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>    
     <script src="script.js"></script>
 </body>
 

@@ -1,31 +1,31 @@
- // Fonction de suppression réelle en utilisant une requête AJAX
- function deleteDisc(id) {
-    Swal.fire({
-        title: 'Suppression en cours',
-        icon: 'info',
-        showCancelButton: false,
-        showConfirmButton: false,
-        allowEscapeKey: false,
-        allowOutsideClick: false,
-        timer: 2000,
-        timerProgressBar: true,
-        onOpen: () => {
-            Swal.showLoading();
-        }
+function deleteDisc(discId) {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
     });
-
-    // Appel AJAX pour supprimer le disque
-    // Assurez-vous d'ajuster le chemin du fichier delete_disc.php si nécessaire
-    $.ajax({
-        url: 'delete_disc.php?id=' + id,
-        type: 'GET',
-        success: function (response) {
-            Swal.fire('Suppression réussie', 'Le disque a été supprimé avec succès', 'success');
-            // Faire d'autres actions après la suppression réussie si nécessaire
-        },
-        error: function (xhr, status, error) {
-            Swal.fire('Erreur', 'Une erreur s\'est produite lors de la suppression', 'error');
-            // Gérer l'erreur si nécessaire
-        }
+  
+    swalWithBootstrapButtons.fire({
+      title: 'Êtes-vous sûr(e) ?',
+      text: "Vous ne pourrez pas revenir en arrière !",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Oui, supprimer !',
+      cancelButtonText: 'Non, annuler !',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Redirection vers la page de suppression avec l'ID du disque
+        window.location.href = 'delete_disc.php?id=' + discId;
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        swalWithBootstrapButtons.fire(
+          'Annulé',
+          'Votre fichier est en sécurité :)',
+          'error'
+        );
+      }
     });
-}
+  }
+  
