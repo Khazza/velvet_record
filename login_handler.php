@@ -23,22 +23,10 @@ $user = $stmt->fetch();
 if ($user && password_verify($_POST["password"], $user["password"])) {
     // Authentification réussie, on stocke l'utilisateur en session
     $_SESSION["user"] = $user;
-
-    // Afficher la popup SweetAlert2
-    echo "<script>
-        Swal.fire({
-            icon: 'success',
-            title: 'Connexion réussie',
-            text: 'Vous êtes maintenant connecté',
-            showConfirmButton: false,
-            timer: 1500
-        }).then(function() {
-            // Redirection facultative après la fermeture de la popup
-            // Remplacez 'index.php' par l'URL souhaitée
-            window.location.href = 'index.php';
-        });
-    </script>";
-
+    // Redirection vers la page de confirmation de connexion
+    $_SESSION["login_success"] = "Vous êtes connecté avec succès.";
+    header("Refresh: 5; URL=index.php");
+    include('login_success.php');
     exit;
 } else {
     // Mauvaise combinaison nom d'utilisateur / mot de passe
@@ -46,4 +34,3 @@ if ($user && password_verify($_POST["password"], $user["password"])) {
     header("Location: login.php?error=1");
     exit;
 }
-
