@@ -47,8 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $genre = $_POST['genre'];
     $price = $_POST['price'];
 
-
-    if (isset($_FILES['picture']['name'])) {
+    // Vérification si un fichier image a été téléchargé
+    if (!empty($_FILES['picture']['name'])) {
 
         // Gestion du changement de jaquette
         $uploadDir = 'src/img/jaquettes/';
@@ -139,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <div class="mb-3">
                 <label for="year" class="form-label">Année</label>
-                <input type="number" class="form-control" id="year" name="year" placeholder="Entrez l'année" value="<?php echo $row['disc_year']; ?>" required>
+                <input type="number" class="form-control" id="year" name="year" min="1900" max="<?php echo date('Y'); ?>" placeholder="Entrez l'année" value="<?php echo $row['disc_year']; ?>" required>
             </div>
             <div class="mb-3">
                 <label for="genre" class="form-label">Genre</label>
@@ -147,27 +147,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <div class="mb-3">
                 <label for="price" class="form-label">Prix</label>
-                <input type="number" class="form-control" id="price" name="price" step="0.01" placeholder="Entrez le prix" value="<?php echo $row['disc_price']; ?>" required>
+                <input type="number" class="form-control" id="price" name="price" min="0" step="0.01" placeholder="Entrez le prix" value="<?php echo $row['disc_price']; ?>" required>
             </div>
             <div class="mb-3">
                 <label for="picture" class="form-label">Jaquette</label>
-                <input type="file" class="form-control" id="picture" name="picture" accept="image/*">
+                <input type="file" class="form-control" id="picture" name="picture">
             </div>
-            <div class="mb-3">
-                <?php if ($row['disc_picture']) : ?>
-                    <img src="src/img/jaquettes/<?php echo $row['disc_picture']; ?>" alt="<?php echo $row['disc_title']; ?>" width="200">
-                <?php else : ?>
-                    <span>Aucune jaquette disponible</span>
-                <?php endif; ?>
-            </div>
-            <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+            <a href="details.php?id=<?php echo $row['disc_id']; ?>" class="btn btn-secondary">Annuler</a>
         </form>
     </div>
-
-    <!-- Inclusion des scripts Bootstrap et des scripts JS supplémentaires -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
-    <!-- Inclusion du fichier JS personnalisé -->
-    <script src="script.js"></script>
 </body>
 
 </html>
