@@ -46,3 +46,4 @@ if ($user && password_verify($_POST["password"], $user["password"])) {
     header("Location: login.php?error=1");
     exit;
 }
+

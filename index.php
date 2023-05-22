@@ -25,7 +25,7 @@ $count = $count_row['count'];
     <!-- Inclusion de Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <!-- Inclusion de SweetAlert2 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css" rel="stylesheet"> 
     <!-- Inclusion du fichier CSS personnalisé -->
     <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
@@ -165,7 +165,7 @@ $count = $count_row['count'];
     <!-- Inclusion des scripts Bootstrap et des scripts JS supplémentaires -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
     <!-- Inclusion des scripts SweetAlert2 -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
     <!-- Inclusion du fichier JS personnalisé -->
     <script src="script.js"></script>
 </body>
