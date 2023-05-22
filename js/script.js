@@ -1,57 +1,31 @@
-// function confirmDelete(id) {
-//     Swal.fire({
-//         title: 'Confirmation de suppression',
-//         text: 'Êtes-vous sûr de vouloir supprimer ce disque ?',
-//         icon: 'warning',
-//         showCancelButton: true,
-//         confirmButtonText: 'Confirmer',
-//         cancelButtonText: 'Annuler'
-//     }).then((result) => {
-//         if (result.isConfirmed) {
-//             window.location.href = 'delete_disc.php?id=' + id;
-//         }
-//     });
-// }
-    function confirmDelete(id) {
-        Swal.fire({
-            title: 'Confirmation de suppression',
-            text: 'Êtes-vous sûr de vouloir supprimer ce disque ?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Confirmer',
-            cancelButtonText: 'Annuler'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Appel AJAX ou redirection vers la page de suppression
-                Swal.fire({
-                    title: 'Suppression en cours',
-                    icon: 'info',
-                    showCancelButton: false,
-                    showConfirmButton: false,
-                    allowEscapeKey: false,
-                    allowOutsideClick: false,
-                    timer: 2000,
-                    timerProgressBar: true,
-                    onOpen: () => {
-                        Swal.showLoading();
-                    }
-                });
+ // Fonction de suppression réelle en utilisant une requête AJAX
+ function deleteDisc(id) {
+    Swal.fire({
+        title: 'Suppression en cours',
+        icon: 'info',
+        showCancelButton: false,
+        showConfirmButton: false,
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        timer: 2000,
+        timerProgressBar: true,
+        onOpen: () => {
+            Swal.showLoading();
+        }
+    });
 
-                // Exécutez ici l'action de suppression (par exemple, appel AJAX)
-                // Après la suppression réussie, affichez le message de réussite
-                // Sinon, affichez le message d'erreur
-                simulateDelete(id);
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-                Swal.fire('Annulé', 'La suppression a été annulée', 'error');
-            }
-        });
-    }
-
-    // Fonction de suppression simulée (à remplacer par votre propre logique de suppression)
-    function simulateDelete(id) {
-        // Code de suppression simulé avec une délai de 2 secondes
-        setTimeout(() => {
-            // Suppression réussie
+    // Appel AJAX pour supprimer le disque
+    // Assurez-vous d'ajuster le chemin du fichier delete_disc.php si nécessaire
+    $.ajax({
+        url: 'delete_disc.php?id=' + id,
+        type: 'GET',
+        success: function (response) {
             Swal.fire('Suppression réussie', 'Le disque a été supprimé avec succès', 'success');
-        }, 2000);
-    }
+            // Faire d'autres actions après la suppression réussie si nécessaire
+        },
+        error: function (xhr, status, error) {
+            Swal.fire('Erreur', 'Une erreur s\'est produite lors de la suppression', 'error');
+            // Gérer l'erreur si nécessaire
+        }
+    });
+}

@@ -38,7 +38,6 @@ if (isset($_GET['id'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <!-- Inclusion du fichier CSS personnalisé -->
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -98,7 +97,7 @@ if (isset($_GET['id'])) {
         <div class="text-center mt-3">
             <?php if ($role === 'admin') { ?>
             <a href="edit_disc.php?id=<?php echo $row['disc_id']; ?>" class="btn btn-warning">Modifier</a>
-            <button class="btn btn-danger" onclick="confirmDelete(<?php echo $row['disc_id']; ?>)">Supprimer</button>
+            <a href="delete_disc.php?id=<?php echo $row['disc_id']; ?>" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce disque ?')">Supprimer</a>
             <?php } ?>
             <a href="javascript:history.back()" class="btn btn-primary">Retour</a>
         </div>
