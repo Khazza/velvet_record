@@ -37,7 +37,6 @@ if (isset($_GET['id'])) {
     <title>Détails du disque</title>
     <!-- Inclusion de Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.min.css" rel="stylesheet">
     <!-- Inclusion du fichier CSS personnalisé -->
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -110,9 +109,13 @@ if (isset($_GET['id'])) {
             <a href="javascript:history.back()" class="btn btn-primary">Retour</a>
         </div>
     </div>
-    <!-- Inclusion des scripts Bootstrap et du script JS personnalisé -->
+    <!-- Inclusion de jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Inclusion des scripts Bootstrap -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>    
+    <!-- Inclusion de SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+    <!-- Inclusion du script JS personnalisé -->
     <script src="script.js"></script>
 </body>
 
