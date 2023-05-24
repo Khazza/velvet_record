@@ -130,10 +130,10 @@ $(document).ready(function() {
                     title: 'Modifications enregistrées',
                     showConfirmButton: false,
                     timer: 1500
+                }).then(function() {
+                    // Redirection vers la page de détails du disque
+                    window.location.href = 'details.php?id=' + response;
                 });
-
-                // Réinitialiser le formulaire ou effectuer d'autres actions
-                form[0].reset();
             },
             error: function(xhr, status, error) {
                 // Afficher une alerte d'erreur
@@ -147,4 +147,5 @@ $(document).ready(function() {
         });
     });
 });
+
 
