@@ -7,7 +7,7 @@ session_unset();
 // Détruit la session
 session_destroy();
 
-// Redirige vers la page de connexion
-header('Location: index.php');
+// Redirige vers la page d'accueil avec le paramètre de requête logout=success
+header('Location: index.php?logout=success');
 exit();
 ?>

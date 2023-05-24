@@ -47,8 +47,6 @@
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ----------------------------------Login------------------------------------
-
-
 document.addEventListener('DOMContentLoaded', (event) => {
     const urlParams = new URLSearchParams(window.location.search);
     const login = urlParams.get('login');
@@ -57,6 +55,35 @@ document.addEventListener('DOMContentLoaded', (event) => {
         Swal.fire({
             title: 'Connecté avec succès!',
             text: 'Bienvenue dans votre compte.',
+            icon: 'success',
+            confirmButtonText: 'Cool'
+        })
+    }
+});
+
+
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// ----------------------------------Logout-----------------------------------
+document.addEventListener('DOMContentLoaded', (event) => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const login = urlParams.get('login');
+    const logout = urlParams.get('logout');
+
+    if (login === 'success') {
+        Swal.fire({
+            title: 'Connecté avec succès!',
+            text: 'Bienvenue dans votre compte.',
+            icon: 'success',
+            confirmButtonText: 'Cool'
+        })
+    }
+
+    if (logout === 'success') {
+        Swal.fire({
+            title: 'Déconnecté avec succès!',
+            text: 'Vous avez été déconnecté de votre compte.',
             icon: 'success',
             confirmButtonText: 'Cool'
         })
