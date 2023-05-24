@@ -57,28 +57,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
             text: 'Bienvenue dans votre compte.',
             icon: 'success',
             confirmButtonText: 'Cool'
+        }).then(() => {
+            history.replaceState(null, '', 'index.php');
         })
     }
 });
 
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
 // ----------------------------------Logout-----------------------------------
 document.addEventListener('DOMContentLoaded', (event) => {
     const urlParams = new URLSearchParams(window.location.search);
-    const login = urlParams.get('login');
     const logout = urlParams.get('logout');
-
-    if (login === 'success') {
-        Swal.fire({
-            title: 'Connecté avec succès!',
-            text: 'Bienvenue dans votre compte.',
-            icon: 'success',
-            confirmButtonText: 'Cool'
-        })
-    }
 
     if (logout === 'success') {
         Swal.fire({
@@ -86,14 +74,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
             text: 'Vous avez été déconnecté de votre compte.',
             icon: 'success',
             confirmButtonText: 'Cool'
+        }).then(() => {
+            history.replaceState(null, '', 'index.php');
         })
     }
 });
 
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
 // ----------------------------------Signup-----------------------------------
 $(document).ready(function() {
     if (typeof register_success !== 'undefined' && register_success) {
@@ -101,6 +87,8 @@ $(document).ready(function() {
             'Inscription réussie !',
             register_success,
             'success'
-        );
+        ).then(() => {
+            history.replaceState(null, '', 'index.php');
+        });
     }
 });
