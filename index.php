@@ -36,15 +36,15 @@ $count = $count_row['count'];
                 Liste des disques (<span class="counter-style"><?php echo $count; ?></span>)
             </a>
             <div class="ml-auto">
-            <?php if (isset($_SESSION['user'])) { ?>
+                <?php if (isset($_SESSION['user'])) { ?>
                     <span class="navbar-text me-2">Bonjour, <?php echo $username; ?></span>
                     <a href="logout.php" class="btn btn-outline-primary me-2">Logout</a>
                     <?php if ($role === 'admin') { ?>
                         <a href="add_disc.php" class="btn btn-primary">Ajouter un Disque</a>
                     <?php } ?>
                 <?php } else { ?>
-                    <a href="login.php" class="btn btn-outline-primary me-2">Log in</a>
-                    <a href="signup.php" class="btn btn-primary">Sign up</a>
+                    <a href="#" onclick="showLoginForm()" class="btn btn-outline-primary me-2">Log in</a>
+                    <a href="#" onclick="showSignupForm()" class="btn btn-primary">Sign up</a>
                 <?php } ?>
             </div>
         </div>
@@ -135,9 +135,12 @@ $count = $count_row['count'];
         </div>
     </div>
     <!-- Inclusion des scripts Bootstrap et des scripts JS supplémentaires -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
+    <!-- Inclusion de SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
     <!-- Inclusion du fichier JS personnalisé -->
-    <script src="script.js"></script>
+    <script src="./js/script.js"></script>
 </body>
 
 </html>

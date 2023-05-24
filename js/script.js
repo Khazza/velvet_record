@@ -72,3 +72,82 @@
         }
     });
 }
+
+function showLoginForm() {
+    Swal.fire({
+        title: 'Log In',
+        html:
+        '<input id="swal-input1" class="swal2-input" placeholder="Username">' +
+        '<input id="swal-input2" class="swal2-input" placeholder="Password" type="password">',
+        confirmButtonText: 'Log in',
+        preConfirm: () => {
+            const username = Swal.getPopup().querySelector('#swal-input1').value
+            const password = Swal.getPopup().querySelector('#swal-input2').value
+            if (!username || !password) {
+                Swal.showValidationMessage(`Please enter username and password`)
+            }
+            return { username: username, password: password }
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: 'login_script.php',
+                type: 'POST',
+                data: {
+                    username: result.value.username,
+                    password: result.value.password
+                },
+                success: function(response) {
+                    if (response === 'success') {
+                        location.reload();
+                    } else {
+                        Swal.fire('Error', 'Invalid username or password', 'error');
+                    }
+                }
+            });
+        }
+    });
+}
+
+function showSignupForm() {
+    Swal.fire({
+        title: 'Sign Up',
+        html:
+        '<input id="swal-input1" class="swal2-input" placeholder="Username">' +
+        '<input id="swal-input2" class="swal2-input" placeholder="Email">' +
+        '<input id="swal-input3" class="swal2-input" placeholder="Password" type="password">' +
+        '<input id="swal-input4" class="swal2-input" placeholder="Confirm Password" type="password">',
+        confirmButtonText: 'Sign up',
+        preConfirm: () => {
+            const username = Swal.getPopup().querySelector('#swal-input1').value
+            const email = Swal.getPopup().querySelector('#swal-input2').value
+            const password = Swal.getPopup().querySelector('#swal-input3').value
+            const confirmPassword = Swal.getPopup().querySelector('#swal-input4').value
+            if (!username || !email || !password || !confirmPassword) {
+                Swal.showValidationMessage(`Please enter all fields`)
+            } else if (password !== confirmPassword) {
+                Swal.showValidationMessage(`Passwords do not match`)
+            }
+            return { username: username, email: email, password: password }
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: 'signup_script.php',
+                type: 'POST',
+                data: {
+                    username: result.value.username,
+                    email: result.value.email,
+                    password: result.value.password
+                },
+                success: function(response) {
+                    if (response === 'success') {
+                        location.reload();
+                    } else {
+                        Swal.fire('Error', 'Unable to sign up', 'error');
+                    }
+                }
+            });
+        }
+    });
+}
