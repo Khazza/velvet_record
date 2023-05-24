@@ -2,49 +2,43 @@
 session_start();
 include('db.php');
 
-// Vérification du jeton CSRF
+// Check CSRF token
 if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-    $_SESSION['errors'][] = "CSRF token validation failed.";
-    header("Location: signup.php");
-    exit();
+    echo "csrf_error";
+    exit;
 }
 
-// Vérification des champs
+// Check fields
 if (!preg_match('/^[a-zA-Z0-9]+$/', $_POST['username'])) {
-    $_SESSION['errors'][] = "Le nom d'utilisateur ne doit contenir que des lettres et des chiffres.";
+    echo "username_error";
+    exit;
 }
 if (strlen($_POST['password']) < 5) {
-    $_SESSION['errors'][] = "Le mot de passe doit comporter au moins 5 caractères.";
+    echo "password_length_error";
+    exit;
 }
 if (!preg_match('/[A-Z]/', $_POST['password']) || !preg_match('/[a-z]/', $_POST['password'])) {
-    $_SESSION['errors'][] = "Le mot de passe doit contenir au moins une lettre majuscule et une lettre minuscule.";
+    echo "password_case_error";
+    exit;
 }
 if ($_POST['password'] !== $_POST['confirm_password']) {
-    $_SESSION['errors'][] = "Les mots de passe ne correspondent pas.";
+    echo "password_mismatch_error";
+    exit;
 }
 
-// Vérification si le nom d'utilisateur est déjà pris
+// Check if username is already taken
 $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
 $stmt->execute([$_POST['username']]);
 $user = $stmt->fetch();
 
 if ($user) {
-    $_SESSION['errors'][] = "Le nom d'utilisateur est déjà pris.";
-    header("Location: signup.php");
-    exit();
+    echo "username_taken_error";
+    exit;
 }
 
-// Si des erreurs ont été détectées, retourner sur la page signup.php
-if (!empty($_SESSION['errors'])) {
-    header("Location: signup.php");
-    exit();
-}
-
-// Si tout est correct, ajouter l'utilisateur à la base de données
+// If everything is okay, add user to the database
 $stmt = $pdo->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
 $stmt->execute([$_POST['username'], password_hash($_POST['password'], PASSWORD_DEFAULT)]);
 
-// Rediriger l'utilisateur vers une page de succès
-header("Location: signup_success.php");
-exit();
-?>
+echo "success";
+exit;

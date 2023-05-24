@@ -2,35 +2,32 @@
 session_start();
 include('db.php');
 
-// Vérification du jeton CSRF
+// Check CSRF token
 if (!isset($_POST["csrf_token"]) || $_POST["csrf_token"] !== $_SESSION["csrf_token"]) {
-    header("Location: index.php");
+    echo "csrf_error";
     exit;
 }
 
-// Vérification si les champs de connexion sont renseignés
+// Check if login fields are set
 if (!isset($_POST["username"]) || !isset($_POST["password"])) {
-    header("Location: index.php");
+    echo "field_error";
     exit;
 }
 
-// Récupération de l'utilisateur dans la base de données
+// Fetch user from the database
 $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
 $stmt->execute([$_POST["username"]]);
 $user = $stmt->fetch();
 
-// Vérification du mot de passe
+// Check password
 if ($user && password_verify($_POST["password"], $user["password"])) {
-    // Authentification réussie, on stocke l'utilisateur en session
+    // Successful authentication, store user in session
     $_SESSION["user"] = $user;
-    // Redirection vers la page de confirmation de connexion
-    $_SESSION["login_success"] = "Vous êtes connecté avec succès.";
-    header("Refresh: 5; URL=index.php");
-    include('login_success.php');
+    echo "success";
     exit;
 } else {
-    // Mauvaise combinaison nom d'utilisateur / mot de passe
-    $_SESSION["login_error"] = "Mauvaise combinaison nom d'utilisateur / mot de passe.";
-    header("Location: login.php?error=1");
+    // Wrong username/password combination
+    echo "auth_error";
     exit;
 }
+?>
