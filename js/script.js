@@ -29,6 +29,9 @@
 //     });
 //   }
   
+
+
+// -------------------------Supression disc-------------------------
   function deleteDisc(id) {
     Swal.fire({
         title: 'Êtes-vous sûr?',
@@ -73,81 +76,79 @@
     });
 }
 
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// -------------------------Login / Signup-------------------------
 function showLoginForm() {
     Swal.fire({
-        title: 'Log In',
+        title: 'Login',
         html:
-        '<input id="swal-input1" class="swal2-input" placeholder="Username">' +
-        '<input id="swal-input2" class="swal2-input" placeholder="Password" type="password">',
+            '<input type="text" id="login-username" class="swal2-input" placeholder="Username">' +
+            '<input type="password" id="login-password" class="swal2-input" placeholder="Password">',
         confirmButtonText: 'Log in',
+        focusConfirm: false,
         preConfirm: () => {
-            const username = Swal.getPopup().querySelector('#swal-input1').value
-            const password = Swal.getPopup().querySelector('#swal-input2').value
+            const username = Swal.getPopup().querySelector('#login-username').value
+            const password = Swal.getPopup().querySelector('#login-password').value
             if (!username || !password) {
                 Swal.showValidationMessage(`Please enter username and password`)
             }
             return { username: username, password: password }
         }
     }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                url: 'login_script.php',
-                type: 'POST',
-                data: {
-                    username: result.value.username,
-                    password: result.value.password
-                },
-                success: function(response) {
-                    if (response === 'success') {
-                        location.reload();
-                    } else {
-                        Swal.fire('Error', 'Invalid username or password', 'error');
-                    }
-                }
-            });
-        }
-    });
+        // send ajax request to login_handler.php
+        $.ajax({
+            url: 'login_handler.php',
+            type: 'POST',
+            data: {
+                username: result.value.username,
+                password: result.value.password
+            },
+            success: function(response) {
+                // handle the response
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                // handle the error
+            }
+        });
+    })
 }
 
 function showSignupForm() {
     Swal.fire({
-        title: 'Sign Up',
+        title: 'Sign up',
         html:
-        '<input id="swal-input1" class="swal2-input" placeholder="Username">' +
-        '<input id="swal-input2" class="swal2-input" placeholder="Email">' +
-        '<input id="swal-input3" class="swal2-input" placeholder="Password" type="password">' +
-        '<input id="swal-input4" class="swal2-input" placeholder="Confirm Password" type="password">',
+            '<input type="text" id="signup-username" class="swal2-input" placeholder="Username">' +
+            '<input type="password" id="signup-password" class="swal2-input" placeholder="Password">' +
+            '<input type="password" id="signup-confirm-password" class="swal2-input" placeholder="Confirm Password">',
         confirmButtonText: 'Sign up',
+        focusConfirm: false,
         preConfirm: () => {
-            const username = Swal.getPopup().querySelector('#swal-input1').value
-            const email = Swal.getPopup().querySelector('#swal-input2').value
-            const password = Swal.getPopup().querySelector('#swal-input3').value
-            const confirmPassword = Swal.getPopup().querySelector('#swal-input4').value
-            if (!username || !email || !password || !confirmPassword) {
+            const username = Swal.getPopup().querySelector('#signup-username').value
+            const password = Swal.getPopup().querySelector('#signup-password').value
+            const confirmPassword = Swal.getPopup().querySelector('#signup-confirm-password').value
+            if (!username || !password || !confirmPassword) {
                 Swal.showValidationMessage(`Please enter all fields`)
-            } else if (password !== confirmPassword) {
-                Swal.showValidationMessage(`Passwords do not match`)
             }
-            return { username: username, email: email, password: password }
+            return { username: username, password: password, confirmPassword: confirmPassword }
         }
     }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                url: 'signup_script.php',
-                type: 'POST',
-                data: {
-                    username: result.value.username,
-                    email: result.value.email,
-                    password: result.value.password
-                },
-                success: function(response) {
-                    if (response === 'success') {
-                        location.reload();
-                    } else {
-                        Swal.fire('Error', 'Unable to sign up', 'error');
-                    }
-                }
-            });
-        }
-    });
+        // send ajax request to signup_handler.php
+        $.ajax({
+            url: 'signup_handler.php',
+            type: 'POST',
+            data: {
+                username: result.value.username,
+                password: result.value.password,
+                confirm_password: result.value.confirmPassword
+            },
+            success: function(response) {
+                // handle the response
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                // handle the error
+            }
+        });
+    })
 }
