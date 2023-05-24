@@ -1,52 +1,50 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST");
-header("Content-Type: application/json");
-
 session_start();
 include('db.php');
 
-// Transform JSON data from AJAX request into $_POST
-$_POST = json_decode(file_get_contents('php://input'), true);
-
-// Check CSRF token
+// Vérification du jeton CSRF
 if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-    echo json_encode(["status" => "error", "message" => "csrf_error"]);
-    exit;
+    $_SESSION['errors'][] = "CSRF token validation failed.";
+    header("Location: signup.php");
+    exit();
 }
 
-// Check fields
+// Vérification des champs
 if (!preg_match('/^[a-zA-Z0-9]+$/', $_POST['username'])) {
-    echo json_encode(["status" => "error", "message" => "username_error"]);
-    exit;
+    $_SESSION['errors'][] = "Le nom d'utilisateur ne doit contenir que des lettres et des chiffres.";
 }
 if (strlen($_POST['password']) < 5) {
-    echo json_encode(["status" => "error", "message" => "password_length_error"]);
-    exit;
+    $_SESSION['errors'][] = "Le mot de passe doit comporter au moins 5 caractères.";
 }
 if (!preg_match('/[A-Z]/', $_POST['password']) || !preg_match('/[a-z]/', $_POST['password'])) {
-    echo json_encode(["status" => "error", "message" => "password_case_error"]);
-    exit;
+    $_SESSION['errors'][] = "Le mot de passe doit contenir au moins une lettre majuscule et une lettre minuscule.";
 }
 if ($_POST['password'] !== $_POST['confirm_password']) {
-    echo json_encode(["status" => "error", "message" => "password_mismatch_error"]);
-    exit;
+    $_SESSION['errors'][] = "Les mots de passe ne correspondent pas.";
 }
 
-// Check if username is already taken
+// Vérification si le nom d'utilisateur est déjà pris
 $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
 $stmt->execute([$_POST['username']]);
 $user = $stmt->fetch();
 
 if ($user) {
-    echo json_encode(["status" => "error", "message" => "username_taken_error"]);
-    exit;
+    $_SESSION['errors'][] = "Le nom d'utilisateur est déjà pris.";
+    header("Location: signup.php");
+    exit();
 }
 
-// If everything is okay, add user to the database
+// Si des erreurs ont été détectées, retourner sur la page signup.php
+if (!empty($_SESSION['errors'])) {
+    header("Location: signup.php");
+    exit();
+}
+
+// Si tout est correct, ajouter l'utilisateur à la base de données
 $stmt = $pdo->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
 $stmt->execute([$_POST['username'], password_hash($_POST['password'], PASSWORD_DEFAULT)]);
 
-echo json_encode(["status" => "success"]);
-exit;
+// Rediriger l'utilisateur vers une page de succès
+header("Location: signup_success.php");
+exit();
 ?>

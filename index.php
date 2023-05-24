@@ -26,9 +26,6 @@ $count = $count_row['count'];
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <!-- Inclusion du fichier CSS personnalisé -->
     <link rel="stylesheet" href="./assets/css/styles.css">
-    <script>
-    var csrf_token = '<?php echo $_SESSION["csrf_token"]; ?>';
-</script>
 </head>
 
 <body>
@@ -39,15 +36,15 @@ $count = $count_row['count'];
                 Liste des disques (<span class="counter-style"><?php echo $count; ?></span>)
             </a>
             <div class="ml-auto">
-                <?php if (isset($_SESSION['user'])) { ?>
+            <?php if (isset($_SESSION['user'])) { ?>
                     <span class="navbar-text me-2">Bonjour, <?php echo $username; ?></span>
                     <a href="logout.php" class="btn btn-outline-primary me-2">Logout</a>
                     <?php if ($role === 'admin') { ?>
                         <a href="add_disc.php" class="btn btn-primary">Ajouter un Disque</a>
                     <?php } ?>
                 <?php } else { ?>
-                    <a href="#" id="loginBtn" class="btn btn-outline-primary me-2">Log in</a>
-                    <a href="#" id="signupBtn" class="btn btn-primary">Sign up</a>
+                    <a href="login.php" class="btn btn-outline-primary me-2">Log in</a>
+                    <a href="signup.php" class="btn btn-primary">Sign up</a>
                 <?php } ?>
             </div>
         </div>
@@ -137,13 +134,11 @@ $count = $count_row['count'];
             ?>
         </div>
     </div>
+
     <!-- Inclusion des scripts Bootstrap et des scripts JS supplémentaires -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
-    <!-- Inclusion de SweetAlert2 -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
     <!-- Inclusion du fichier JS personnalisé -->
-    <script src="./js/script.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

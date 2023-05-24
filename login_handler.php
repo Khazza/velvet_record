@@ -1,40 +1,36 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST");
-header("Content-Type: application/json");
-
 session_start();
 include('db.php');
 
-// Transform JSON data from AJAX request into $_POST
-$_POST = json_decode(file_get_contents('php://input'), true);
-
-// Check CSRF token
+// Vérification du jeton CSRF
 if (!isset($_POST["csrf_token"]) || $_POST["csrf_token"] !== $_SESSION["csrf_token"]) {
-    echo json_encode(["status" => "error", "message" => "csrf_error"]);
+    header("Location: index.php");
     exit;
 }
 
-// Check if login fields are set
+// Vérification si les champs de connexion sont renseignés
 if (!isset($_POST["username"]) || !isset($_POST["password"])) {
-    echo json_encode(["status" => "error", "message" => "field_error"]);
+    header("Location: index.php");
     exit;
 }
 
-// Fetch user from the database
+// Récupération de l'utilisateur dans la base de données
 $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
 $stmt->execute([$_POST["username"]]);
 $user = $stmt->fetch();
 
-// Check password
+// Vérification du mot de passe
 if ($user && password_verify($_POST["password"], $user["password"])) {
-    // Successful authentication, store user in session
+    // Authentification réussie, on stocke l'utilisateur en session
     $_SESSION["user"] = $user;
-    echo json_encode(["status" => "success"]);
+    // Redirection vers la page de confirmation de connexion
+    $_SESSION["login_success"] = "Vous êtes connecté avec succès.";
+    header("Refresh: 5; URL=index.php");
+    include('login_success.php');
     exit;
 } else {
-    // Wrong username/password combination
-    echo json_encode(["status" => "error", "message" => "auth_error"]);
+    // Mauvaise combinaison nom d'utilisateur / mot de passe
+    $_SESSION["login_error"] = "Mauvaise combinaison nom d'utilisateur / mot de passe.";
+    header("Location: login.php?error=1");
     exit;
 }
-?>
