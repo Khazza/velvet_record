@@ -26,6 +26,9 @@ $count = $count_row['count'];
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <!-- Inclusion du fichier CSS personnalisé -->
     <link rel="stylesheet" href="./assets/css/styles.css">
+    <script>
+    var csrf_token = '<?php echo $_SESSION["csrf_token"]; ?>';
+</script>
 </head>
 
 <body>
