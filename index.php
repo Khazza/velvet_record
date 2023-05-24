@@ -143,6 +143,16 @@ $count = $count_row['count'];
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
     <!-- Inclusion du script JS personnalisé -->
     <script src="./js/script.js"></script>
+
+    <script>
+    var register_success = <?php echo json_encode($_SESSION['register_success'] ?? null); ?>;
+    <?php
+    if (isset($_SESSION['register_success'])) {
+        unset($_SESSION['register_success']);
+    }
+    ?>
+    </script>
+    
 </body>
 
 </html>

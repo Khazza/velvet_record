@@ -94,3 +94,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
+// ----------------------------------Signup-----------------------------------
+$(document).ready(function() {
+    if (typeof register_success !== 'undefined' && register_success) {
+        Swal.fire(
+            'Inscription réussie !',
+            register_success,
+            'success'
+        );
+    }
+});
