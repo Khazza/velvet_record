@@ -79,6 +79,17 @@
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
+// --------------------------------CSRF token---------------------------------
+
+var csrf_token = '';
+
+$(document).ready(function() {
+    $.get('get_csrf_token.php', function(data) {
+        csrf_token = data;
+    });
+});
+
+
 // -------------------------Login / Signup-------------------------
 document.getElementById('loginBtn').addEventListener('click', function(e) {
     e.preventDefault();
@@ -95,25 +106,23 @@ function showLoginForm() {
         title: 'Login',
         html: '<input type="text" id="loginUsername" class="swal2-input" placeholder="Username">' +
             '<input type="password" id="loginPassword" class="swal2-input" placeholder="Password">' +
-            '<input type="hidden" id="loginCsrfToken" class="swal2-input">',
+            '<input type="hidden" id="loginCsrfToken" class="swal2-input" value="' + csrf_token + '">',
         confirmButtonText: 'Log in',
         focusConfirm: false,
-        preConfirm: function() {
-            return new Promise(function(resolve) {
-                resolve([
-                    document.getElementById('loginUsername').value,
-                    document.getElementById('loginPassword').value,
-                    document.getElementById('loginCsrfToken').value
-                ]);
-            });
+        preConfirm: () => {
+            return [
+                document.getElementById('loginUsername').value,
+                document.getElementById('loginPassword').value,
+                document.getElementById('loginCsrfToken').value
+            ]
         }
-    }).then(function(result) {
-        var username = result.value[0];
-        var password = result.value[1];
-        var csrf_token = result.value[2];
-        handleLogin(username, password, csrf_token);
+    }).then((result) => {
+        if (result.value) {
+            handleLogin(result.value);
+        }
     });
 }
+
 
 function handleLogin(username, password, csrf_token) {
     $.ajax({
@@ -141,27 +150,24 @@ function showSignupForm() {
         html: '<input type="text" id="signupUsername" class="swal2-input" placeholder="Username">' +
             '<input type="password" id="signupPassword" class="swal2-input" placeholder="Password">' +
             '<input type="password" id="signupConfirmPassword" class="swal2-input" placeholder="Confirm Password">' +
-            '<input type="hidden" id="signupCsrfToken" class="swal2-input">',
+            '<input type="hidden" id="signupCsrfToken" class="swal2-input" value="' + csrf_token + '">',
         confirmButtonText: 'Sign up',
         focusConfirm: false,
-        preConfirm: function() {
-            return new Promise(function(resolve) {
-                resolve([
-                    document.getElementById('signupUsername').value,
-                    document.getElementById('signupPassword').value,
-                    document.getElementById('signupConfirmPassword').value,
-                    document.getElementById('signupCsrfToken').value
-                ]);
-            });
+        preConfirm: () => {
+            return [
+                document.getElementById('signupUsername').value,
+                document.getElementById('signupPassword').value,
+                document.getElementById('signupConfirmPassword').value,
+                document.getElementById('signupCsrfToken').value
+            ]
         }
-    }).then(function(result) {
-        var username = result.value[0];
-        var password = result.value[1];
-        var confirmPassword = result.value[2];
-        var csrf_token = result.value[3];
-        handleSignup(username, password, confirmPassword, csrf_token);
+    }).then((result) => {
+        if (result.value) {
+            handleSignup(result.value);
+        }
     });
 }
+
 
 function handleSignup(username, password, confirmPassword, csrf_token) {
     $.ajax({
