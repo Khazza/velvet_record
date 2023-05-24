@@ -125,10 +125,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $update_stmt = $pdo->prepare($update_sql);
     $update_stmt->execute([':artist_id' => $artist, ':title' => $title, ':year' => $year, ':genre' => $genre, ':label' => $label, ':price' => $price, ':picture' => $filename, ':id' => $id]);
 
-    header('Location: index.php');
+    // Récupérer l'URL de la page de détails du disque modifié
+    $details_url = 'details.php?id=' . $id;
+
+    // Rediriger vers la page de détails du disque modifié
+    header('Location: ' . $details_url);
     exit;
 }
-
 ?>
 
 <!DOCTYPE html>

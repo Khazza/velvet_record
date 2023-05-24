@@ -132,7 +132,7 @@ $(document).ready(function() {
                     timer: 1500
                 }).then(function() {
                     // Redirection vers la page de détails du disque
-                    window.location.href = 'details.php?id=' + response;
+                    window.location.href = 'details.php?id=' + id;
                 });
             },
             error: function(xhr, status, error) {
