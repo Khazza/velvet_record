@@ -111,31 +111,40 @@ document.getElementById('artist').addEventListener('change', function() {
 
 // ----------------------------------Form Edit----------------------------------
 $(document).ready(function() {
-    $('form').on('submit', function(e) {
-        e.preventDefault();
+    $('form').submit(function(e) {
+        e.preventDefault(); // Empêche la soumission normale du formulaire
 
-        var formData = new FormData(this);
+        var form = $(this);
+        var formData = new FormData(form[0]);
 
         $.ajax({
-            type: 'POST',
-            url: $(this).attr('action'),
+            url: form.attr('action'),
+            type: form.attr('method'),
             data: formData,
-            contentType: false,
             processData: false,
+            contentType: false,
             success: function(response) {
-                Swal.fire(
-                    'Succès !',
-                    'Le disque a été modifié avec succès.',
-                    'success'
-                );
+                // Afficher une alerte de succès
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Modifications enregistrées',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+
+                // Réinitialiser le formulaire ou effectuer d'autres actions
+                form[0].reset();
             },
-            error: function(error) {
-                Swal.fire(
-                    'Erreur !',
-                    'Une erreur s\'est produite lors de la modification du disque.',
-                    'error'
-                );
+            error: function(xhr, status, error) {
+                // Afficher une alerte d'erreur
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erreur',
+                    text: 'Une erreur s\'est produite lors de l\'enregistrement des modifications.',
+                    confirmButtonText: 'OK'
+                });
             }
         });
     });
 });
+
