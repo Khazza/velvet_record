@@ -92,3 +92,19 @@ $(document).ready(function() {
         });
     }
 });
+
+// ----------------------------------Artiste-----------------------------------
+document.getElementById('artist').addEventListener('change', function() {
+    if (this.value === 'add_new') {
+        var newArtist = prompt('Entrez le nom du nouvel artiste :');
+        if (newArtist) {
+            var opt = document.createElement('option');
+            opt.value = newArtist;
+            opt.innerHTML = newArtist;
+            this.appendChild(opt);
+            this.value = newArtist;
+        } else {
+            this.value = '';
+        }
+    }
+});

@@ -47,6 +47,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $genre = $_POST['genre'];
     $price = $_POST['price'];
 
+    // Check if artist exists or needs to be added
+    $artist_stmt = $pdo->prepare("SELECT * FROM artist WHERE artist_name = :artist");
+    $artist_stmt->execute([':artist' => $artist]);
+    $artist_row = $artist_stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$artist_row) {
+        // L'artiste n'existe pas, ajoutez-le à la base de données
+        $new_artist_stmt = $pdo->prepare("INSERT INTO artist (artist_name) VALUES (:artist)");
+        $new_artist_stmt->execute([':artist' => $artist]);
+        $artist = $pdo->lastInsertId();
+    } else {
+        $artist = $artist_row['artist_id'];
+    }
+
+    // Continuer avec le reste du code ...
     // Vérification si un fichier image a été téléchargé
     if (!empty($_FILES['picture']['name'])) {
 
@@ -68,95 +83,103 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Calcul des nouvelles dimensions de l'image en conservant le ratio
             $ratio = min($maxWidth / $imageWidth, $maxHeight / $imageHeight);
-            $newWidth = intval($imageWidth * $ratio);
-            $newHeight = intval($imageHeight * $ratio);
+            $newWidth = $imageWidth * $ratio;
+            $newHeight = $imageHeight * $ratio;
 
-            // Création d'une nouvelle image redimensionnée
-            $newImage = imagecreatetruecolor($newWidth, $newHeight);
-            $sourceImage = imagecreatefromstring(file_get_contents($tmpFilePath));
+            $dst = imagecreatetruecolor($newWidth, $newHeight);
 
-            // Redimensionnement de l'image source vers la nouvelle image
-            imagecopyresampled($newImage, $sourceImage, 0, 0, 0, 0, $newWidth, $newHeight, $imageWidth, $imageHeight);
+            // Création de l'image redimensionnée en fonction du type de l'image originale
+            $src = null;
+            switch ($imageSize[2]) {
+                case IMAGETYPE_GIF:
+                    $src = imagecreatefromgif($tmpFilePath);
+                    imagecopyresampled($dst, $src, 0, 0, 0, 0, $newWidth, $newHeight, $imageWidth, $imageHeight);
+                    imagegif($dst, $newFilePath);
+                    break;
+                case IMAGETYPE_JPEG:
+                    $src = imagecreatefromjpeg($tmpFilePath);
+                    imagecopyresampled($dst, $src, 0, 0, 0, 0, $newWidth, $newHeight, $imageWidth, $imageHeight);
+                    imagejpeg($dst, $newFilePath);
+                    break;
+                case IMAGETYPE_PNG:
+                    $src = imagecreatefrompng($tmpFilePath);
+                    imagecopyresampled($dst, $src, 0, 0, 0, 0, $newWidth, $newHeight, $imageWidth, $imageHeight);
+                    imagepng($dst, $newFilePath);
+                    break;
+                default:
+                    echo "Le format de l'image n'est pas pris en charge.";
+                    exit;
+            }
 
-            // Enregistrement de l'image redimensionnée
-            imagejpeg($newImage, $newFilePath, 90);
-
-            // Libération de la mémoire utilisée par les images
-            imagedestroy($newImage);
-            imagedestroy($sourceImage);
+            imagedestroy($src);
+            imagedestroy($dst);
         } else {
-            // Pas de redimensionnement nécessaire, copie directe de l'image
+            // Si l'image est plus petite que la taille maximale, déplacez-la simplement vers le répertoire d'upload
             move_uploaded_file($tmpFilePath, $newFilePath);
         }
-
-        // Mise à jour du chemin de la nouvelle jaquette dans la base de données
-        $updateSql = "UPDATE disc SET artist_id = :artist, disc_title = :title, disc_label = :label, disc_year = :year, disc_genre = :genre, disc_price = :price, disc_picture = :picture WHERE disc_id = :id";
-        $updateStmt = $pdo->prepare($updateSql);
-        $updateStmt->execute([':artist' => $artist, ':title' => $title, ':label' => $label, ':year' => $year, ':genre' => $genre, ':price' => $price, ':picture' => $filename, ':id' => $id]);
     } else {
-        // Mise à jour des autres informations sans changer la jaquette
-        $updateSql = "UPDATE disc SET artist_id = :artist, disc_title = :title, disc_label = :label, disc_year = :year, disc_genre = :genre, disc_price = :price WHERE disc_id = :id";
-        $updateStmt = $pdo->prepare($updateSql);
-        $updateStmt->execute([':artist' => $artist, ':title' => $title, ':label' => $label, ':year' => $year, ':genre' => $genre, ':price' => $price, ':id' => $id]);
+        $filename = $row['disc_picture'];
     }
-    header('Location: details.php?id=' . $id);
+
+    $update_sql = "UPDATE disc SET artist_id = :artist_id, disc_title = :title, disc_year = :year, disc_genre = :genre, disc_label = :label, disc_price = :price, disc_picture = :picture WHERE disc_id = :id";
+    $update_stmt = $pdo->prepare($update_sql);
+    $update_stmt->execute([':artist_id' => $artist, ':title' => $title, ':year' => $year, ':genre' => $genre, ':label' => $label, ':price' => $price, ':picture' => $filename, ':id' => $id]);
+
+    header('Location: index.php');
     exit;
 }
+
 ?>
 
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="UTF-8">
-    <title>Modifier le disque</title>
-    <!-- Inclusion de Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-    <!-- Inclusion du fichier CSS personnalisé -->
-    <link rel="stylesheet" href="styles.css">
+    <title>Modifier un disque</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="script.js"></script>
 </head>
-
 <body>
     <div class="container">
-        <h1 class="text-center">Modifier le disque</h1>
-        <form method="POST" action="edit_disc.php?id=<?php echo $row['disc_id']; ?>" enctype="multipart/form-data">
+        <h1>Modifier un disque</h1>
+        <form method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="title" class="form-label">Titre</label>
-                <input type="text" class="form-control" id="title" name="title" placeholder="Entrez le titre" value="<?php echo $row['disc_title']; ?>" required>
+                <input type="text" class="form-control" id="title" name="title" value="<?= $row['disc_title'] ?>" required>
             </div>
             <div class="mb-3">
                 <label for="artist" class="form-label">Artiste</label>
                 <select class="form-select" id="artist" name="artist" required>
                     <option value="">Sélectionner un artiste</option>
-                    <?php foreach ($artists as $artist) : ?>
-                        <option value="<?php echo $artist['artist_id']; ?>" <?php if ($artist['artist_id'] == $row['artist_id']) echo 'selected'; ?>><?php echo $artist['artist_name']; ?></option>
+                    <option value="add_new">Ajouter un nouvel artiste</option>
+                    <?php foreach ($artists as $artist): ?>
+                        <option value="<?= $artist['artist_name'] ?>" <?= $artist['artist_id'] == $row['artist_id'] ? 'selected' : '' ?>>
+                            <?= $artist['artist_name'] ?>
+                        </option>
                     <?php endforeach; ?>
                 </select>
             </div>
             <div class="mb-3">
                 <label for="label" class="form-label">Label</label>
-                <input type="text" class="form-control" id="label" name="label" placeholder="Entrez le label" value="<?php echo $row['disc_label']; ?>" required>
+                <input type="text" class="form-control" id="label" name="label" value="<?= $row['disc_label'] ?>" required>
             </div>
             <div class="mb-3">
-                <label for="year" class="form-label">Année</label>
-                <input type="number" class="form-control" id="year" name="year" min="1900" max="<?php echo date('Y'); ?>" placeholder="Entrez l'année" value="<?php echo $row['disc_year']; ?>" required>
+                <label for="year" class="form-label">Year</label>
+                <input type="number" class="form-control" id="year" name="year" value="<?= $row['disc_year'] ?>" required>
             </div>
             <div class="mb-3">
                 <label for="genre" class="form-label">Genre</label>
-                <input type="text" class="form-control" id="genre" name="genre" placeholder="Entrez le genre" value="<?php echo $row['disc_genre']; ?>" required>
+                <input type="text" class="form-control" id="genre" name="genre" value="<?= $row['disc_genre'] ?>" required>
             </div>
             <div class="mb-3">
                 <label for="price" class="form-label">Prix</label>
-                <input type="number" class="form-control" id="price" name="price" min="0" step="0.01" placeholder="Entrez le prix" value="<?php echo $row['disc_price']; ?>" required>
+                <input type="number" class="form-control" id="price" name="price" value="<?= $row['disc_price'] ?>" required>
             </div>
             <div class="mb-3">
-                <label for="picture" class="form-label">Jaquette</label>
+                <label for="picture" class="form-label">Jaquette (laissez vide pour conserver l'image actuelle)</label>
                 <input type="file" class="form-control" id="picture" name="picture">
             </div>
-            <button type="submit" class="btn btn-primary">Enregistrer</button>
-            <a href="details.php?id=<?php echo $row['disc_id']; ?>" class="btn btn-secondary">Annuler</a>
+            <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
         </form>
     </div>
 </body>
-
 </html>
