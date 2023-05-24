@@ -1,8 +1,8 @@
 <?php
 include 'db.php';
 
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
+if (isset($_POST['id'])) {
+    $id = $_POST['id'];
 
     // Obtenir l'artiste du disque à supprimer
     $artist_sql = "SELECT artist_id FROM disc WHERE disc_id = :id";

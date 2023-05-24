@@ -10,8 +10,8 @@ if (isset($_SESSION['user'])) {
     $role = $_SESSION['user']['role'];
 }
 
-if (isset($_POST['id'])) {
-    $id = $_POST['id'];
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
 
     $sql = "SELECT * FROM disc JOIN artist ON disc.artist_id = artist.artist_id WHERE disc_id = :id";
     $stmt = $pdo->prepare($sql);
