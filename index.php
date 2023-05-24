@@ -43,8 +43,8 @@ $count = $count_row['count'];
                         <a href="add_disc.php" class="btn btn-primary">Ajouter un Disque</a>
                     <?php } ?>
                 <?php } else { ?>
-                    <a href="#" onclick="showLoginForm()" class="btn btn-outline-primary me-2">Log in</a>
-                    <a href="#" onclick="showSignupForm()" class="btn btn-primary">Sign up</a>
+                    <a href="#" id="loginBtn" class="btn btn-outline-primary me-2">Log in</a>
+                    <a href="#" id="signupBtn" class="btn btn-primary">Sign up</a>
                 <?php } ?>
             </div>
         </div>
