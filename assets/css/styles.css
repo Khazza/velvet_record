@@ -9,3 +9,9 @@
 .modal-dialog {
     margin-top: 200px;
 }
+
+.form-container {
+    max-width: 500px;
+    margin: auto;
+    padding-top: 10%;
+}
