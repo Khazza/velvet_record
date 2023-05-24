@@ -106,7 +106,7 @@ if (isset($_GET['id'])) {
                 <a href="edit_disc.php?id=<?php echo $row['disc_id']; ?>" class="btn btn-warning">Modifier</a>
                 <button class="btn btn-danger" onclick="deleteDisc(<?php echo $row['disc_id']; ?>)">Supprimer</button>
             <?php } ?>
-            <a href="javascript:history.back()" class="btn btn-primary">Retour</a>
+            <a href="index.php" class="btn btn-primary">Retour</a>
         </div>
     </div>
     <!-- Inclusion de jQuery -->
