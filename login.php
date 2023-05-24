@@ -1,3 +1,23 @@
+<?php
+session_start();
+include('db.php');
+
+// Générer un nouveau jeton CSRF et l'enregistrer dans la variable de session
+if (!isset($_SESSION["csrf_token"])) {
+    $_SESSION["csrf_token"] = bin2hex(random_bytes(32));
+}
+
+$csrf_token = isset($_SESSION["csrf_token"]) ? $_SESSION["csrf_token"] : '';
+
+// Initialise la variable $message à une chaîne vide
+$message = '';
+
+if (isset($_GET['error'])) {
+    if ($_GET['error'] == 1) {
+        $message = 'Nom d\'utilisateur ou mot de passe incorrect';
+    }
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
