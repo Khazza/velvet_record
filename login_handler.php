@@ -23,10 +23,8 @@ $user = $stmt->fetch();
 if ($user && password_verify($_POST["password"], $user["password"])) {
     // Authentification réussie, on stocke l'utilisateur en session
     $_SESSION["user"] = $user;
-    // Redirection vers la page de confirmation de connexion
-    $_SESSION["login_success"] = "Vous êtes connecté avec succès.";
-    header("Refresh: 5; URL=index.php");
-    include('login_success.php');
+    // Redirection vers la page d'accueil avec le paramètre de requête login=success
+    header("Location: index.php?login=success");
     exit;
 } else {
     // Mauvaise combinaison nom d'utilisateur / mot de passe
@@ -34,3 +32,4 @@ if ($user && password_verify($_POST["password"], $user["password"])) {
     header("Location: login.php?error=1");
     exit;
 }
+?>
