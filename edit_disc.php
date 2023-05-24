@@ -1,8 +1,12 @@
 <?php
 include('db.php');
 session_start();
-
 $role = false;
+
+if ($_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') {
+    // Gérer la requête AJAX
+}
+
 // Vérifiez si l'utilisateur est connecté
 if (isset($_SESSION['user'])) {
     // Récupérez le nom d'utilisateur et le rôle de l'utilisateur

@@ -108,3 +108,34 @@ document.getElementById('artist').addEventListener('change', function() {
         }
     }
 });
+
+// ----------------------------------Form Edit----------------------------------
+$(document).ready(function() {
+    $('form').on('submit', function(e) {
+        e.preventDefault();
+
+        var formData = new FormData(this);
+
+        $.ajax({
+            type: 'POST',
+            url: $(this).attr('action'),
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                Swal.fire(
+                    'Succès !',
+                    'Le disque a été modifié avec succès.',
+                    'success'
+                );
+            },
+            error: function(error) {
+                Swal.fire(
+                    'Erreur !',
+                    'Une erreur s\'est produite lors de la modification du disque.',
+                    'error'
+                );
+            }
+        });
+    });
+});
