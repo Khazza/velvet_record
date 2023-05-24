@@ -28,7 +28,6 @@
 //       }
 //     });
 //   }
-
   
   function deleteDisc(id) {
     Swal.fire({
