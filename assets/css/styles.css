@@ -1,10 +1,19 @@
 .btn-primary, .btn-outline-primary {
-    background-color: #ff9ead !important; /* Remplacez #FFB6C1 par le code couleur rose pâle de votre choix */
-    border-color: #ff9ead !important; /* Assurez-vous que la couleur de la bordure correspond à la couleur de l'arrière-plan pour un look uniforme */
+    background-color: #ff9ead !important;
+    border-color: #ff9ead !important; 
+    transition: all 0.3s ease; /* Ajoute une transition pour tous les changements de style */
+
 }
 
 .btn-outline-primary {
-    color: #ffffff !important; /* Changez la couleur du texte pour les boutons avec le style outline à noir (ou à une couleur de votre choix) */
+    color: #ffffff !important; 
+}
+
+/* Ajoute une pseudo-classe :hover pour changer le style des boutons lorsqu'on passe la souris dessus */
+.btn-primary:hover, .btn-outline-primary:hover {
+    background-color: #FF69B4 !important; 
+    border-color: #FF69B4 !important;
+    color: #FFFFFF !important; /* Changer la couleur du texte en blanc lorsqu'on passe la souris dessus */
 }
 
 
