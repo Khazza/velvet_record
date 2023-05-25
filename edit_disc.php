@@ -136,14 +136,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Modifier un disque</title>
     <!-- Inclusion de Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <!-- Inclusion du fichier CSS personnalisé -->
-    <link rel="stylesheet" href="./assets/css/styles.css"> 
+    <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
+
 <body>
     <div class="container">
         <h1>Modifier un disque</h1>
@@ -157,7 +159,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <select class="form-select" id="artist" name="artist" required>
                     <option value="">Sélectionner un artiste</option>
                     <option value="add_new">Ajouter un nouvel artiste</option>
-                    <?php foreach ($artists as $artist): ?>
+                    <?php foreach ($artists as $artist) : ?>
                         <option value="<?= $artist['artist_name'] ?>" <?= $artist['artist_id'] == $row['artist_id'] ? 'selected' : '' ?>>
                             <?= $artist['artist_name'] ?>
                         </option>
@@ -184,6 +186,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="picture" class="form-label">Jaquette (laissez vide pour conserver l'image actuelle)</label>
                 <input type="file" class="form-control" id="picture" name="picture">
             </div>
+            <div id="disc-id" data-id="<?= $id ?>"></div>
             <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
         </form>
     </div>
@@ -196,4 +199,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Inclusion du script JS personnalisé -->
     <script src="./js/script.js"></script>
 </body>
+
 </html>
