@@ -1,4 +1,4 @@
-.btn-primary {
+.btn-primary .btn-outline-primary{
     background-color: #fc68b7 !important; /* Remplacez #FF1493 par le code couleur rose de votre choix */
     border-color: #fc68b7 !important; /* Assurez-vous que la couleur de la bordure correspond à la couleur de l'arrière-plan pour un look uniforme */
 }
