@@ -36,7 +36,7 @@
         } else if (result.dismiss === Swal.DismissReason.cancel) {
             Swal.fire(
                 'Annulé',
-                'Le disque est sûr :)',
+                'Le disque safe ! :)',
                 'error'
             );
         }
