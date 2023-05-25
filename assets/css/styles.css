@@ -95,22 +95,4 @@
 }
 
 /* ------------------------------------------------- */
-/* Style pour le compteur de disques */
-.counter-style {
-    color: #6e0a19; /* Change la couleur du texte du compteur */
-    font-weight: bold; /* Rend le texte du compteur en gras */
-    font-size: 1.2em; /* Augmente la taille du texte du compteur */
-    padding: 10px; /* Ajoute un espace autour du texte */
-    border: 2px solid #f8f9fa; /* Ajoute une bordure autour du compteur */
-    border-radius: 5px; /* Arrondit les coins de la bordure */
-    transition: all 0.5s ease; /* Ajoute une transition pour tous les changements de style */
-}
-
-.counter-style:hover {
-    color: #4b0711; /* Change la couleur du texte lorsqu'on passe la souris dessus */
-    background-color: #f8f9fa; /* Change la couleur de fond lorsqu'on passe la souris dessus */
-    border-color: #4b0711; /* Change la couleur de la bordure lorsqu'on passe la souris dessus */
-    transform: scale(1.1); /* Augmente la taille du compteur lorsqu'on passe la souris dessus */
-}
-
 
