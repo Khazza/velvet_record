@@ -1,6 +1,10 @@
-.btn-primary .btn-outline-primary{
-    background-color: #fc68b7 !important; /* Remplacez #FF1493 par le code couleur rose de votre choix */
-    border-color: #fc68b7 !important; /* Assurez-vous que la couleur de la bordure correspond à la couleur de l'arrière-plan pour un look uniforme */
+.btn-primary, .btn-outline-primary {
+    background-color: #FFB6C1 !important; /* Remplacez #FFB6C1 par le code couleur rose pâle de votre choix */
+    border-color: #FFB6C1 !important; /* Assurez-vous que la couleur de la bordure correspond à la couleur de l'arrière-plan pour un look uniforme */
+}
+
+.btn-outline-primary {
+    color: #000000 !important; /* Changez la couleur du texte pour les boutons avec le style outline à noir (ou à une couleur de votre choix) */
 }
 
 
@@ -68,7 +72,7 @@
 .disc-card .card-body .card-title {
     font-size: 1.5rem;
     font-weight: 500;
-    color: #fc68b7; /* Couleur du titre */
+    color: #FFB6C1; /* Couleur du titre */
 }
 .disc-card .card-body .card-text {
     font-size: 1rem;
