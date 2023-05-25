@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     if (login === 'success') {
         Swal.fire({
             title: 'Connecté avec succès!',
-            text: 'Bienvenue dans votre compte.',
+            text: 'Bienvenue!',
             icon: 'success',
             confirmButtonText: 'Cool'
         }).then(() => {
