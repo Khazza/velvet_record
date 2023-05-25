@@ -95,4 +95,10 @@
 }
 
 /* ------------------------------------------------- */
+/* Style pour le compteur de disques */
+.counter-style {
+    color: #f8f9fa; /* Change la couleur du texte du compteur */
+    font-weight: bold; /* Rend le texte du compteur en gras */
+    font-size: 1.2em; /* Augmente la taille du texte du compteur */
+}
 
