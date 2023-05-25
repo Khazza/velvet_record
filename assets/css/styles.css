@@ -104,4 +104,6 @@
 .card .card-body .btn-primary {
     font-size: 1rem;
     padding: .375rem .75rem;
+    margin-bottom: 10px; /* Ajoute une marge de 10px en bas du bouton */
+
 }
