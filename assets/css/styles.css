@@ -2,6 +2,7 @@
     background-color: #ff9ead !important;
     border-color: #ff9ead !important; 
     transition: all 0.3s ease; /* Ajoute une transition pour tous les changements de style */
+    color: #ffffff !important; /* Changer la couleur du texte en blanc */
 }
 
 .btn-outline-primary {
@@ -14,6 +15,7 @@
     border-color: #FF69B4 !important;
     color: #FFFFFF !important; /* Changer la couleur du texte en blanc lorsqu'on passe la souris dessus */
 }
+
 
 
 .card-text {
