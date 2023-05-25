@@ -117,6 +117,9 @@ $(document).ready(function() {
         var form = $(this);
         var formData = new FormData(form[0]);
 
+        // Récupérer l'ID du disque depuis l'attribut data
+        var discId = $('#disc-id').data('id');
+
         $.ajax({
             url: form.attr('action'),
             type: form.attr('method'),
@@ -132,7 +135,7 @@ $(document).ready(function() {
                     timer: 1500
                 }).then(function() {
                     // Redirection vers la page de détails du disque
-                    window.location.href = 'details.php?id=' + id;
+                    window.location.href = 'details.php?id=' + discId;
                 });
             },
             error: function(xhr, status, error) {
@@ -147,5 +150,6 @@ $(document).ready(function() {
         });
     });
 });
+
 
 
