@@ -12,7 +12,7 @@
         if (result.isConfirmed) {
             // Effectuez la requête de suppression ici
             $.ajax({
-                url: 'delete_disc.php',  // URL vers votre script PHP pour supprimer le disque
+                url: 'delete_disc.php',  // URL vers script PHP pour supprimer le disque
                 type: 'POST',
                 data: {id: id},
                 success: function() {
@@ -112,12 +112,12 @@ document.getElementById('artist').addEventListener('change', function() {
 // ----------------------------------Form Edit----------------------------------
 $(document).ready(function() {
     $('form').submit(function(e) {
-        e.preventDefault(); // Empêche la soumission normale du formulaire
+        e.preventDefault(); 
 
         var form = $(this);
         var formData = new FormData(form[0]);
 
-        // Récupérer l'ID du disque depuis l'attribut data
+        // Récupérer l'ID du disque
         var discId = $('#disc-id').data('id');
 
         $.ajax({

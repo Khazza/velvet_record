@@ -47,13 +47,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $genre = $_POST['genre'];
     $price = $_POST['price'];
 
-    // Check if artist exists or needs to be added
+    // Verifie si l'artiste existe ou s'il a besoin d'être ajouter
     $artist_stmt = $pdo->prepare("SELECT * FROM artist WHERE artist_name = :artist");
     $artist_stmt->execute([':artist' => $artist]);
     $artist_row = $artist_stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$artist_row) {
-        // L'artiste n'existe pas, ajoutez-le à la base de données
+        // L'artiste n'existe pas, on l'ajoute
         $new_artist_stmt = $pdo->prepare("INSERT INTO artist (artist_name) VALUES (:artist)");
         $new_artist_stmt->execute([':artist' => $artist]);
         $artist = $pdo->lastInsertId();
@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $dst = imagecreatetruecolor($newWidth, $newHeight);
 
-            // Création de l'image redimensionnée en fonction du type de l'image originale
+            // Création de l'image redimensionnée
             $src = null;
             switch ($imageSize[2]) {
                 case IMAGETYPE_GIF:
@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             imagedestroy($src);
             imagedestroy($dst);
         } else {
-            // Si l'image est plus petite que la taille maximale, déplacez-la simplement vers le répertoire d'upload
+            // Si l'image est plus petite que la taille maximale, on l'upload direct
             move_uploaded_file($tmpFilePath, $newFilePath);
         }
     } else {

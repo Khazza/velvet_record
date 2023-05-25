@@ -19,12 +19,12 @@ $price = $_POST['price'];
 
 // Vérification si un nouvel artiste est ajouté
 if (!empty($newArtist)) {
-    // Insertion du nouvel artiste dans la table artist
+    // Insertion du nouvel artiste
     $insertArtistSql = "INSERT INTO artist (artist_name) VALUES (:artist_name)";
     $insertArtistStmt = $pdo->prepare($insertArtistSql);
     $insertArtistStmt->execute(['artist_name' => $newArtist]);
 
-    // Récupération de l'ID du nouvel artiste ajouté
+    // Récupération de l'ID du nouvel artiste
     $artistId = $pdo->lastInsertId();
 } else {
     $artistId = $artist;
@@ -80,7 +80,7 @@ if ($_FILES['file']['name']) {
         'picture' => $filename
     ]);
 
-    // Redirection vers la page d'accueil ou une autre page de confirmation
+    // Redirection vers la page d'accueil
     header('Location: index.php');
     exit();
 }
