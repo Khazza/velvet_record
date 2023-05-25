@@ -1,3 +1,9 @@
+.btn-primary {
+    background-color: #fc68b7 !important; /* Remplacez #FF1493 par le code couleur rose de votre choix */
+    border-color: #fc68b7 !important; /* Assurez-vous que la couleur de la bordure correspond à la couleur de l'arrière-plan pour un look uniforme */
+}
+
+
 .card-text {
     font-size: 14px;
 }
@@ -62,7 +68,7 @@
 .disc-card .card-body .card-title {
     font-size: 1.5rem;
     font-weight: 500;
-    color: #007BFF; /* Couleur du titre */
+    color: #fc68b7; /* Couleur du titre */
 }
 .disc-card .card-body .card-text {
     font-size: 1rem;
