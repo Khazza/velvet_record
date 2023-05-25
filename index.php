@@ -36,7 +36,7 @@ $count = $count_row['count'];
                 Liste des disques (<span class="counter-style"><?php echo $count; ?></span>)
             </a>
             <div class="ml-auto">
-            <?php if (isset($_SESSION['user'])) { ?>
+                <?php if (isset($_SESSION['user'])) { ?>
                     <span class="navbar-text me-2">Bonjour, <?php echo $username; ?></span>
                     <a href="logout.php" class="btn btn-outline-primary me-2">Logout</a>
                     <?php if ($role === 'admin') { ?>
@@ -105,7 +105,7 @@ $count = $count_row['count'];
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             ?>
                 <div class="col-md-6">
-                    <div class="card mb-3 border border-0">
+                    <div class="card mb-3 border border-0 disc-card">
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <img src="src/img/jaquettes/<?= $row['disc_picture']; ?>" class="card-img-top" alt="Jaquette">
@@ -145,14 +145,14 @@ $count = $count_row['count'];
     <script src="./js/script.js"></script>
 
     <script>
-    var register_success = <?php echo json_encode($_SESSION['register_success'] ?? null); ?>;
-    <?php
-    if (isset($_SESSION['register_success'])) {
-        unset($_SESSION['register_success']);
-    }
-    ?>
+        var register_success = <?php echo json_encode($_SESSION['register_success'] ?? null); ?>;
+        <?php
+        if (isset($_SESSION['register_success'])) {
+            unset($_SESSION['register_success']);
+        }
+        ?>
     </script>
-    
+
 </body>
 
 </html>

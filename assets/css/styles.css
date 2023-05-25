@@ -20,56 +20,22 @@
 }
 
 
-/* Styling l'historique */
-.card-body {
-    background-color: #f8f9fa;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-}
-
-.card-body:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
-/* Styling des textes de l'historique */
-.card-body .card-text {
-    font-size: 14px;
-    color: #343a40;
-}
-
-/* Styling des images de l'historique */
-.card-body .card-img-top {
-    border-radius: 15px;
-}
-
-/* Styling du titre de l'historique */
-.card-title {
-    color: #343a40;
-    font-size: 18px;
-    text-align: center;
-}
-
 /* styles.css */
 
 /* Styling les cartes de disques */
-.card {
+.disc-card {
     border: none;
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.2s;
 }
-
-.card:hover {
+.disc-card:hover {
     transform: scale(1.03);
 }
-
-.card .row .col-md-4 {
+.disc-card .row .col-md-4 {
     position: relative;
 }
-
-.card .row .col-md-4::after {
+.disc-card .row .col-md-4::after {
     content: '';
     display: block;
     position: absolute;
@@ -80,30 +46,24 @@
     background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%);
     z-index: 1;
 }
-
-.card .row .col-md-4 img {
+.disc-card .row .col-md-4 img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-
-.card .card-body {
+.disc-card .card-body {
     position: relative;
     z-index: 2;
 }
-
-.card .card-body .card-title {
+.disc-card .card-body .card-title {
     font-size: 1.5rem;
     font-weight: 500;
 }
-
-.card .card-body .card-text {
+.disc-card .card-body .card-text {
     font-size: 1rem;
 }
-
-.card .card-body .btn-primary {
+.disc-card .card-body .btn-primary {
     font-size: 1rem;
     padding: .375rem .75rem;
     margin-bottom: 10px; /* Ajoute une marge de 10px en bas du bouton */
-
 }
