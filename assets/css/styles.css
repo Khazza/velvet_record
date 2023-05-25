@@ -11,9 +11,9 @@
 }
 
 .form-container {
-    max-width: 400px; /* Réduisez la taille maximale du formulaire */
+    max-width: 400px; /* Réduis la taille maximale du formulaire */
     margin: auto;
-    position: absolute; /* Positionnement absolu pour le centrage vertical */
+    position: absolute;
     top: 50%; /* Centrage vertical */
     left: 50%; /* Centrage horizontal */
     transform: translate(-50%, -50%); /* Centrage fin */

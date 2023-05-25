@@ -45,9 +45,7 @@ if (isset($_GET['id'])) {
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light py-0">
         <div class="container">
-            <a class="navbar-brand fs-1 fw-bold">
-                Détails
-            </a>
+            <a class="navbar-brand fs-1 fw-bold">Détails</a>
             <div class="ml-auto">
                 <?php if (isset($_SESSION['user'])) { ?>
                     <span class="navbar-text me-2">Bonjour, <?php echo $username; ?></span>

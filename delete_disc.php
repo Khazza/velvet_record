@@ -21,7 +21,7 @@ if (isset($_POST['id'])) {
     $disc_stmt = $pdo->prepare($disc_sql);
     $disc_stmt->execute(['id' => $id]);
 
-    // Si l'artiste n'a pas d'autres disques, le supprimer également
+    // Si l'artiste n'a pas d'autres disques, le supprimer
     if ($count == 1) {
         $artist_sql = "DELETE FROM artist WHERE artist_id = :artist_id";
         $artist_stmt = $pdo->prepare($artist_sql);

@@ -58,7 +58,7 @@ $count = $count_row['count'];
                         <h5 class="card-title text-center">Ajoutés récemment :</h5>
                         <div class="row d-flex justify-content-center">
                             <?php
-                            // Requête SQL pour sélectionner les 5 derniers enregistrements de la table disc
+                            // Requête SQL pour sélectionner les 5 derniers de la table disc
                             $history_sql = "SELECT * 
                         FROM disc
                         JOIN artist ON disc.artist_id = artist.artist_id

@@ -34,7 +34,7 @@ if ($user) {
     exit();
 }
 
-// Si des erreurs ont été détectées, retourner sur la page signup.php
+// Si des erreurs ont été détectées, redirection signup.php
 if (!empty($_SESSION['errors'])) {
     header("Location: signup.php");
     exit();
@@ -44,7 +44,7 @@ if (!empty($_SESSION['errors'])) {
 $stmt = $pdo->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
 $stmt->execute([$_POST['username'], password_hash($_POST['password'], PASSWORD_DEFAULT)]);
 
-// Récupérer l'utilisateur fraîchement inscrit et le connecter
+// Récupérer l'utilisateur inscrit et le connecter
 $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
 $stmt->execute([$_POST['username']]);
 $user = $stmt->fetch();
@@ -52,7 +52,7 @@ $user = $stmt->fetch();
 if ($user) {
     $_SESSION["user"] = $user;
     $_SESSION["register_success"] = "Inscription réussie! Vous êtes maintenant connecté.";
-    header("Location: index.php");  // Rediriger vers l'index
+    header("Location: index.php");
     exit();
 } else {
     $_SESSION["errors"][] = "Erreur lors de l'inscription. Veuillez réessayer.";
