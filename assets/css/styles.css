@@ -1,42 +1,46 @@
-/* styles.css */
-
-/* Styling la navbar */
-.navbar {
-    background-color: #6e0a19; /* Couleur de fond de la navbar */
-    border: none; /* Enlève la bordure de la navbar */
-}
-.navbar-brand, .navbar-text {
-    color: #ffffff; /* Couleur du texte dans la navbar */
-}
-.navbar .btn-outline-primary {
-    color: #ffffff; /* Couleur du texte du bouton dans la navbar */
-    border-color: #ffffff; /* Couleur de la bordure du bouton dans la navbar */
-}
-.navbar .btn-primary {
-    background-color: #4b0711; /* Couleur de fond du bouton dans la navbar */
-    border-color: #4b0711; /* Couleur de la bordure du bouton dans la navbar */
-}
-.navbar .btn-outline-primary:hover, .navbar .btn-primary:hover {
-    background-color: #ffffff; /* Couleur de fond du bouton dans la navbar lorsqu'on passe la souris dessus */
-    color: #6e0a19; /* Couleur du texte du bouton dans la navbar lorsqu'on passe la souris dessus */
-    border-color: #ffffff; /* Couleur de la bordure du bouton dans la navbar lorsqu'on passe la souris dessus */
-}
-
-/* Styling les boutons */
 .btn-primary, .btn-outline-primary, .btn-warning, .btn-danger {
     background-color: #6e0a19 !important;
-    border-color: #6e0a19 !important;
+    border-color: #6e0a19 !important; 
     transition: all 0.3s ease; /* Ajoute une transition pour tous les changements de style */
     color: #ffffff !important; /* Changer la couleur du texte en blanc */
 }
+
 .btn-outline-primary {
-    color: #ffffff !important;
+    color: #ffffff !important; 
 }
+
+/* Ajoute une pseudo-classe :hover pour changer le style des boutons lorsqu'on passe la souris dessus */
 .btn-primary:hover, .btn-outline-primary:hover, .btn-warning:hover, .btn-danger:hover {
-    background-color: #4b0711 !important;
+    background-color: #4b0711 !important; 
     border-color: #4b0711 !important;
     color: #FFFFFF !important; /* Changer la couleur du texte en blanc lorsqu'on passe la souris dessus */
 }
+
+
+
+.card-text {
+    font-size: 14px;
+}
+
+.card-title {
+    font-size: 18px;
+}
+
+.modal-dialog {
+    margin-top: 200px;
+}
+
+.form-container {
+    max-width: 400px; /* Réduis la taille maximale du formulaire */
+    margin: auto;
+    position: absolute;
+    top: 50%; /* Centrage vertical */
+    left: 50%; /* Centrage horizontal */
+    transform: translate(-50%, -50%); /* Centrage fin */
+}
+
+
+/* styles.css */
 
 /* Styling les cartes de disques */
 .disc-card {
@@ -90,25 +94,5 @@
     margin-bottom: 10px; /* Ajoute une marge de 10px en bas du bouton */
 }
 
-/* Styling le texte de la carte */
-.card-text {
-    font-size: 14px;
-}
-.card-title {
-    font-size: 18px;
-}
+/* ------------------------------------------------- */
 
-/* Styling le dialogue modal */
-.modal-dialog {
-    margin-top: 200px;
-}
-
-/* Styling le conteneur du formulaire */
-.form-container {
-    max-width: 400px; /* Réduis la taille maximale du formulaire */
-    margin: auto;
-    position: absolute;
-    top: 50%; /* Centrage vertical */
-    left: 50%; /* Centrage horizontal */
-    transform: translate(-50%, -50%); /* Centrage fin */
-}
