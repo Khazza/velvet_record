@@ -61,7 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $artist = $artist_row['artist_id'];
     }
 
-    // Continuer avec le reste du code ...
     // Vérification si un fichier image a été téléchargé
     if (!empty($_FILES['picture']['name'])) {
 
@@ -133,6 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 ?>
+
 
 <!DOCTYPE html>
 <html>
