@@ -53,9 +53,9 @@ $count = $count_row['count'];
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card mb-3 border-0 history-card">
+                <div class="card mb-3 border-0">
                     <div class="card-body">
-                        <h5 class="card-title history-card-title">Ajoutés récemment :</h5>
+                        <h5 class="card-title text-center">Ajoutés récemment :</h5>
                         <div class="row d-flex justify-content-center">
                             <?php
                             // Requête SQL pour sélectionner les 5 derniers de la table disc
@@ -69,14 +69,14 @@ $count = $count_row['count'];
                             // Boucle pour afficher les enregistrements de l'historique
                             while ($history_row = $history_stmt->fetch(PDO::FETCH_ASSOC)) {
                             ?>
-                                <div class="col-md-2 text-center history-card-col">
-                                    <img src="src/img/jaquettes/<?= $history_row['disc_picture']; ?>" class="card-img-top history-card" alt="Jaquette" style="max-width: 50px;">
+                                <div class="col-md-2 text-center">
+                                    <img src="src/img/jaquettes/<?= $history_row['disc_picture']; ?>" class="card-img-top" alt="Jaquette" style="max-width: 50px;">
                                     <div class="mt-2">
-                                        <span class="card-text history-card">
+                                        <span class="card-text">
                                             <span class="fw-bold">Titre:</span><br>
                                             <?php echo $history_row['disc_title']; ?>
                                         </span><br>
-                                        <span class="card-text history-card">
+                                        <span class="card-text">
                                             <span class="fw-bold">Artiste:</span><br>
                                             <?php echo $history_row['artist_name']; ?>
                                         </span>
