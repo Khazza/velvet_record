@@ -1,51 +1,48 @@
 // -------------------------Supression disc-------------------------
-  function deleteDisc(id) {
+function deleteDisc(id) {
     Swal.fire({
         title: 'Êtes-vous sûr?',
         text: "Vous ne pourrez pas revenir en arrière!",
         icon: 'warning',
         showCancelButton: true,
+        confirmButtonColor: '#ff9ead', // couleur de bouton confirmer
+        cancelButtonColor: '#FF69B4', // couleur de bouton annuler
         confirmButtonText: 'Oui, supprimer!',
         cancelButtonText: 'Non, annuler!',
         reverseButtons: true
     }).then((result) => {
-        if (result.isConfirmed) {
-            // Effectuez la requête de suppression ici
-            $.ajax({
-                url: 'delete_disc.php',  // URL vers script PHP pour supprimer le disque
-                type: 'POST',
-                data: {id: id},
-                success: function() {
-                    Swal.fire(
-                        'Supprimé!',
-                        'Le disque a été supprimé.',
-                        'success'
-                    ).then(() => {
-                        // Redirigez l'utilisateur vers une autre page après la suppression
-                        window.location.href = 'index.php';
-                    });
-                },
-                error: function() {
-                    Swal.fire(
-                        'Erreur!',
-                        'Une erreur s\'est produite lors de la suppression du disque.',
-                        'error'
-                    );
-                }
-            });
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
-            Swal.fire(
-                'Annulé',
-                'Le disque safe ! :)',
-                'error'
-            );
-        }
+        // Effectuez la requête de suppression ici
+        $.ajax({
+            url: 'delete_disc.php',  // URL vers script PHP pour supprimer le disque
+            type: 'POST',
+            data: {id: id},
+            success: function() {
+                Swal.fire(
+                    'Supprimé!',
+                    'Le disque a été supprimé.',
+                    'success'
+                ).then(() => {
+                    // Redirigez l'utilisateur vers une autre page après la suppression
+                    window.location.href = 'index.php';
+                });
+            },
+            error: function() {
+                Swal.fire(
+                    'Erreur!',
+                    'Une erreur s\'est produite lors de la suppression du disque.',
+                    'error'
+                );
+            }
+        });
+    }).catch(() => {
+        Swal.fire(
+            'Annulé',
+            'Le disque safe ! :)',
+            'error'
+        );
     });
 }
 
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
 // ----------------------------------Login------------------------------------
 document.addEventListener('DOMContentLoaded', (event) => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -56,6 +53,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             title: 'Connecté avec succès!',
             text: 'Bienvenue!',
             icon: 'success',
+            confirmButtonColor: '#ff9ead', // couleur de bouton confirmer
             confirmButtonText: 'Cool'
         }).then(() => {
             history.replaceState(null, '', 'index.php');
@@ -73,6 +71,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             title: 'Déconnecté avec succès!',
             text: 'Vous avez été déconnecté de votre compte.',
             icon: 'success',
+            confirmButtonColor: '#ff9ead', // couleur de bouton confirmer
             confirmButtonText: 'Cool'
         }).then(() => {
             history.replaceState(null, '', 'index.php');
@@ -86,7 +85,8 @@ $(document).ready(function() {
         Swal.fire(
             'Inscription réussie !',
             register_success,
-            'success'
+            'success',
+            { confirmButtonColor: '#ff9ead' } // couleur de bouton confirmer
         ).then(() => {
             history.replaceState(null, '', 'index.php');
         });
@@ -132,7 +132,8 @@ $(document).ready(function() {
                     icon: 'success',
                     title: 'Modifications enregistrées',
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 1500,
+                    confirmButtonColor: '#ff9ead' // couleur de bouton confirmer
                 }).then(function() {
                     // Redirection vers la page de détails du disque
                     window.location.href = 'details.php?id=' + discId;
@@ -144,11 +145,10 @@ $(document).ready(function() {
                     icon: 'error',
                     title: 'Erreur',
                     text: 'Une erreur s\'est produite lors de l\'enregistrement des modifications.',
+                    confirmButtonColor: '#ff9ead', // couleur de bouton confirmer
                     confirmButtonText: 'OK'
                 });
             }
         });
     });
 });
-
-
