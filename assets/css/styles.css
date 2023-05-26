@@ -1,19 +1,19 @@
 .btn-primary, .btn-outline-primary, .btn-warning, .btn-danger {
-    background-color: #6e0a19 !important;
-    border-color: #6e0a19 !important; 
+    background-color: #6e0a19 ;
+    border-color: #6e0a19 ; 
     transition: all 0.3s ease; /* Ajoute une transition pour tous les changements de style */
-    color: #ffffff !important; /* Changer la couleur du texte en blanc */
+    color: #ffffff ; 
 }
 
 .btn-outline-primary {
-    color: #ffffff !important; 
+    color: #ffffff ; 
 }
 
-/* Ajoute une pseudo-classe :hover pour changer le style des boutons lorsqu'on passe la souris dessus */
+/* Ajoute une pseudo-classe :hover des boutons lorsqu'on passe la souris dessus */
 .btn-primary:hover, .btn-outline-primary:hover, .btn-warning:hover, .btn-danger:hover {
-    background-color: #4b0711 !important; 
-    border-color: #4b0711 !important;
-    color: #FFFFFF !important; /* Changer la couleur du texte en blanc lorsqu'on passe la souris dessus */
+    background-color: #4b0711 ; 
+    border-color: #4b0711 ;
+    color: #FFFFFF ; 
 }
 
 
@@ -40,9 +40,7 @@
 }
 
 
-/* styles.css */
-
-/* Styling les cartes de disques */
+/* Style cartes de disques */
 .disc-card {
     border: none;
     border-radius: 10px;
