@@ -24,6 +24,7 @@ $count = $count_row['count'];
     <title>Liste des disques</title>
     <!-- Inclusion de Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <!-- Inclusion du fichier CSS personnalisé -->
     <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
@@ -31,10 +32,10 @@ $count = $count_row['count'];
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light py-0">
-        <div class="container">
-            <a class="navbar-brand fs-1 fw-bold">
-                Liste des disques (<span class="counter-style"><?php echo $count; ?></span>)
-            </a>
+    <div class="container">
+        <a class="navbar-brand fs-1 fw-bold">
+            <i class="fas fa-compact-disc"></i> <span class="counter-style"><?php echo $count; ?></span>
+        </a>
             <div class="ml-auto">
                 <?php if (isset($_SESSION['user'])) { ?>
                     <span class="navbar-text me-2">Bonjour, <?php echo $username; ?></span>
