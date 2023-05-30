@@ -16,8 +16,8 @@
     color: #FFFFFF ; 
 }
 
-
-
+/* ---------------------------------------- */
+/* CARDS */
 .card-text {
     font-size: 14px;
 }
@@ -38,7 +38,6 @@
     left: 50%; /* Centrage horizontal */
     transform: translate(-50%, -50%); /* Centrage fin */
 }
-
 
 /* Style cartes de disques */
 .disc-card {
@@ -240,4 +239,30 @@
 .history-card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     transform: scale(1.03);
+}
+
+
+
+
+
+.navbar {
+    background-color: #f8f9fa; /* changez cela à votre couleur préférée */
+    border-bottom: 1px solid #ddd; /* ajoute une bordure en bas */
+    font-family: Arial, sans-serif; /* changez cela à votre police préférée */
+}
+.navbar-brand {
+    color: #6e0a19; /* changez cela à votre couleur préférée */
+    letter-spacing: 1px; /* ajoute un espacement entre les lettres */
+    text-transform: uppercase; /* rend toutes les lettres en majuscules */
+}
+.navbar-text {
+    color: #6e0a19; /* changez cela à votre couleur préférée */
+    letter-spacing: 1px; /* ajoute un espacement entre les lettres */
+}
+.navbar a {
+    color: #6e0a19; /* changez cela à votre couleur préférée */
+    transition: color 0.3s ease; /* ajoute une transition à la couleur du texte */
+}
+.navbar a:hover {
+    color: #4b0711; /* changez cela à votre couleur préférée lorsque vous passez la souris dessus */
 }
