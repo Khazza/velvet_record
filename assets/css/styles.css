@@ -147,6 +147,8 @@
 .history-content .disc-title {
     font-size: 0.85rem;
     color: #6e0a19;  /* Couleur de texte pour le titre du disque */
+    font-weight: bold;
+    
 }
 
 .history-content .artist-name {
