@@ -249,7 +249,9 @@
     font-family: Arial, sans-serif;
 }
 .navbar-brand {
-    color: #6e0a19; /* changez cela à votre couleur préférée */
     letter-spacing: 1px; /* ajoute un espacement entre les lettres */
     text-transform: uppercase; /* rend toutes les lettres en majuscules */
+}
+.titre-navbar:hover {
+    color: #000000;
 }
