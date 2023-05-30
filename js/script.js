@@ -1,12 +1,14 @@
 // -------------------------Supression disc-------------------------
-  function deleteDisc(id) {
+function deleteDisc(id) {
     Swal.fire({
         title: 'Êtes-vous sûr?',
         text: "Vous ne pourrez pas revenir en arrière!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Oui, supprimer!',
+        confirmButtonColor: '#6e0a19',
         cancelButtonText: 'Non, annuler!',
+        cancelButtonColor: '#a41930',
         reverseButtons: true
     }).then((result) => {
         if (result.isConfirmed) {
@@ -53,7 +55,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
             title: 'Connecté avec succès!',
             text: 'Bienvenue!',
             icon: 'success',
-            confirmButtonText: 'Cool'
+            confirmButtonText: 'Cool',
+            confirmButtonColor: '#6e0a19'
         }).then(() => {
             history.replaceState(null, '', 'index.php');
         })
@@ -70,7 +73,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
             title: 'Déconnecté avec succès!',
             text: 'Vous avez été déconnecté de votre compte.',
             icon: 'success',
-            confirmButtonText: 'Cool'
+            confirmButtonText: 'Cool',
+            confirmButtonColor: '#6e0a19'
         }).then(() => {
             history.replaceState(null, '', 'index.php');
         })
@@ -83,7 +87,10 @@ $(document).ready(function() {
         Swal.fire(
             'Inscription réussie !',
             register_success,
-            'success'
+            'success',
+            {
+                confirmButtonColor: '#6e0a19'
+            }
         ).then(() => {
             history.replaceState(null, '', 'index.php');
         });
@@ -129,7 +136,8 @@ $(document).ready(function() {
                     icon: 'success',
                     title: 'Modifications enregistrées',
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 1500,
+                    confirmButtonColor: '#6e0a19'
                 }).then(function() {
                     // Redirection vers la page de détails du disque
                     window.location.href = 'details.php?id=' + discId;
@@ -141,7 +149,8 @@ $(document).ready(function() {
                     icon: 'error',
                     title: 'Erreur',
                     text: 'Une erreur s\'est produite lors de l\'enregistrement des modifications.',
-                    confirmButtonText: 'OK'
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#6e0a19'
                 });
             }
         });
