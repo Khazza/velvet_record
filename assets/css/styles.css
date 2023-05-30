@@ -121,17 +121,6 @@
 
 .history-content img {
     border-radius: 50%;
-}
-
-.history-content .card-text {
-    color: #343a40;
-}
-
-.history-content .fw-bold {
-    color: #6e0a19;
-}
-
-.history-content img {
     /* Réduction de la taille maximale de l'image de 50px à 40px */
     max-width: 40px;
 }
@@ -139,16 +128,17 @@
 .history-content .card-text {
     /* Réduction de la taille de la police de 1rem (16px) à 0.75rem (12px) */
     font-size: 0.75rem;
+    color: #343a40;
 }
-.history-content img {
-    max-width: 50px;
+
+.history-content .fw-bold {
+    color: #6e0a19;
 }
 
 .history-content .disc-title {
     font-size: 0.85rem;
     color: #6e0a19;  /* Couleur de texte pour le titre du disque */
-    font-weight: bold;
-    
+    font-weight: bold; 
 }
 
 .history-content .artist-name {
