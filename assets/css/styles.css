@@ -291,3 +291,27 @@
   letter-spacing: 1px;
   text-transform: uppercase; /* rend toutes les lettres en majuscules */
 }
+
+/* -----------------------Add_discs------------------*/
+.add-disc-card {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.add-disc-card-header {
+    background-color: #007bff;
+    color: white;
+}
+
+.add-disc-card-title {
+    margin-bottom: 0;
+}
+
+.add-disc-btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.add-disc-btn:hover {
+    background-color: #0056b3;
+    color: white;
+}
