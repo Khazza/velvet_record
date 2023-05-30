@@ -212,6 +212,27 @@
 /* ------------------------------------------------- */
 /* ------------------------------------------------- */
 /* ------------------------------------------------- */
+/* Style pour la carte du titre d'historique */
+.history-title-card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s;
+    background-color: #f8f9fa; /* Couleur de fond de la carte */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Ombre de la carte */
+}
+.history-title-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); /* Ombre plus grande lors du survol */
+}
+.history-title-card .card-body {
+    padding: 20px; /* Plus d'espacement à l'intérieur de la carte */
+}
+.history-title-card .card-body .history-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #6e0a19; /* Couleur du titre */
+}
 
 
 .history-card-body img {
