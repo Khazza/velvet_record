@@ -33,7 +33,10 @@ $count = $count_row['count'];
     <nav class="navbar navbar-expand-lg navbar-light bg-light py-0">
         <div class="container">
             <a class="navbar-brand fs-1 fw-bold">
-                Liste des disques <span class="badge bg-secondary"><?php echo $count; ?></span>
+                Liste des disques
+                <div class="info-bubble">
+                    <?php echo $count; ?>
+                </div>
             </a>
             <div class="ml-auto">
                 <?php if (isset($_SESSION['user'])) { ?>
