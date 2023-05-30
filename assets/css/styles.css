@@ -291,37 +291,3 @@
   letter-spacing: 1px;
   text-transform: uppercase; /* rend toutes les lettres en majuscules */
 }
-
-/* -----------------------Add_discs------------------*/
-.add-disc-card {
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-}
-
-.add-disc-card-header {
-    background-color: #6e0a19;
-    color: white;
-}
-
-.add-disc-card-title {
-    margin-bottom: 0;
-}
-
-.add-disc-card .card-body {
-    padding: 20px;
-}
-
-.add-disc-btn {
-    background-color: #6e0a19;
-    color: white;
-}
-
-.add-disc-btn:hover {
-    background-color: #6e0a19;
-    color: white;
-}
-
-.btn-container {
-    display: flex;
-    justify-content: space-between;
-}
-
