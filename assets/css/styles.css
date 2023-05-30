@@ -208,3 +208,34 @@
     100% { transform: rotate(360deg); }
 }
 
+
+/* ------------------------------------------------- */
+/* ------------------------------------------------- */
+/* ------------------------------------------------- */
+
+
+.history-card-body img {
+    transition: transform 0.2s;
+}
+.history-card-body img:hover {
+    transform: scale(1.1);
+}
+.history-card-body:hover {
+    background-color: #e9ecef; /* Changez cette couleur comme vous le souhaitez */
+}
+.disc-title:hover, .artist-name:hover {
+    color: #dc3545; /* Changez cette couleur comme vous le souhaitez */
+    cursor: pointer;
+}
+.history-card-body .col-md-2 {
+    border: 1px solid #ccc;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 5px;
+}
+.history-card-body .col-md-2 {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+.history-card-body .col-md-2:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
