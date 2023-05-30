@@ -160,10 +160,8 @@
     background-color: #f8f9fa;
     color: #6e0a19;
     border-radius: 50%;
-    padding: 5px 10px; /* augmentation de l'espacement interne pour donner plus de place au texte */
-    font-size: 0.9rem; /* augmentation de la taille du texte pour le rendre plus lisible */
+    font-size: 2.2rem; /* augmentation de la taille du texte pour le rendre plus lisible */
     font-weight: bold;
-    margin: 0 10px; /* ajout de marge pour donner plus d'espace autour du compteur */
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease, color 0.3s ease; /* transition pour rendre le changement de couleur plus doux */
 }
