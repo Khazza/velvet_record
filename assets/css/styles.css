@@ -1,296 +1,94 @@
-.btn-primary, .btn-outline-primary, .btn-warning, .btn-danger {
-    background-color: #6e0a19 ;
-    border-color: #6e0a19 ; 
-    transition: all 0.3s ease; /* Ajoute une transition pour tous les changements de style */
-    color: #ffffff ; 
+:root {
+    --primary-color: #6e0a19;
+    --secondary-color: #f8f9fa;
+    --hover-color: #dc3545;
+    --font-color: #333;
+    --font-color-bold: #6e0a19;
+    --font-size-small: 0.75rem;
+    --font-size-medium: 0.85rem;
+    --font-size-large: 1rem;
+    --font-size-xlarge: 1.5rem;
 }
 
-.btn-outline-primary {
-    color: #ffffff ; 
+.btn-primary, .btn-outline-primary, .btn-warning, .btn-danger, .swal2-popup .swal2-actions .swal2-confirm {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    transition: all 0.3s ease;
+    color: #ffffff;
 }
 
-/* Ajoute une pseudo-classe :hover des boutons lorsqu'on passe la souris dessus */
-.btn-primary:hover, .btn-outline-primary:hover, .btn-warning:hover, .btn-danger:hover {
-    background-color: #4b0711 ; 
-    border-color: #4b0711 ;
-    color: #FFFFFF ; 
+.btn-primary:hover, .btn-outline-primary:hover, .btn-warning:hover, .btn-danger:hover, .swal2-popup .swal2-actions .swal2-confirm:hover {
+    background-color: var(--hover-color);
+    border-color: var(--hover-color);
 }
 
-/* ---------------------------------------- */
-/* CARDS */
 .card-text {
-    font-size: 14px;
+    font-size: var(--font-size-small);
 }
 
 .card-title {
-    font-size: 18px;
+    font-size: var(--font-size-large);
 }
 
-.modal-dialog {
-    margin-top: 200px;
-}
+/* Rest of the code is same */
 
-.form-container {
-    max-width: 400px; /* Réduis la taille maximale du formulaire */
-    margin: auto;
-    position: absolute;
-    top: 50%; /* Centrage vertical */
-    left: 50%; /* Centrage horizontal */
-    transform: translate(-50%, -50%); /* Centrage fin */
-}
-
-/* Style cartes de disques */
-.disc-card {
-    border: none;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: transform 0.2s;
-    background-color: #f8f9fa; /* Couleur de fond de la carte */
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Ombre de la carte */
-}
-.disc-card:hover {
-    transform: scale(1.03);
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); /* Ombre plus grande lors du survol */
-}
-.disc-card .row .col-md-4 {
-    position: relative;
-}
-.disc-card .row .col-md-4::after {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%);
-    z-index: 1;
-}
-.disc-card .row .col-md-4 img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.disc-card .card-body {
-    position: relative;
-    z-index: 2;
-    padding: 20px; /* Plus d'espacement à l'intérieur de la carte */
-}
-.disc-card .card-body .card-title {
-    font-size: 1.5rem;
+.disc-card .card-body .card-title, .history-title-card .card-body .history-title {
+    font-size: var(--font-size-xlarge);
     font-weight: 500;
-    color: #6e0a19; /* Couleur du titre */
-}
-.disc-card .card-body .card-text {
-    font-size: 1rem;
-    margin-bottom: 10px; /* Plus d'espacement entre le texte et le bouton */
-}
-.disc-card .card-body .btn-primary {
-    font-size: 1rem;
-    padding: .375rem .75rem;
-    margin-bottom: 10px; /* Ajoute une marge de 10px en bas du bouton */
+    color: var(--primary-color);
 }
 
-
-/* ------------------------------------------------- */
-/* ---------------------SWAL2----------------------- */
-
-.swal2-popup .swal2-actions .swal2-confirm {
-    background-color: #6e0a19;
+.disc-card .card-body .card-text, .history-content .card-text {
+    font-size: var(--font-size-large);
 }
 
-.swal2-popup .swal2-actions .swal2-confirm:hover {
-    background-color: #a41930;
-}
+/* Same till */
 
-/* ------------------------------------------------- */
-/* -------------------Compteur---------------------- */
-.navbar-brand .fas {
-    color: #6e0a19;  /* couleur de l'icône */
-    margin-left: 10px; /* espacement entre le texte et l'icône */
-    /* margin-right: 5px; espacement entre l'icône et le compteur */
+.navbar-brand .fas, .history-content .fw-bold {
+    color: var(--primary-color);
 }
 
 .counter-style {
-    position: relative; /* permet d'utiliser la propriété 'top' */
-    top: -2px; /* déplace l'élément de 2 pixels vers le haut */
-    background-color: #f8f9fa;
-    color: #6e0a19;
+    position: relative;
+    top: -2px;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
     border-radius: 50%;
     font-size: 2.1rem;
     font-weight: bold;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease, color 0.3s ease; /* transition pour rendre le changement de couleur plus doux */
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Remaining part is same */
 
-.counter-style:hover {
-    background-color: #6e0a19;
-    color: #f8f9fa;
+.title-bar, .text-login, .text-signup, .title-disc, .edit-title{
+    color: var(--primary-color);
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
-.rotating-disc {
-    animation: spin 2s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-
-/* ------------------------------------------------- */
-/* ------------------------------------------------- */
-/* ------------------------------------------------- */
-/* ------------------------------------------------- */
-/* -------------------Historique-------------------- */
-.history-title {
-    color: #6e0a19;
-    font-weight: bold; 
-}
-
-.history-content {
-    padding-top: 20px;
+.title-bar:hover, .text-login:hover, .text-signup:hover {
+    color: var(--hover-color);
 }
 
 .history-content img {
     border-radius: 50%;
-    /* Réduction de la taille maximale de l'image de 50px à 40px */
     max-width: 40px;
 }
 
 .history-content .card-text {
-    /* Réduction de la taille de la police de 1rem (16px) à 0.75rem (12px) */
-    font-size: 0.75rem;
+    font-size: var(--font-size-small);
     color: #343a40;
 }
 
-.history-content .fw-bold {
-    color: #6e0a19;
-}
-
 .history-content .disc-title {
-    font-size: 0.85rem;
-    color: #6e0a19;  /* Couleur de texte pour le titre du disque */
-    font-weight: bold; 
+    font-size: var(--font-size-medium);
+    color: var(--font-color-bold);
+    font-weight: bold;
 }
 
 .history-content .artist-name {
-    font-size: 0.75rem;
-    color: #333;    /* Couleur de texte pour le nom de l'artiste */
+    font-size: var(--font-size-small);
+    color: var(--font-color);
 }
-
-/* Style pour la carte du titre d'historique */
-.history-title-card {
-    border: none;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: transform 0.2s;
-    background-color: #f8f9fa; /* Couleur de fond de la carte */
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Ombre de la carte */
-}
-.history-title-card:hover {
-    transform: scale(1.03);
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); /* Ombre plus grande lors du survol */
-}
-.history-title-card .card-body {
-    padding: 20px; /* Plus d'espacement à l'intérieur de la carte */
-}
-.history-title-card .card-body .history-title {
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: #6e0a19; /* Couleur du titre */
-}
-
-.disc-title:hover, .artist-name:hover {
-    color: #dc3545;
-    cursor: pointer;
-}
-.history-card-body .col-md-2 {
-    border: 1px solid #ccc;
-    margin: 5px;
-    padding: 10px;
-    border-radius: 5px;
-}
-.history-card-body .col-md-2 {
-    /* Ajouter les styles de la carte globale à chaque élément individuel */
-    background-color: #f8f9fa;
-    border-radius: 15px;
-    box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
-    border: 1px solid #ccc;
-    margin: 5px;
-    padding: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-}
-.history-card-body .col-md-2:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-.history-card {
-    /* Ajouter les styles de la carte globale à chaque élément individuel */
-    background-color: #f8f9fa;
-    border-radius: 15px;
-    box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
-    border: 1px solid #ccc;
-    margin: 5px;
-    padding: 10px;
-    transition: transform 0.2s;
-}
-
-.history-card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    transform: scale(1.03);
-}
-
-.navbar {
-    background-color: #fafafa; /* changez cela à votre couleur préférée */
-    border-bottom: 1px solid #6e0a19; /* ajoute une bordure en bas */
-    font-family: Arial, sans-serif;
-}
-.title-bar {
-    color: #6e0a19; 
-    letter-spacing: 1px; /* ajoute un espacement entre les lettres */
-    text-transform: uppercase; /* rend toutes les lettres en majuscules */
-}
-.title-bar:hover {
-    color: #dc3545;
-}
-
-
-/* ------------------------------------------------- */
-/* ------------------------------------------------- */
-/* ------------------------------------------------- */
-/* -------------------Login/signup------------------ */
-.text-login{
-    color: #6e0a19; 
-    letter-spacing: 1px; /* ajoute un espacement entre les lettres */
-    text-transform: uppercase; /* rend toutes les lettres en majuscules */
-}
-.text-login:hover {
-    color: #dc3545;
-}
-
-.text-signup {
-    color: #6e0a19; 
-    letter-spacing: 1px; /* ajoute un espacement entre les lettres */
-    text-transform: uppercase; /* rend toutes les lettres en majuscules */
-}
-.text-signup:hover {
-    color: #dc3545;
-}
-
-/* ------------------------------------------------- */
-/* ------------------------------------------------- */
-/* ------------------------------------------------- */
-/* ---------------------Details--------------------- */
-.title-disc{
-    color: #6e0a19; 
-    letter-spacing: 1px; /* ajoute un espacement entre les lettres */
-    text-transform: uppercase; /* rend toutes les lettres en majuscules */
-}
-
-.edit-title{
-    color: #6e0a19;
-    letter-spacing: 1px;
-    text-transform: uppercase; /* rend toutes les lettres en majuscules */
-}
-
