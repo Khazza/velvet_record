@@ -1,27 +1,112 @@
-/* ---------------------------------------- */
-/* BUTTONS & ICONS */
-
-.btn-primary, .btn-outline-primary, .btn-warning, .btn-danger, .swal2-popup .swal2-actions .swal2-confirm {
-    background-color: #6e0a19;
-    border-color: #6e0a19; 
-    color: #ffffff;
+.btn-primary, .btn-outline-primary, .btn-warning, .btn-danger {
+    background-color: #6e0a19 ;
+    border-color: #6e0a19 ; 
     transition: all 0.3s ease;
+    color: #ffffff ; 
 }
 
-.btn-primary:hover, .btn-outline-primary:hover, .btn-warning:hover, .btn-danger:hover, .swal2-popup .swal2-actions .swal2-confirm:hover {
-    background-color: #4b0711;
-    border-color: #4b0711;
-    color: #ffffff;
+.btn-outline-primary {
+    color: #ffffff ; 
 }
 
-.navbar-brand .fas, .counter-style, .history-content .fw-bold, .history-content .disc-title {
+.btn-primary:hover, .btn-outline-primary:hover, .btn-warning:hover, .btn-danger:hover {
+    background-color: #4b0711 ; 
+    border-color: #4b0711 ;
+    color: #FFFFFF ; 
+}
+
+.card-text {
+    font-size: 14px;
+}
+
+.card-title {
+    font-size: 18px;
+}
+
+.modal-dialog {
+    margin-top: 200px;
+}
+
+.form-container {
+    max-width: 400px;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.disc-card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s;
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.disc-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.disc-card .row .col-md-4 {
+    position: relative;
+}
+
+.disc-card .row .col-md-4::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%);
+    z-index: 1;
+}
+
+.disc-card .row .col-md-4 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.disc-card .card-body {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+}
+
+.disc-card .card-body .card-title {
+    font-size: 1.5rem;
+    font-weight: 500;
     color: #6e0a19;
+}
+
+.disc-card .card-body .card-text {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.swal2-popup .swal2-actions .swal2-confirm {
+    background-color: #6e0a19;
+}
+
+.swal2-popup .swal2-actions .swal2-confirm:hover {
+    background-color: #a41930;
+}
+
+.navbar-brand .fas {
+    color: #6e0a19;
+    margin-left: 10px;
 }
 
 .counter-style {
     position: relative;
     top: -2px;
     background-color: #f8f9fa;
+    color: #6e0a19;
     border-radius: 50%;
     font-size: 2.1rem;
     font-weight: bold;
@@ -43,25 +128,41 @@
     100% { transform: rotate(360deg); }
 }
 
-
-/* ---------------------------------------- */
-/* CARDS & MODAL */
-
-.card-text, .history-content .card-text {
-    font-size: 14px;
+.history-title {
+    color: #6e0a19;
+    font-weight: bold;
 }
 
-.card-title, .disc-card .card-body .card-title, .history-title-card .card-body .history-title {
-    font-size: 18px;
-    font-weight: 500;
+.history-content {
+    padding-top: 20px;
+}
+
+.history-content img {
+    border-radius: 50%;
+    max-width: 40px;
+}
+
+.history-content .card-text {
+    font-size: 0.75rem;
+    color: #343a40;
+}
+
+.history-content .fw-bold {
     color: #6e0a19;
 }
 
-.modal-dialog {
-    margin-top: 200px;
+.history-content .disc-title {
+    font-size: 0.85rem;
+    color: #6e0a19;
+    font-weight: bold;
 }
 
-.disc-card, .history-title-card, .history-card-body .col-md-2, .history-card {
+.history-content .artist-name {
+    font-size: 0.75rem;
+    color: #333;
+}
+
+.history-title-card {
     border: none;
     border-radius: 10px;
     overflow: hidden;
@@ -70,28 +171,53 @@
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
-.disc-card:hover, .history-title-card:hover, .history-card-body .col-md-2:hover, .history-card:hover {
+.history-title-card:hover {
     transform: scale(1.03);
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 
-.disc-card .card-body, .history-title-card .card-body {
-    position: relative;
-    z-index: 2;
+.history-title-card .card-body {
     padding: 20px;
 }
 
+.history-title-card .card-body .history-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #6e0a19;
+}
 
-/* ---------------------------------------- */
-/* FORMS & LAYOUT */
+.disc-title:hover, .artist-name:hover {
+    color: #dc3545;
+    cursor: pointer;
+}
 
-.form-container {
-    max-width: 400px;
-    margin: auto;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.history-card-body .col-md-2 {
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+    border: 1px solid #ccc;
+    margin: 5px;
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.history-card-body .col-md-2:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.history-card {
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+    border: 1px solid #ccc;
+    margin: 5px;
+    padding: 10px;
+    transition: transform 0.2s;
+}
+
+.history-card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    transform: scale(1.03);
 }
 
 .navbar {
@@ -100,16 +226,44 @@
     font-family: Arial, sans-serif;
 }
 
-
-/* ---------------------------------------- */
-/* TYPOGRAPHY & TEXT STYLING */
-
-.title-bar, .text-login, .text-signup, .title-disc, .edit-title {
+.title-bar {
     color: #6e0a19;
     letter-spacing: 1px;
     text-transform: uppercase;
 }
 
-.title-bar:hover, .text-login:hover, .text-signup:hover, .title-disc:hover, .edit-title:hover, .artist-name:hover {
+.title-bar:hover {
     color: #dc3545;
+}
+
+.text-login {
+    color: #6e0a19;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.text-login:hover {
+    color: #dc3545;
+}
+
+.text-signup {
+    color: #6e0a19;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.text-signup:hover {
+    color: #dc3545;
+}
+
+.title-disc {
+    color: #6e0a19;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.edit-title {
+    color: #6e0a19;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
