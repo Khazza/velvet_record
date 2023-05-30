@@ -33,6 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $artist = $artist_row['artist_id'];
     }
 
+// Vérification si un fichier image a été téléchargé
+if (!empty($_FILES['picture']['name'])) {
+
     // Gestion du changement de jaquette
     $uploadDir = 'src/img/jaquettes/';
     $filename = $_FILES['picture']['name'];
@@ -75,14 +78,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 imagepng($dst, $newFilePath);
                 break;
             default:
-                throw new Exception('Le format de l\'image n\'est pas supporté.');
+                echo "Le format de l'image n'est pas pris en charge.";
+                exit;
         }
+
         imagedestroy($src);
         imagedestroy($dst);
     } else {
-        // Si l'image est de la bonne taille, on la déplace simplement
+        // Si l'image est plus petite que la taille maximale, on l'upload direct
         move_uploaded_file($tmpFilePath, $newFilePath);
     }
+} else {
+    $filename = $row['disc_picture'];
+}
 
     // Préparation de la requête SQL
     $stmt = $pdo->prepare("UPDATE disc SET disc_title = :title, artist_id = :artist, disc_label = :label, disc_year = :year, disc_genre = :genre, disc_price = :price, disc_picture = :picture WHERE disc_id = :id");
