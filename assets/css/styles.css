@@ -93,6 +93,7 @@
 }
 
 /* ------------------------------------------------- */
+/* ---------------------SWAL2----------------------- */
 
 .swal2-popup .swal2-actions .swal2-confirm {
     background-color: #6e0a19;
@@ -100,4 +101,32 @@
 
 .swal2-popup .swal2-actions .swal2-confirm:hover {
     background-color: #a41930;
+}
+
+/* ------------------------------------------------- */
+/* -------------------Historique-------------------- */
+.history-container {
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+}
+
+.history-title {
+    color: #6e0a19;
+}
+
+.history-content {
+    padding-top: 20px;
+}
+
+.history-content img {
+    border-radius: 50%;
+}
+
+.history-content .card-text {
+    color: #343a40;
+}
+
+.history-content .fw-bold {
+    color: #6e0a19;
 }
