@@ -32,7 +32,9 @@ $artists = $artist_stmt->fetchAll(PDO::FETCH_ASSOC);
         <nav class="navbar navbar-expand-lg navbar-light bg-light py-0">
         <div class="container">
             <a class="navbar-brand fs-1 fw-bold">
+            <span class="title-bar">
                 Ajouter un vinyle
+            </span>
             </a>
             <div class="ml-auto">
             <?php if (isset($_SESSION['user'])) { ?>

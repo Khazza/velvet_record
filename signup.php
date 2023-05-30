@@ -23,7 +23,7 @@ $errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : [];
     <div class="container form-container">
         <div class="card">
             <div class="card-header">
-                <h2 class="text-center">Signup</h2>
+                <h2 class="text-signup text-center">Signup</h2>
             </div>
             <div class="card-body">
                 <?php

@@ -43,9 +43,10 @@ if (isset($_GET['id'])) {
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light py-0">
+    <nav class="navbar navbar-expand-lg navbar-light py-0">
         <div class="container">
-            <a class="navbar-brand fs-1 fw-bold">Détails</a>
+            <a class="navbar-brand fs-1 fw-bold">
+            <span class="title-bar">Détails</span></a>
             <div class="ml-auto">
                 <?php if (isset($_SESSION['user'])) { ?>
                     <span class="navbar-text me-2">Bonjour, <?php echo $username; ?></span>
@@ -59,7 +60,7 @@ if (isset($_GET['id'])) {
     </nav>
 
     <div class="container">
-        <h1 class="text-center"><?php echo $row['disc_title']; ?></h1>
+        <h1 class="text-center title-disc"><?php echo $row['disc_title']; ?></h1>
         <div class="row">
             <div class="col-md-6">
                 <div class="mb-3">

@@ -203,7 +203,7 @@
 }
 
 .disc-title:hover, .artist-name:hover {
-    color: #dc3545; /* Changez cette couleur comme vous le souhaitez */
+    color: #dc3545;
     cursor: pointer;
 }
 .history-card-body .col-md-2 {
@@ -241,15 +241,56 @@
     transform: scale(1.03);
 }
 
-
-
 .navbar {
     background-color: #fafafa; /* changez cela à votre couleur préférée */
-    border-bottom: 1px solid #ddd; /* ajoute une bordure en bas */
+    border-bottom: 1px solid #6e0a19; /* ajoute une bordure en bas */
     font-family: Arial, sans-serif;
 }
-.navbar-brand {
-    color: #6e0a19; /* changez cela à votre couleur préférée */
+.title-bar {
+    color: #6e0a19; 
     letter-spacing: 1px; /* ajoute un espacement entre les lettres */
     text-transform: uppercase; /* rend toutes les lettres en majuscules */
 }
+.title-bar:hover {
+    color: #dc3545;
+}
+
+
+/* ------------------------------------------------- */
+/* ------------------------------------------------- */
+/* ------------------------------------------------- */
+/* -------------------Login/signup------------------ */
+.text-login{
+    color: #6e0a19; 
+    letter-spacing: 1px; /* ajoute un espacement entre les lettres */
+    text-transform: uppercase; /* rend toutes les lettres en majuscules */
+}
+.text-login:hover {
+    color: #dc3545;
+}
+
+.text-signup {
+    color: #6e0a19; 
+    letter-spacing: 1px; /* ajoute un espacement entre les lettres */
+    text-transform: uppercase; /* rend toutes les lettres en majuscules */
+}
+.text-signup:hover {
+    color: #dc3545;
+}
+
+/* ------------------------------------------------- */
+/* ------------------------------------------------- */
+/* ------------------------------------------------- */
+/* ---------------------Details--------------------- */
+.title-disc{
+    color: #6e0a19; 
+    letter-spacing: 1px; /* ajoute un espacement entre les lettres */
+    text-transform: uppercase; /* rend toutes les lettres en majuscules */
+}
+
+.edit-title{
+    color: #6e0a19;
+    letter-spacing: 1px;
+    text-transform: uppercase; /* rend toutes les lettres en majuscules */
+}
+
