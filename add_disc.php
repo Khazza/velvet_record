@@ -92,8 +92,11 @@ $artists = $artist_stmt->fetchAll(PDO::FETCH_ASSOC);
                         <label for="picture" class="form-label">Jaquette</label>
                         <input type="file" class="form-control" id="picture" name="file" accept="image/*">
                     </div>
-                    <button type="submit" class="btn add-disc-btn">Ajouter</button>
-                    <a href="javascript:history.back()" class="btn add-disc-btn">Retour</a>
+                    <div class="btn-container">
+                        <button type="submit" class="btn add-disc-btn">Ajouter</button>
+                        <a href="javascript:history.back()" class="btn add-disc-btn">Retour</a>
+                    </div>
+
                     </form>
                 </div>
                 <!-- Inclusion des scripts Bootstrap et des scripts JS supplémentaires -->
