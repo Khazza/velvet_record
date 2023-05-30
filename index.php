@@ -55,43 +55,40 @@ $count = $count_row['count'];
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card mb-3 border-0 history-container">
-                    <div class="card history-title-card">
-                        <div class="card-body">
-                            <h5 class="card-title text-center history-title">Ajoutés récemment :</h5>
-                        </div>
-                    </div>
-                    <div class="row d-flex justify-content-center history-content">
-                        <?php
-                        // Requête SQL pour sélectionner les 5 derniers de la table disc
-                        $history_sql = "SELECT * 
+                <div class="card-body history-card-body">
+                        <h5 class="card-title text-center history-title">Ajoutés récemment :</h5>
+                        <div class="row d-flex justify-content-center history-content">
+                            <?php
+                            // Requête SQL pour sélectionner les 5 derniers de la table disc
+                            $history_sql = "SELECT * 
                     FROM disc
                     JOIN artist ON disc.artist_id = artist.artist_id
                     ORDER BY disc_id DESC
                     LIMIT 5";
-                        $history_stmt = $pdo->query($history_sql);
+                            $history_stmt = $pdo->query($history_sql);
 
-                        // Boucle pour afficher les enregistrements de l'historique
-                        while ($history_row = $history_stmt->fetch(PDO::FETCH_ASSOC)) {
-                        ?>
-                            <div class="col-md-2 text-center">
-                                <img src="src/img/jaquettes/<?= $history_row['disc_picture']; ?>" class="card-img-top" alt="Jaquette">
-                                <div class="mt-2">
-                                    <span class="disc-title">
-                                        <?php echo $history_row['disc_title']; ?>
-                                    </span><br>
-                                    <span class="artist-name">
-                                        <?php echo $history_row['artist_name']; ?>
-                                    </span>
+                            // Boucle pour afficher les enregistrements de l'historique
+                            while ($history_row = $history_stmt->fetch(PDO::FETCH_ASSOC)) {
+                            ?>
+                                <div class="col-md-2 text-center">
+                                    <img src="src/img/jaquettes/<?= $history_row['disc_picture']; ?>" class="card-img-top" alt="Jaquette">
+                                    <div class="mt-2">
+                                        <span class="disc-title">
+                                            <?php echo $history_row['disc_title']; ?>
+                                        </span><br>
+                                        <span class="artist-name">
+                                            <?php echo $history_row['artist_name']; ?>
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                        <?php
-                        }
-                        ?>
+                            <?php
+                            }
+                            ?>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 
 
