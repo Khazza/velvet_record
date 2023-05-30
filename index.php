@@ -66,7 +66,6 @@ $count = $count_row['count'];
                 ORDER BY disc_id DESC
                 LIMIT 5";
                         $history_stmt = $pdo->query($history_sql);
-
                         // Boucle pour afficher les enregistrements de l'historique
                         while ($history_row = $history_stmt->fetch(PDO::FETCH_ASSOC)) {
                         ?>
