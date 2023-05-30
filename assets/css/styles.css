@@ -140,3 +140,16 @@
     /* Réduction de la taille de la police de 1rem (16px) à 0.75rem (12px) */
     font-size: 0.75rem;
 }
+.history-content img {
+    max-width: 50px;
+}
+
+.history-content .disc-title {
+    font-size: 0.85rem;
+    color: #6e0a19;  /* Couleur de texte pour le titre du disque */
+}
+
+.history-content .artist-name {
+    font-size: 0.75rem;
+    color: #333;    /* Couleur de texte pour le nom de l'artiste */
+}

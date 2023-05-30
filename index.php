@@ -70,12 +70,12 @@ $count = $count_row['count'];
                         while ($history_row = $history_stmt->fetch(PDO::FETCH_ASSOC)) {
                         ?>
                             <div class="col-md-2 text-center">
-                                <img src="src/img/jaquettes/<?= $history_row['disc_picture']; ?>" class="card-img-top" alt="Jaquette" style="max-width: 50px;">
+                                <img src="src/img/jaquettes/<?= $history_row['disc_picture']; ?>" class="card-img-top" alt="Jaquette">
                                 <div class="mt-2">
-                                    <span class="card-text">
+                                    <span class="disc-title">
                                         <?php echo $history_row['disc_title']; ?>
                                     </span><br>
-                                    <span class="card-text">
+                                    <span class="artist-name">
                                         <?php echo $history_row['artist_name']; ?>
                                     </span>
                                 </div>
