@@ -44,9 +44,14 @@ if (isset($_GET['error'])) {
                         <input type="text" class="form-control" name="username" required>
                     </div>
                     <div class="mb-3">
-                        <label for="password" class="form-label">Password:</label>
-                        <input type="password" class="form-control" name="password" required>
-                    </div>
+    <label for="password" class="form-label">Password:</label>
+    <div class="input-group">
+        <input type="password" class="form-control" name="password" id="password" required>
+        <button type="button" id="togglePassword" class="btn btn-outline-secondary">
+            <i class="fas fa-eye"></i>
+        </button>
+    </div>
+</div>
                     <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary">Login</button>
