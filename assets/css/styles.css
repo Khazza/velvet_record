@@ -309,9 +309,22 @@
 .add-disc-btn {
     background-color: #6e0a19;
     color: white;
+    display: inline-block;
 }
 
 .add-disc-btn:hover {
     background-color: #6e0a19;
     color: white;
 }
+
+.container form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.add-disc-card .form-control {
+    margin: 10px 0;
+    padding: 10px;
+}
+
