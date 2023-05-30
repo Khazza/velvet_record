@@ -73,11 +73,9 @@ $count = $count_row['count'];
                                 <img src="src/img/jaquettes/<?= $history_row['disc_picture']; ?>" class="card-img-top" alt="Jaquette" style="max-width: 50px;">
                                 <div class="mt-2">
                                     <span class="card-text">
-                                        <span class="fw-bold">Titre:</span><br>
                                         <?php echo $history_row['disc_title']; ?>
                                     </span><br>
                                     <span class="card-text">
-                                        <span class="fw-bold">Artiste:</span><br>
                                         <?php echo $history_row['artist_name']; ?>
                                     </span>
                                 </div>
