@@ -92,9 +92,11 @@
     margin-bottom: 10px; /* Ajoute une marge de 10px en bas du bouton */
 }
 
-/* ------------------------------------------------- */
-/* Style des cartes d'historique */
-.history-card {
+/* Style pour card-body dans l'historique */
+.history-card-body {
+    position: relative;
+    z-index: 2;
+    padding: 20px; /* Plus d'espacement à l'intérieur de la carte */
     border: none;
     border-radius: 10px;
     overflow: hidden;
@@ -102,40 +104,16 @@
     background-color: #f8f9fa; /* Couleur de fond de la carte */
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Ombre de la carte */
 }
-.history-card:hover {
+.history-card-body:hover {
     transform: scale(1.03);
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); /* Ombre plus grande lors du survol */
 }
-.history-card .col-md-2 {
-    position: relative;
-}
-.history-card .col-md-2::after {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%);
-    z-index: 1;
-}
-.history-card .col-md-2 img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.history-card .card-body {
-    position: relative;
-    z-index: 2;
-    padding: 20px; /* Plus d'espacement à l'intérieur de la carte */
-}
-.history-card .card-body .history-title {
+.history-card-body .history-title {
     font-size: 1.5rem;
     font-weight: 500;
     color: #6e0a19; /* Couleur du titre */
 }
-.history-card .card-body .disc-title, .history-card .card-body .artist-name {
+.history-card-body .disc-title, .history-card-body .artist-name {
     font-size: 1rem;
     margin-bottom: 10px; /* Plus d'espacement entre le texte et le bouton */
 }

@@ -54,8 +54,8 @@ $count = $count_row['count'];
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
-            <div class="card mb-3 border-0 history-container history-card">
-                    <div class="card-body">
+                <div class="card mb-3 border-0 history-container">
+                <div class="card-body history-card-body">
                         <h5 class="card-title text-center history-title">Ajoutés récemment :</h5>
                         <div class="row d-flex justify-content-center history-content">
                             <?php
