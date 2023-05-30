@@ -130,3 +130,13 @@
 .history-content .fw-bold {
     color: #6e0a19;
 }
+
+.history-content img {
+    /* Réduction de la taille maximale de l'image de 50px à 40px */
+    max-width: 40px;
+}
+
+.history-content .card-text {
+    /* Réduction de la taille de la police de 1rem (16px) à 0.75rem (12px) */
+    font-size: 0.75rem;
+}
