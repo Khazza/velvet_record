@@ -30,13 +30,11 @@ $count = $count_row['count'];
 </head>
 
 <body>
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg py-0">
-    <div class="container">
-        <a class="navbar-brand fs-1 fw-bold titre-navbar">
-            Liste des disques:
-        </a>
-        <i class="fas fa-compact-disc rotating-disc"></i> <span class="counter-style"><?php echo $count; ?></span>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light py-0">
+        <div class="container">
+            <a class="navbar-brand fs-1 fw-bold">
+                Liste des disques: <i class="fas fa-compact-disc rotating-disc"></i> <span class="counter-style"><?php echo $count; ?></span>
             </a>
             <div class="ml-auto">
                 <?php if (isset($_SESSION['user'])) { ?>
