@@ -149,15 +149,3 @@
 
 /* ------------------------------------------------- */
 /* -------------------Compteur---------------------- */
-.info-bubble {
-    display: inline-block;
-    background-color: #6e0a19;
-    color: white;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    text-align: center;
-    line-height: 20px;
-    font-size: 0.8em;
-    margin-left: 5px;
-}
