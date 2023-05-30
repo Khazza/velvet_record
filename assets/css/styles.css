@@ -146,3 +146,15 @@
     font-size: 0.75rem;
     color: #333;    /* Couleur de texte pour le nom de l'artiste */
 }
+
+/* ------------------------------------------------- */
+/* -------------------Compteur---------------------- */
+.counter-style {
+    color: #6e0a19; /* Couleur différente pour le compteur */
+    font-size: 1.2em; /* Taille de police plus grande pour le compteur */
+    font-weight: bold; /* Mise en gras du compteur */
+    padding: 2px 5px; /* Padding autour du compteur */
+    background-color: #f8f9fa; /* Arrière-plan pour le compteur */
+    border-radius: 5px; /* Bord arrondi pour le compteur */
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2); /* Ombre pour le compteur */
+}
