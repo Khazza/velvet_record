@@ -151,7 +151,8 @@
 /* -------------------Compteur---------------------- */
 .navbar-brand .fas {
     color: #6e0a19;  /* couleur de l'icône */
-    margin-right: 10px; /* espacement entre l'icône et le compteur */
+    margin-left: 10px; /* espacement entre le texte et l'icône */
+    margin-right: 5px; /* espacement entre l'icône et le compteur */
 }
 
 .counter-style {
@@ -162,3 +163,4 @@
     font-weight: bold;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 }
+
