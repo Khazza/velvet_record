@@ -52,7 +52,7 @@ $count = $count_row['count'];
 
     <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-6">  <!-- Ici, j'ai changé col-md-8 en col-md-6 -->
             <div class="card mb-3 border-0 history-container">
                 <div class="card-body">
                     <h5 class="card-title text-center history-title">Ajoutés récemment :</h5>
@@ -91,6 +91,7 @@ $count = $count_row['count'];
         </div>
     </div>
 </div>
+
 
     <div class="container">
         <div class="row">
