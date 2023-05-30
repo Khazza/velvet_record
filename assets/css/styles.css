@@ -298,7 +298,7 @@
 }
 
 .add-disc-card-header {
-    background-color: #007bff;
+    background-color: #6e0a19;
     color: white;
 }
 
@@ -307,11 +307,11 @@
 }
 
 .add-disc-btn {
-    background-color: #007bff;
+    background-color: #6e0a19;
     color: white;
 }
 
 .add-disc-btn:hover {
-    background-color: #0056b3;
+    background-color: #6e0a19;
     color: white;
 }
