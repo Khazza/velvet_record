@@ -7,6 +7,11 @@ if (isset($_SESSION['user'])) {
     $username = $_SESSION['user']['username'];
     $role = $_SESSION['user']['role'];
 }
+// empeche l'envoi du formulaire si pas connecté
+if (!isset($_SESSION['user'])) {
+    header('Location: login.php');
+    exit();
+}
 
 // Récupération des données du formulaire
 $title = $_POST['title'];
