@@ -284,7 +284,7 @@
     letter-spacing: 1px; /* ajoute un espacement entre les lettres */
     text-transform: uppercase; /* rend toutes les lettres en majuscules */
 }
-.back-index:hoover {
+.back-index:hover {
     color: #dc3545;
 }
 /* ---------------------Details--------------------- */
