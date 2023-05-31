@@ -156,3 +156,13 @@ $(document).ready(function() {
         });
     });
 });
+
+// formulaire envoi artiste
+document.getElementById('discForm').addEventListener('submit', function(event) {
+    var artist = document.getElementById('artist').value;
+    var newArtist = document.getElementById('new_artist').value;
+    if (artist === "" && newArtist === "") {
+        event.preventDefault();
+        alert("Veuillez remplir soit le champ Artiste, soit le champ Nouvel Artiste.");
+    }
+});

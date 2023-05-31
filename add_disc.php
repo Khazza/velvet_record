@@ -95,7 +95,7 @@ $artists = $artist_stmt->fetchAll(PDO::FETCH_ASSOC);
     <!-- Inclusion des scripts Bootstrap et des scripts JS supplémentaires -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
     <!-- Inclusion du fichier JS personnalisé -->
-    <script src="script.js"></script>
+    <script src="./js/script.js"></script>
 
 </body>
 
