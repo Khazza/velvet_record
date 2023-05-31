@@ -58,7 +58,7 @@ if (isset($_GET['error'])) {
                     <span>Don't have an account? <a href="signup.php" class="text-signup">Sign up</a></span>
                 </div>
                 <div class="text-center mt-2">
-                    <span>Or go back to <a href="index.php">Home</a></span>
+                    <span>Or go back to <a href="index.php" class="back-index">Home</a></span>
                 </div>
             </div>
         </div>

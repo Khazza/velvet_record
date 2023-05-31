@@ -279,6 +279,14 @@
   color: #dc3545;
 }
 
+.back-index {
+    color: #6e0a19;
+    letter-spacing: 1px; /* ajoute un espacement entre les lettres */
+    text-transform: uppercase; /* rend toutes les lettres en majuscules */
+}
+.back-index:hoover {
+    color: #dc3545;
+}
 /* ---------------------Details--------------------- */
 .title-disc {
   color: #6e0a19;

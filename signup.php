@@ -59,6 +59,9 @@ $errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : [];
                 <div class="text-center mt-2">
                     <span>Or go back to <a href="index.php">Home</a></span>
                 </div>
+                <div class="text-center mt-2">
+                    <span>Or go back to <a href="index.php" class="back-index">Home</a></span>
+                </div>
             </div>
         </div>
     </div>
