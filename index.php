@@ -52,43 +52,43 @@ $count = $count_row['count'];
     </nav>
 
     <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card mb-3 border-0 history-container">
-                <div class="card-body history-card-body">
-                    <h5 class="card-title text-center history-title">Ajoutés récemment :</h5>
-                    <div class="row d-flex justify-content-center history-content">
-                        <?php
-                        // Requête SQL pour sélectionner les 5 derniers de la table disc
-                        $history_sql = "SELECT * 
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card mb-3 border-0 history-container">
+                    <div class="card-body history-card-body">
+                        <h5 class="card-title text-center history-title">Ajoutés récemment :</h5>
+                        <div class="row d-flex justify-content-center history-content">
+                            <?php
+                            // Requête SQL pour sélectionner les 5 derniers de la table disc
+                            $history_sql = "SELECT * 
                 FROM disc
                 JOIN artist ON disc.artist_id = artist.artist_id
                 ORDER BY disc_id DESC
                 LIMIT 5";
-                        $history_stmt = $pdo->query($history_sql);
-                        // Boucle pour afficher les enregistrements de l'historique
-                        while ($history_row = $history_stmt->fetch(PDO::FETCH_ASSOC)) {
-                        ?>
-                            <div class="col-md-2 text-center history-card"> <!-- Ajout de la classe history-card ici -->
-                                <img src="src/img/jaquettes/<?= $history_row['disc_picture']; ?>" class="card-img-top" alt="Jaquette">
-                                <div class="mt-2">
-                                    <span class="disc-title">
-                                        <?php echo $history_row['disc_title']; ?>
-                                    </span><br>
-                                    <span class="artist-name">
-                                        <?php echo $history_row['artist_name']; ?>
-                                    </span>
+                            $history_stmt = $pdo->query($history_sql);
+                            // Boucle pour afficher les enregistrements de l'historique
+                            while ($history_row = $history_stmt->fetch(PDO::FETCH_ASSOC)) {
+                            ?>
+                                <div class="col-md-2 text-center history-card"> <!-- Ajout de la classe history-card ici -->
+                                    <img src="src/img/jaquettes/<?= $history_row['disc_picture']; ?>" class="card-img-top" alt="Jaquette">
+                                    <div class="mt-2">
+                                        <span class="disc-title">
+                                            <?php echo $history_row['disc_title']; ?>
+                                        </span><br>
+                                        <span class="artist-name">
+                                            <?php echo $history_row['artist_name']; ?>
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
-                        <?php
-                        }
-                        ?>
+                            <?php
+                            }
+                            ?>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 
 
@@ -108,20 +108,22 @@ $count = $count_row['count'];
                     <div class="card mb-3 border border-0 disc-card">
                         <div class="row g-0">
                             <div class="col-md-4">
-                                <img src="src/img/jaquettes/<?= $row['disc_picture']; ?>" class="card-img-top" alt="Jaquette">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body py-0 h-100">
-                                    <div class="d-flex flex-column justify-content-between h-100">
-                                        <div class="d-flex flex-column">
-                                            <h5 class="card-title fw-bold"><?php echo $row['disc_title']; ?></h5>
-                                            <span class="card-text"><span class="fw-bold">Artiste: </span><?php echo $row['artist_name']; ?></span>
-                                            <span class="card-text"><span class="fw-bold">Label: </span> <?php echo $row['disc_label']; ?></span>
-                                            <span class="card-text"><span class="fw-bold">Année: </span><?php echo $row['disc_year']; ?></span>
-                                            <span class="card-text"><span class="fw-bold">Genre: </span><?php echo $row['disc_genre']; ?></span>
-                                        </div>
-                                        <div>
-                                            <a href="details.php?id=<?php echo $row['disc_id']; ?>" class="btn btn-primary">Détails</a>
+                                <div class="col-md-2 text-center history-card image-card">
+                                    <img src="src/img/jaquettes/<?= $history_row['disc_picture']; ?>" class="card-img-top" alt="Jaquette">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body py-0 h-100">
+                                        <div class="d-flex flex-column justify-content-between h-100">
+                                            <div class="d-flex flex-column">
+                                                <h5 class="card-title fw-bold"><?php echo $row['disc_title']; ?></h5>
+                                                <span class="card-text"><span class="fw-bold">Artiste: </span><?php echo $row['artist_name']; ?></span>
+                                                <span class="card-text"><span class="fw-bold">Label: </span> <?php echo $row['disc_label']; ?></span>
+                                                <span class="card-text"><span class="fw-bold">Année: </span><?php echo $row['disc_year']; ?></span>
+                                                <span class="card-text"><span class="fw-bold">Genre: </span><?php echo $row['disc_genre']; ?></span>
+                                            </div>
+                                            <div>
+                                                <a href="details.php?id=<?php echo $row['disc_id']; ?>" class="btn btn-primary">Détails</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

@@ -299,3 +299,12 @@
   letter-spacing: 1px;
   text-transform: uppercase; /* rend toutes les lettres en majuscules */
 }
+.image-card {
+    transition: all 0.3s ease;
+  }
+  
+  .image-card:hover {
+    transform: rotate(5deg);
+    background-color: #f8f9fa;
+  }
+  
