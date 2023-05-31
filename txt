@@ -1,0 +1,2 @@
+Fatal error: Uncaught PDOException: SQLSTATE[22007]: Invalid datetime format: 1366 Incorrect integer value: '' for column `record`.`disc`.`artist_id` at row 1 in /home/mahe/Bureau/velvet_record/process_add_disc.php on line 80
+( ! ) PDOException: SQLSTATE[22007]: Invalid datetime format: 1366 Incorrect integer value: '' for column `record`.`disc`.`artist_id` at row 1 in /home/mahe/Bureau/velvet_record/process_add_disc.php on line 80
