@@ -1,5 +1,6 @@
 <?php
 include('db.php');
+session_start();
 
 // Vérifiez si l'utilisateur est connecté
 if (isset($_SESSION['user'])) {
@@ -16,6 +17,15 @@ $year = $_POST['year'];
 $genre = $_POST['genre'];
 $label = $_POST['label'];
 $price = $_POST['price'];
+
+// Vérification si un artiste a été sélectionné ou un nouvel artiste est ajouté
+if (empty($artist) && empty($newArtist)) {
+    // Redirection vers la page d'ajout de disque avec une erreur
+    $_SESSION['error'] = "Veuillez sélectionner un artiste existant ou en ajouter un nouveau.";
+    header('Location: add_disc.php');
+    exit();
+}
+
 
 // Vérification si un nouvel artiste est ajouté
 if (!empty($newArtist)) {

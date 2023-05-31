@@ -28,16 +28,16 @@ $artists = $artist_stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 
 <body>
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light py-0">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light py-0">
         <div class="container">
             <a class="navbar-brand fs-1 fw-bold">
-            <span class="title-bar">
-                Ajouter un vinyle
-            </span>
+                <span class="title-bar">
+                    Ajouter un vinyle
+                </span>
             </a>
             <div class="ml-auto">
-            <?php if (isset($_SESSION['user'])) { ?>
+                <?php if (isset($_SESSION['user'])) { ?>
                     <span class="navbar-text me-2">Bonjour, <?php echo $username; ?></span>
                     <a href="logout.php" class="btn btn-outline-primary me-2">Logout</a>
                 <?php } else { ?>
@@ -51,6 +51,12 @@ $artists = $artist_stmt->fetchAll(PDO::FETCH_ASSOC);
     <!-- Formulaire d'ajout de disque -->
     <div class="container">
         <form method="POST" action="process_add_disc.php" enctype="multipart/form-data">
+            <?php if (isset($_SESSION['error'])) : ?>
+                <div class="alert alert-danger">
+                    <?= $_SESSION['error'];
+                    unset($_SESSION['error']); ?>
+                </div>
+            <?php endif; ?>
             <div class="mb-3">
                 <label for="title" class="form-label">Titre</label>
                 <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" required>
