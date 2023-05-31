@@ -53,6 +53,9 @@ $errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : [];
                         <button type="submit" class="btn btn-primary">Signup</button>
                     </div>
                 </form>
+                <div class="text-center mt-2">
+                    <span>Already have an account? <a href="login.php" class="text-login">Login</a></span>
+                </div>
             </div>
         </div>
     </div>
