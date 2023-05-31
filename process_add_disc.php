@@ -26,16 +26,26 @@ if (empty($artist) && empty($newArtist)) {
     exit();
 }
 
-
 // Vérification si un nouvel artiste est ajouté
 if (!empty($newArtist)) {
-    // Insertion du nouvel artiste
-    $insertArtistSql = "INSERT INTO artist (artist_name) VALUES (:artist_name)";
-    $insertArtistStmt = $pdo->prepare($insertArtistSql);
-    $insertArtistStmt->execute(['artist_name' => $newArtist]);
+    // Vérifie si l'artiste existe déjà
+    $checkArtistSql = "SELECT * FROM artist WHERE artist_name = :artist_name";
+    $checkArtistStmt = $pdo->prepare($checkArtistSql);
+    $checkArtistStmt->execute(['artist_name' => $newArtist]);
+    $existingArtist = $checkArtistStmt->fetch(PDO::FETCH_ASSOC);
 
-    // Récupération de l'ID du nouvel artiste
-    $artistId = $pdo->lastInsertId();
+    if ($existingArtist) {
+        // Si l'artiste existe déjà, utilisez son ID
+        $artistId = $existingArtist['artist_id'];
+    } else {
+        // Insertion du nouvel artiste
+        $insertArtistSql = "INSERT INTO artist (artist_name) VALUES (:artist_name)";
+        $insertArtistStmt = $pdo->prepare($insertArtistSql);
+        $insertArtistStmt->execute(['artist_name' => $newArtist]);
+
+        // Récupération de l'ID du nouvel artiste
+        $artistId = $pdo->lastInsertId();
+    }
 } else {
     $artistId = $artist;
 }
