@@ -54,10 +54,10 @@ $errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : [];
                     </div>
                 </form>
                 <div class="text-center mt-2">
-                    <span>Already have an account? <a href="login.php" class="text-login">Login</a></span>
+                    <span>Vous avez déjà un compte ? <a href="login.php" class="text-login">Login</a></span>
                 </div>
                 <div class="text-center mt-2">
-                    <span>Or go back to <a href="index.php" class="back-index">Home</a></span>
+                    <span>Ou retourner à l'accueil <a href="index.php" class="back-index">Home</a></span>
                 </div>
             </div>
         </div>

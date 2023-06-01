@@ -3,7 +3,7 @@ function deleteDisc(id) {
     Swal.fire({
         title: 'Êtes-vous sûr?',
         text: "Vous ne pourrez pas revenir en arrière!",
-        icon: 'warning',
+        icon: 'question',
         showCancelButton: true,
         confirmButtonText: 'Oui, supprimer!',
         confirmButtonColor: '#6e0a19',
@@ -157,7 +157,7 @@ $(document).ready(function() {
     });
 });
 
-// formulaire envoi artiste
+// Choix d'artiste soit via le select soit via une entrée manuelle
 document.getElementById('discForm').addEventListener('submit', function(event) {
     var artist = document.getElementById('artist').value;
     var newArtist = document.getElementById('new_artist').value;

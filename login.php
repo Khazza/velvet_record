@@ -55,10 +55,10 @@ if (isset($_GET['error'])) {
                     </div>
                 </form>
                 <div class="text-center mt-2">
-                    <span>Don't have an account? <a href="signup.php" class="text-signup">Sign up</a></span>
+                    <span>Vous n'avez pas de compte ? <a href="signup.php" class="text-signup">Sign up</a></span>
                 </div>
                 <div class="text-center mt-2">
-                    <span>Or go back to <a href="index.php" class="back-index">Home</a></span>
+                    <span>Ou retourner à l'accueil <a href="index.php" class="back-index">Home</a></span>
                 </div>
             </div>
         </div>
