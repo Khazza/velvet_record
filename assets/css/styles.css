@@ -292,6 +292,7 @@
   color: #6e0a19;
   letter-spacing: 1px; /* ajoute un espacement entre les lettres */
   text-transform: uppercase; /* rend toutes les lettres en majuscules */
+  font-weight: bold;
 }
 
 .edit-title {
