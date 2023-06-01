@@ -46,7 +46,7 @@ if (isset($_GET['id'])) {
     <nav class="navbar navbar-expand-lg navbar-light py-0">
         <div class="container">
             <a class="navbar-brand fs-1 fw-bold">
-            <span class="title-bar">Détails</span></a>
+                <span class="title-bar">Détails</span></a>
             <div class="ml-auto">
                 <?php if (isset($_SESSION['user'])) { ?>
                     <span class="navbar-text me-2">Bonjour, <?php echo $username; ?></span>
@@ -65,40 +65,34 @@ if (isset($_GET['id'])) {
             <div class="col-md-6">
                 <div class="mb-3">
                     <label for="artist" class="form-label">Artiste</label>
-                    <input type="text" class="form-control" id="artist" value="<?php echo $row['artist_name']; ?>"
-                        disabled>
+                    <input type="text" class="form-control" id="artist" value="<?php echo $row['artist_name']; ?>" disabled>
                 </div>
                 <div class="mb-3">
                     <label for="label" class="form-label">Label</label>
-                    <input type="text" class="form-control" id="label" value="<?php echo $row['disc_label']; ?>"
-                        disabled>
+                    <input type="text" class="form-control" id="label" value="<?php echo $row['disc_label']; ?>" disabled>
                 </div>
                 <div class="mb-3">
                     <label for="year" class="form-label">Année</label>
-                    <input type="text" class="form-control" id="year" value="<?php echo $row['disc_year']; ?>"
-                        disabled>
+                    <input type="text" class="form-control" id="year" value="<?php echo $row['disc_year']; ?>" disabled>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="mb-3">
                     <label for="artist" class="form-label">Titre</label>
-                    <input type="text" class="form-control" id="artist" value="<?php echo $row['disc_title']; ?>"
-                        disabled>
+                    <input type="text" class="form-control" id="artist" value="<?php echo $row['disc_title']; ?>" disabled>
                 </div>
                 <div class="mb-3">
                     <label for="genre" class="form-label">Genre</label>
-                    <input type="text" class="form-control" id="genre" value="<?php echo $row['disc_genre']; ?>"
-                        disabled>
+                    <input type="text" class="form-control" id="genre" value="<?php echo $row['disc_genre']; ?>" disabled>
                 </div>
                 <div class="mb-3">
                     <label for="price" class="form-label">Prix</label>
-                    <input type="text" class="form-control" id="price" value="<?php echo $row['disc_price']; ?>"
-                        disabled>
+                    <input type="text" class="form-control" id="price" value="<?php echo $row['disc_price']; ?>" disabled>
                 </div>
             </div>
         </div>
         <div class="text-center">
-            <img src="src/img/jaquettes/<?php echo $row['disc_picture']; ?>" alt="<?php echo $row['disc_title']; ?>"><br>
+            <img class="jaquette-img" src="src/img/jaquettes/<?php echo $row['disc_picture']; ?>" alt="<?php echo $row['disc_title']; ?>">
         </div>
         <div class="text-center mt-3">
             <?php if ($role === 'admin') { ?>

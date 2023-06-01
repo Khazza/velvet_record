@@ -313,3 +313,11 @@
   color: #dc3545;
 }
 
+.jaquette-img {
+  max-width: 100%;
+  max-height: 500px; /* remplacez 500px par la hauteur maximale que vous souhaitez */
+  height: auto;
+  width: auto;
+  object-fit: contain; /* cela garantit que l'image conserve ses proportions d'origine */
+}
+
