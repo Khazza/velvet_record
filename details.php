@@ -60,66 +60,54 @@ if (isset($_GET['id'])) {
     </nav>
 
     <div class="container">
-    <h1 class="text-center title-disc"><?php echo $row['disc_title']; ?></h1>
-    
-    <div class="text-center">
-        <img src="src/img/jaquettes/<?php echo $row['disc_picture']; ?>" alt="<?php echo $row['disc_title']; ?>"><br>
-    </div>
-
-    <div class="text-center mt-3">
-        <?php if ($role === 'admin') { ?>
-            <a href="edit_disc.php?id=<?php echo $row['disc_id']; ?>" class="btn btn-warning">Modifier</a>
-            <button class="btn btn-danger" onclick="deleteDisc(<?php echo $row['disc_id']; ?>)">Supprimer</button>
-        <?php } ?>
-        <a href="index.php" class="btn btn-primary">Retour</a>
-    </div>
-
-    <div class="row">
-        <div class="col-md-6">
-            <div class="mb-3">
-                <label for="artist" class="form-label">Artiste</label>
-                <input type="text" class="form-control" id="artist" value="<?php echo $row['artist_name']; ?>"
-                    disabled>
+        <h1 class="text-center title-disc"><?php echo $row['disc_title']; ?></h1>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="artist" class="form-label">Artiste</label>
+                    <input type="text" class="form-control" id="artist" value="<?php echo $row['artist_name']; ?>"
+                        disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="label" class="form-label">Label</label>
+                    <input type="text" class="form-control" id="label" value="<?php echo $row['disc_label']; ?>"
+                        disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="year" class="form-label">Année</label>
+                    <input type="text" class="form-control" id="year" value="<?php echo $row['disc_year']; ?>"
+                        disabled>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="label" class="form-label">Label</label>
-                <input type="text" class="form-control" id="label" value="<?php echo $row['disc_label']; ?>"
-                    disabled>
-            </div>
-            <div class="mb-3">
-                <label for="year" class="form-label">Année</label>
-                <input type="text" class="form-control" id="year" value="<?php echo $row['disc_year']; ?>"
-                    disabled>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="mb-3">
-                <label for="artist" class="form-label">Titre</label>
-                <input type="text" class="form-control" id="artist" value="<?php echo $row['disc_title']; ?>"
-                    disabled>
-            </div>
-            <div class="mb-3">
-                <label for="genre" class="form-label">Genre</label>
-                <input type="text" class="form-control" id="genre" value="<?php echo $row['disc_genre']; ?>"
-                    disabled>
-            </div>
-            <div class="mb-3">
-                <label for="price" class="form-label">Prix</label>
-                <input type="text" class="form-control" id="price" value="<?php echo $row['disc_price']; ?>"
-                    disabled>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="artist" class="form-label">Titre</label>
+                    <input type="text" class="form-control" id="artist" value="<?php echo $row['disc_title']; ?>"
+                        disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="genre" class="form-label">Genre</label>
+                    <input type="text" class="form-control" id="genre" value="<?php echo $row['disc_genre']; ?>"
+                        disabled>
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Prix</label>
+                    <input type="text" class="form-control" id="price" value="<?php echo $row['disc_price']; ?>"
+                        disabled>
+                </div>
             </div>
         </div>
+        <div class="text-center">
+            <img src="src/img/jaquettes/<?php echo $row['disc_picture']; ?>" alt="<?php echo $row['disc_title']; ?>"><br>
+        </div>
+        <div class="text-center mt-3">
+            <?php if ($role === 'admin') { ?>
+                <a href="edit_disc.php?id=<?php echo $row['disc_id']; ?>" class="btn btn-warning">Modifier</a>
+                <button class="btn btn-danger" onclick="deleteDisc(<?php echo $row['disc_id']; ?>)">Supprimer</button>
+            <?php } ?>
+            <a href="index.php" class="btn btn-primary">Retour</a>
+        </div>
     </div>
-
-    <div class="text-center mt-3">
-        <?php if ($role === 'admin') { ?>
-            <a href="edit_disc.php?id=<?php echo $row['disc_id']; ?>" class="btn btn-warning">Modifier</a>
-            <button class="btn btn-danger" onclick="deleteDisc(<?php echo $row['disc_id']; ?>)">Supprimer</button>
-        <?php } ?>
-        <a href="index.php" class="btn btn-primary">Retour</a>
-    </div>
-</div>
-
     <!-- Inclusion de jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- Inclusion des scripts Bootstrap -->
