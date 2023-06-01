@@ -83,12 +83,12 @@
 .disc-card .card-body {
   position: relative;
   z-index: 2;
-  padding: 20px; /* Plus d'espacement à l'intérieur de la carte */
+  padding: 20px;
 }
 .disc-card .card-body .card-title {
   font-size: 1.5rem;
   font-weight: 500;
-  color: #6e0a19; /* Couleur du titre */
+  color: #6e0a19;
 }
 .disc-card .card-body .card-text {
   font-size: 1rem;
@@ -164,7 +164,6 @@
 }
 
 .history-content .card-text {
-  /* Réduction de la taille de la police de 1rem (16px) à 0.75rem (12px) */
   font-size: 0.75rem;
   color: #343a40;
 }
@@ -175,13 +174,13 @@
 
 .history-content .disc-title {
   font-size: 0.85rem;
-  color: #6e0a19; /* Couleur de texte pour le titre du disque */
+  color: #6e0a19;
   font-weight: bold;
 }
 
 .history-content .artist-name {
   font-size: 0.75rem;
-  color: #333; /* Couleur de texte pour le nom de l'artiste */
+  color: #333;
 }
 
 /* Style pour la carte du titre d'historique */
@@ -191,7 +190,7 @@
   overflow: hidden;
   transition: transform 0.2s;
   background-color: #f8f9fa; /* Couleur de fond de la carte */
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Ombre de la carte */
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 .history-title-card:hover {
   transform: scale(1.03);
@@ -218,7 +217,7 @@
   border-radius: 5px;
 }
 .history-card-body .col-md-2 {
-  /* Ajouter les styles de la carte globale à chaque élément individuel */
+  /* Ajoute les styles de la carte globale à chaque élément individuel */
   background-color: #f8f9fa;
   border-radius: 15px;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
@@ -231,7 +230,7 @@
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 .history-card {
-  /* Ajouter les styles de la carte globale à chaque élément individuel */
+  /* Ajoute les styles de la carte globale à chaque élément individuel */
   background-color: #f8f9fa;
   border-radius: 15px;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
@@ -247,14 +246,14 @@
 }
 
 .navbar {
-  background-color: #fafafa; /* changez cela à votre couleur préférée */
-  border-bottom: 1px solid #6e0a19; /* ajoute une bordure en bas */
+  background-color: #fafafa;
+  border-bottom: 1px solid #6e0a19;
   font-family: Arial, sans-serif;
 }
 .title-bar {
   color: #6e0a19;
-  letter-spacing: 1px; /* ajoute un espacement entre les lettres */
-  text-transform: uppercase; /* rend toutes les lettres en majuscules */
+  letter-spacing: 1px; 
+  text-transform: uppercase;
 }
 .title-bar:hover {
   color: #dc3545;
@@ -263,8 +262,8 @@
 /* -------------------Login/signup------------------ */
 .text-login {
   color: #6e0a19;
-  letter-spacing: 1px; /* ajoute un espacement entre les lettres */
-  text-transform: uppercase; /* rend toutes les lettres en majuscules */
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 .text-login:hover {
   color: #dc3545;
@@ -272,8 +271,8 @@
 
 .text-signup {
   color: #6e0a19;
-  letter-spacing: 1px; /* ajoute un espacement entre les lettres */
-  text-transform: uppercase; /* rend toutes les lettres en majuscules */
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 .text-signup:hover {
   color: #dc3545;
@@ -281,8 +280,8 @@
 
 .back-index {
     color: #6e0a19;
-    letter-spacing: 1px; /* ajoute un espacement entre les lettres */
-    text-transform: uppercase; /* rend toutes les lettres en majuscules */
+    letter-spacing: 1px; 
+    text-transform: uppercase; 
 }
 .back-index:hover {
     color: #dc3545;
@@ -290,17 +289,16 @@
 /* ---------------------Details--------------------- */
 .title-disc {
   color: #6e0a19;
-  letter-spacing: 1px; /* ajoute un espacement entre les lettres */
-  text-transform: uppercase; /* rend toutes les lettres en majuscules */
+  letter-spacing: 1px;
+  text-transform: uppercase;
   font-weight: bold;
 }
 
 .edit-title {
   color: #6e0a19;
   letter-spacing: 1px;
-  text-transform: uppercase; /* rend toutes les lettres en majuscules */
+  text-transform: uppercase; 
 }
-
 
 /* Ajoutez un style audacieux à tous les éléments label !!! */
 .form-label {
@@ -315,7 +313,7 @@
 
 .jaquette-img {
   max-width: 100%;
-  max-height: 500px; /* remplacez 500px par la hauteur maximale que vous souhaitez */
+  max-height: 500px;
   height: auto;
   width: auto;
   object-fit: contain; /* cela garantit que l'image conserve ses proportions d'origine */
