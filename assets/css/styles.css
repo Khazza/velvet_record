@@ -119,11 +119,11 @@
 
 .counter-style {
   position: relative; /* permet d'utiliser la propriété 'top' */
-  top: -2px; /* déplace l'élément de 2 pixels vers le haut */
+  top: -4px; /* déplace l'élément de 2 pixels vers le haut */
   background-color: #f8f9fa;
   color: #6e0a19;
   border-radius: 50%;
-  font-size: 2.1rem;
+  font-size: 2rem;
   font-weight: bold;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease, color 0.3s ease; /* transition pour rendre le changement de couleur plus doux */
