@@ -299,3 +299,37 @@
   letter-spacing: 1px;
   text-transform: uppercase; /* rend toutes les lettres en majuscules */
 }
+
+
+
+/* Modifiez la couleur et la taille de la police de tous les éléments label */
+.form-label {
+  color: #5a6268; /* couleur de votre choix */
+  font-size: 1.5em; /* taille de votre choix */
+}
+
+/* Ajoutez un style audacieux à tous les éléments label */
+.form-label {
+  font-weight: bold;
+}
+
+/* Ajoutez du style aux intitulés quand le curseur passe dessus */
+.form-label:hover {
+  color: #007bff; /* couleur de votre choix */
+}
+
+/* Modifiez la couleur de l'arrière-plan et la couleur de la police de tous les éléments label */
+.form-label {
+  background-color: #f8f9fa; /* couleur de votre choix */
+  color: #212529; /* couleur de votre choix */
+}
+
+/* Ajoutez une marge en haut et en bas à tous les éléments label */
+.form-label {
+  margin: 10px 0; /* marge de votre choix */
+}
+
+/* Ajoutez une bordure en bas à tous les éléments label */
+.form-label {
+  border-bottom: 1px solid #dee2e6; /* bordure de votre choix */
+}
